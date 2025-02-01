@@ -1,9 +1,7 @@
-import { Component } from 'react';
 import Player from './../Player/Player';
 import Tribe from './Tribe';
-import Utilities from './../Utilities';
 
-class Season extends Component {
+class Season {
   properties = {
     days: 39,
     starting_player_count: 18,
@@ -17,9 +15,10 @@ class Season extends Component {
 
   current_day = null;
   players = [];
+  tribes = [];
+  debug = false;
 
   constructor(props) {
-    super(props);
     if (props) {
       for (const property in props)  {
         if (this.properties.hasOwnProperty(property)) {
@@ -27,17 +26,73 @@ class Season extends Component {
         }
       };
     }
+    if (props.debug) {
+      this.debug = props.debug;
+    }
   }
 
-  render() {
-    const test_player = new Player({ id: 1, debug: true });
-    const test_tribe = new Tribe({ name: 'Testers' })
-    test_player.randomlyGenerate();
-    test_tribe.addPlayer(test_player);
+  createTribe(name, players = []) {
+    if (this.getTribeByName(name)) {
+      throw new Error(`Trying to add a tribe that already exists: ${name}`)
+    }
+    const tribe = new Tribe({ name: name });
+    if (players.length > 0) {
+      tribe.addPlayers(players);
+    }
 
-    this.players.push(test_player);
+    return tribe;
+  }
 
-    return Utilities.arrayToList(this.players);
+  getTribeByName(name) {
+    let target_tribe = null;
+    this.tribes.every(tribe => {
+      if (tribe.getName() === name) {
+        target_tribe = tribe;
+        return false;
+      }
+      return true;
+    });
+    return target_tribe;
+  }
+
+  getTribes() {
+    return this.tribes;
+  }
+
+  createPlayer(props = null) {
+    let new_player = null;
+    const id = this.getPlayerCount() + 1; // Should always go up by one, as long
+    // as players can't be removed.
+
+    // If there are no desired props, we randomly generate them.
+    if (props === null) {
+      console.log(`Randomly generating new player with ID ${id}`);
+      new_player = new Player({ id: id });
+      new_player.randomlyGenerate();
+    }
+    else {
+      props.id = id;
+      console.log(`Generating new player from props ${props}`);
+      new_player = new Player(props);
+    }
+
+    this.addPlayer(new_player);
+    return new_player;
+  }
+
+  addPlayer(player) {
+    if (this.debug) {
+      player.setDebug(this.debug);
+    }
+    this.players.push(player);
+  }
+
+  getPlayers() {
+    return this.players;
+  }
+
+  getPlayerCount() {
+    return this.players.length;
   }
 
 }

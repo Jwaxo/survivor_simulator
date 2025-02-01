@@ -1,6 +1,4 @@
-import { Component } from 'react';
-
-class Tribe extends Component {
+class Tribe {
   properties = {
     name: '',
     losses: 0,
@@ -19,13 +17,7 @@ class Tribe extends Component {
   }
   players = [];
 
-  addPlayer(player) {
-    this.players.push(player);
-    player.setTribe(this);
-  }
-
   constructor(props) {
-    super(props);
     if (props) {
       for (const property in props) {
         if (this.properties.hasOwnProperty(property)) {
@@ -35,7 +27,19 @@ class Tribe extends Component {
     }
   }
 
-  render() {
+  addPlayer(player) {
+    this.players.push(player);
+    player.setTribe(this);
+  }
+
+  addPlayers(players) {
+    this.players = this.players.merge(players);
+    players.forEach(player => {
+      player.setTribe(this);
+    })
+  }
+
+  getName() {
     return this.properties.name;
   }
 }

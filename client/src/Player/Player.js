@@ -41,9 +41,13 @@ class Player extends Component {
     if (props.age) {
       this.properties.age = props.age;
     }
-    if (props.debug && props.debug === true) {
+    if (props.debug) {
       this.debug = true;
     }
+  }
+
+  setDebug(debug) {
+    this.debug = debug;
   }
 
   nameToString() {
@@ -109,7 +113,6 @@ class Player extends Component {
       new Trait({ name: 'Athletic' }),
       new Trait({ name: 'Paranoid' }),
     ];
-    // tribe: new Tribe,
 
   }
 
@@ -122,7 +125,7 @@ class Player extends Component {
           <ul>
             <li key="occupation">{ this.properties.occupation.render() }</li>
             <li key="origin">{ this.properties.origin.render() }</li>
-            <li key="tribe">{ this.properties.tribe.render() }</li>
+            <li key="tribe">{ this.properties.tribe.getName() }</li>
             { this.properties.injuries.length > 0 ? (
               <li key="injuries">{ Utilities.arrayToList(this.properties.injuries) } </li>
             ) : '' }
