@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import EnviroBox from './Envirobox';
+import InfoBox from './Infobox';
+import PlayerBox from './Playerbox';
 import StatusBox from './Statusbox';
 
 class Interface extends Component {
@@ -23,7 +26,7 @@ class Interface extends Component {
     if (props.debug === true) {
       // Set time to 7AM.
       this.debug = true;
-      this.advanceTime(6 * 7);
+      this.advanceTime((60 / this.timePerTic) * 7);
     }
     if (props.children) {
       this.children = props.children;
@@ -32,13 +35,17 @@ class Interface extends Component {
 
   advanceTime(tics = 1) {
     this.timestamp += tics * this.timePerTic;
+    this.updateTimestring();
   }
 
   updateTimestring() {
-    const decimal = (this.timestamp * this.timePerTic) / 60;
-    const hours = Math.floor(decimal);
-    const twelveHour = hours % 12 === 0 ? '12' : hours % 12;
-    const minutes = (decimal - hours) * 60;
+    const decimalHours = this.timestamp / 60;
+    const hours = Math.floor(decimalHours);
+    const twelveHour = (hours % 12 === 0 ? '12' : hours % 12).toString();
+    let minutes = ((decimalHours - hours) * 60).toString();
+    if (minutes.length < 2) {
+      minutes += "0";
+    }
     const amPm = hours % 24 < 12 ? "AM" : "PM";
     this.timestring = `${twelveHour}:${minutes} ${amPm}`;
   }
@@ -47,10 +54,13 @@ class Interface extends Component {
     return (
       <div className="interface">
         <StatusBox day={0} time={ this.timestring } weather="Sunny" tribe="Default" phase="Morning" debug={ this.debug }/>
+        <EnviroBox/>
+        <InfoBox/>
         <h2>Welcome to Survivor.</h2>
         <p>This season will be {this.season.properties.days} days long.</p>
         <p>Players this season:</p>
         { this.children }
+        <PlayerBox/>
       </div>
     )
   }
