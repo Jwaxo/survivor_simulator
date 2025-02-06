@@ -12,6 +12,9 @@ class Season {
     current_day_count: 0,
     nickname: "",
   }
+  state = {
+    log: [],
+  }
 
   current_day = null;
   players = [];

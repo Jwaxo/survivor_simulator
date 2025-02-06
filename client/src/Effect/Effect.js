@@ -1,13 +1,13 @@
-import { Component } from 'react';
 
-class Occupation extends Component {
+class Effect {
   properties = {
     name: '',
-    collar: '',
+    description: '',
+    stat: '',
+    value: 0,
   }
 
   constructor(props) {
-    super(props);
     if (props) {
       for (const property in props)  {
         if (this.properties.hasOwnProperty(property)) {
@@ -18,8 +18,8 @@ class Occupation extends Component {
   }
 
   render() {
-    return this.properties.name;
+    return `${this.properties.name}: ${this.properties.description}`;
   }
 }
 
-export default Occupation;
+export default Effect;

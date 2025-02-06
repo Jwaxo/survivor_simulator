@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Utilities from './../Utilities';
+import Utilities from './../../Utilities';
 
 class Stats extends Component {
   properties = {

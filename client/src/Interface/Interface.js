@@ -5,8 +5,12 @@ import PlayerBox from './Playerbox';
 import StatusBox from './Statusbox';
 
 class Interface extends Component {
+  status = {
+    log: [],
+  };
+  logger = null;
   season = null;
-  // How many minutes each
+  // How many minutes each tic is worth.
   timePerTic = 10;
   timestamp = 0;
   timestring = '';
@@ -15,6 +19,9 @@ class Interface extends Component {
 
   constructor(props) {
     super(props);
+    if (props.logger) {
+      this.logger = props.logger;
+    }
     if (props.season) {
       this.season = props.season;
     }
@@ -30,6 +37,9 @@ class Interface extends Component {
     }
     if (props.children) {
       this.children = props.children;
+    }
+    if (props.log) {
+      this.status.log = props.log;
     }
   }
 
@@ -53,13 +63,9 @@ class Interface extends Component {
   render() {
     return (
       <div className="interface">
-        <StatusBox day={0} time={ this.timestring } weather="Sunny" tribe="Default" phase="Morning" debug={ this.debug }/>
+        <StatusBox day={0} time={ this.timestring } weather="Sunny" tribe="Default" phase="Morning" debug={ this.debug } />
         <EnviroBox/>
-        <InfoBox/>
-        <h2>Welcome to Survivor.</h2>
-        <p>This season will be {this.season.properties.days} days long.</p>
-        <p>Players this season:</p>
-        { this.children }
+        <InfoBox log={ this.status.log }/>
         <PlayerBox/>
       </div>
     )

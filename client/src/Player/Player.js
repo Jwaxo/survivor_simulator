@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import Occupation from './Occupation';
-import Origin from './Origin';
-import Race from './Race';
-import Relationship from './Relationship';
-import Stats from './Stats';
-import Trait from './Trait';
+import Occupation from './Property/Occupation';
+import Origin from './Property/Origin';
+import Race from './Property/Race';
+import Relationship from './Property/Relationship';
+import Stats from './Property/Stats';
+import Trait from './Property/Trait';
 import Utilities from '../Utilities';
 
 class Player extends Component {
@@ -21,10 +21,12 @@ class Player extends Component {
     race: null,
     tribe: null,
     stats: null,
+    description: [],
     traits: [],
     relationships: [],
     alliances: [],
     injuries: [],
+    effects: [],
   };
   debug = false;
 
@@ -117,6 +119,9 @@ class Player extends Component {
   }
 
   render() {
+
+    // This shouldn't be here; Player should not be a component.
+    // Should instead make various Player components: a Card, a Teaser, etc.
 
     return (
       <div className="player">

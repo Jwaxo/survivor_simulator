@@ -1,4 +1,5 @@
 import './App.css';
+import { useState } from "react";
 import Season from "./Season/Season";
 import Interface from "./Interface/Interface";
 import seedrandom from 'seedrandom';
@@ -19,10 +20,24 @@ const debugData = Utilities.arrayToList(current_season.getPlayers());
 
 function App() {
 
+  const [log, setLog] = useState([]);
+  const logger = {
+    addToLog : (message) => {
+      setLog([ message, ...log ]);
+    }
+  };
+
+  if (log.length < 1) {
+    logger.addToLog("A new season begins!");
+  }
+  if (log.length === 1) {
+    logger.addToLog("Welcome new players.");
+  }
+
   return (
     <div className="App">
       <header className="App-header">
-        <Interface season={ current_season } timePerTic={10} debug={ debug }>
+        <Interface logger={ logger } season={ current_season } timePerTic={10} debug={ debug } log={ log }>
           { debug ? debugData : '' }
         </Interface>
       </header>
