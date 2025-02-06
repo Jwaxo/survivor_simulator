@@ -66,7 +66,7 @@ class Interface extends Component {
         <StatusBox day={0} time={ this.timestring } weather="Sunny" tribe="Default" phase="Morning" debug={ this.debug } />
         <EnviroBox/>
         <InfoBox log={ this.status.log }/>
-        <PlayerBox/>
+        <PlayerBox players={ this.season.getPlayers() } />
       </div>
     )
   }

@@ -1,13 +1,11 @@
-import React, { Component } from 'react';
 import Occupation from './Property/Occupation';
 import Origin from './Property/Origin';
 import Race from './Property/Race';
 import Relationship from './Property/Relationship';
 import Stats from './Property/Stats';
 import Trait from './Property/Trait';
-import Utilities from '../Utilities';
 
-class Player extends Component {
+class Player {
   id = 0;
   name = {
     first: '',
@@ -31,7 +29,6 @@ class Player extends Component {
   debug = false;
 
   constructor(props) {
-    super(props);
     if (!props || !props.id) {
       throw new Error("Trying to create Player without ID");
     }
@@ -66,6 +63,10 @@ class Player extends Component {
 
   setTribe(tribe) {
     this.properties.tribe = tribe;
+  }
+
+  getOccupation() {
+    return this.properties.occupation;
   }
 
   getRelationship(playerID) {
@@ -116,36 +117,6 @@ class Player extends Component {
       new Trait({ name: 'Paranoid' }),
     ];
 
-  }
-
-  render() {
-
-    // This shouldn't be here; Player should not be a component.
-    // Should instead make various Player components: a Card, a Teaser, etc.
-
-    return (
-      <div className="player">
-        <h3>{ this.nameToString() }</h3>
-        <div className="player-info">
-          <ul>
-            <li key="occupation">{ this.properties.occupation.render() }</li>
-            <li key="origin">{ this.properties.origin.render() }</li>
-            <li key="tribe">{ this.properties.tribe.getName() }</li>
-            { this.properties.injuries.length > 0 ? (
-              <li key="injuries">{ Utilities.arrayToList(this.properties.injuries) } </li>
-            ) : '' }
-            { this.debug === true ? (
-              <>
-                <li key="stats">{ this.properties.stats.render() }</li>
-                <li key="traits">{ Utilities.arrayToString(this.properties.traits) }</li>
-                <li key="alliances">{ Utilities.arrayToList(this.properties.alliances) }</li>
-                <li key="relationships">{ Utilities.arrayToList(this.properties.relationships) }</li>
-              </>
-            ) : '' }
-          </ul>
-        </div>
-      </div>
-    )
   }
 
 }
