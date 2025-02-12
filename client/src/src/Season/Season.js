@@ -1,5 +1,5 @@
 import Player from './../Player/Player';
-import Tribe from './Tribe';
+import Tribe from '../Tribe/Tribe';
 
 class Season {
   properties = {

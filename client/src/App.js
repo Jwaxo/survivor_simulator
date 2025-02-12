@@ -5,7 +5,6 @@ import Interface from "./src/Interface/Interface";
 import seedrandom from 'seedrandom';
 import Utilities from './src/Utilities';
 
-
 let debug = true;
 
 const current_season = new Season({debug});

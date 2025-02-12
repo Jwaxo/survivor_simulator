@@ -13,17 +13,22 @@ $neongreen: #00FF00;
 
 // TRIBE COLORS
 // These MUST MATCH the names in /client/lib/tribe/colors.
-$cardinal: #D1232C;
-$amethyst: #AF36BA;
-$orchid: #E26AC1;
-$persian: #201FD1;
-$mariner: #1F67D1;
-$java: #19B3AF;
-$jade: #00A86B;
-$meadow: #19B371;
-$green: #17D10A;
-$lemon: #F9F015;
-$sun: #F9B915;
+$tribeColors: (
+  "black" : $black,
+  "cardinal" : #D1232C,
+  "amethyst" : #AF36BA,
+  "orchid" : #E26AC1,
+  "persian" : #201FD1,
+  "mariner" : #1F67D1,
+  "java" : #19B3AF,
+  "jade" : #00A86B,
+  "meadow" : #19B371,
+  "green" : #17D10A,
+  "sulu" : #A7EC55,
+  "lemon" : #F9F015,
+  "sun" : #F9B915,
+  "carrot" : #F19D22,
+);
 
 // GENERAL COLORS
 // Define any colors specific to your component within the component's CSS.

@@ -1,6 +1,10 @@
+import Utilities from '../Utilities';
+const tribeColors = require('../../lib/tribe/colors.json');
+
 class Tribe {
   properties = {
     name: '',
+    color: '',
     losses: 0,
     wins: 0,
     assets: [],
@@ -25,6 +29,9 @@ class Tribe {
         }
       };
     }
+    if (!this.getColor()) {
+      this.setColor(this.pickColor());
+    }
   }
 
   addPlayer(player) {
@@ -41,6 +48,30 @@ class Tribe {
 
   getName() {
     return this.properties.name;
+  }
+
+  getColor() {
+    return this.properties.color;
+  }
+
+  getColorName() {
+    return this.properties.color.name;
+  }
+
+  getTextColor() {
+    return this.properties.color.hasOwnProperty("dark") && this.properties.color.dark === true ? "white" : "black";
+  }
+
+  setColor(color) {
+    this.properties.color = color;
+  }
+
+  pickColor(colors = tribeColors.colors) {
+    let pickedColor = colors[Utilities.pickFromRange(tribeColors.colors.length)];
+    if (pickedColor.hasOwnProperty("variants")) {
+      pickedColor = this.pickColor(pickedColor.variants);
+    }
+    return pickedColor;
   }
 }
 

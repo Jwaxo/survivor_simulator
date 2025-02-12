@@ -1,0 +1,12 @@
+/**
+ * Tribe flag (small description of tribe).
+ */
+
+@use './../Base' as *;
+
+.tribe.tribe-flag {
+  border: 1px solid $borderColor;
+  margin-top: 10px;
+  padding: 5px;
+  text-align: center;
+}

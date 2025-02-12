@@ -72,11 +72,87 @@ body {
   font-weight: 700;
 }
 
-.player-card {
-  border: 1px;
+/**
+ * Styles for Player components.
+ */
+/**
+ * Card display of Player info.
+ */
+.player.player-card {
+  border: 1px solid #000000;
+  padding: 15px;
 }
-.player-card ul {
-  list-style: none;
+.player.player-card h3 {
+  font-size: 16px;
   margin: 0;
+}
+.player.player-card ul {
+  list-style: none;
+  margin: 15px 0 0;
   padding: 0;
+}
+
+/**
+ * Styles for Tribe components.
+ */
+/**
+ * General Tribe styles.
+ */
+.tribe.black {
+  background-color: #000000;
+}
+.tribe.cardinal {
+  background-color: #D1232C;
+}
+.tribe.amethyst {
+  background-color: #AF36BA;
+}
+.tribe.orchid {
+  background-color: #E26AC1;
+}
+.tribe.persian {
+  background-color: #201FD1;
+}
+.tribe.mariner {
+  background-color: #1F67D1;
+}
+.tribe.java {
+  background-color: #19B3AF;
+}
+.tribe.jade {
+  background-color: #00A86B;
+}
+.tribe.meadow {
+  background-color: #19B371;
+}
+.tribe.green {
+  background-color: #17D10A;
+}
+.tribe.sulu {
+  background-color: #A7EC55;
+}
+.tribe.lemon {
+  background-color: #F9F015;
+}
+.tribe.sun {
+  background-color: #F9B915;
+}
+.tribe.carrot {
+  background-color: #F19D22;
+}
+.tribe.text--white {
+  color: white;
+}
+.tribe.text--black {
+  color: #000000;
+}
+
+/**
+ * Tribe flag (small description of tribe).
+ */
+.tribe.tribe-flag {
+  border: 1px solid #000000;
+  margin-top: 10px;
+  padding: 5px;
+  text-align: center;
 }

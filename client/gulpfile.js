@@ -11,7 +11,7 @@ function taskSass(cb) {
     // ]))
     .pipe(dest('src/style'));
   console.log('Render complete!');
-  cb();
+  // cb();
 }
 
 function taskImages(cb) {
@@ -26,6 +26,20 @@ exports.build = series(taskSass);
 exports.dev = (cb) => {
   taskSass(cb);
   // watch('scss/images/*', taskImages);
-  watch('scss/**/*.scss', series(taskSass));
+  const watcher = watch('scss/**/*.scss');
+  watcher.on('change', (path, stats) => {
+    console.log(`Change detected in: ${path}`);
+    taskSass();
+  })
+  watcher.on('add', function(path, stats) {
+    console.log(`New file detected: ${path}`);
+    taskSass();
+  });
+
+  watcher.on('unlink', function(path, stats) {
+    console.log(`File ${path} was removed`);
+    taskSass();
+  });
+
 };
 exports.default = exports.dev;

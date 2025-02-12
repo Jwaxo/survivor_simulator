@@ -1,0 +1,20 @@
+/**
+ * General Tribe styles.
+ */
+
+@use './../Base' as *;
+
+.tribe {
+  @each $name, $color in $tribeColors {
+    &.#{$name} {
+      background-color: $color;
+    }
+  }
+
+  &.text--white {
+    color: white;
+  }
+  &.text--black {
+    color: $black;
+  }
+}

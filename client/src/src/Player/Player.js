@@ -65,6 +65,14 @@ class Player {
     this.properties.tribe = tribe;
   }
 
+  getColor() {
+    return this.properties.tribe.getColorName();
+  }
+
+  getTextColor() {
+    return this.properties.tribe.getTextColor();
+  }
+
   getOccupation() {
     return this.properties.occupation;
   }

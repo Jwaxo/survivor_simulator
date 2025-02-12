@@ -1,0 +1,88 @@
+{
+  "version" : 1.0,
+  "colors" : [
+    {
+      "name": "black",
+      "dark": true
+    },
+    {
+      "name": "red",
+      "dark": true,
+      "variants": [
+        {
+          "name": "cardinal",
+          "dark": true
+        }
+      ]
+    },
+    {
+      "name": "purple",
+      "dark": true,
+      "variants": [
+        {
+          "name": "amethyst",
+          "dark": true
+        },
+        {
+          "name": "orchid"
+        }
+      ]
+    },
+    {
+      "name": "blue",
+      "dark": true,
+      "variants": [
+        {
+          "name": "persian",
+          "dark": true
+        },
+        {
+          "name": "mariner",
+          "dark": true
+        },
+        {
+          "name": "java"
+        }
+      ]
+    },
+    {
+      "name": "green",
+      "dark": true,
+      "variants": [
+        {
+          "name": "jade",
+          "dark": true
+        },
+        {
+          "name": "meadow",
+          "dark": true
+        },
+        {
+          "name": "green"
+        },
+        {
+          "name": "sulu"
+        }
+      ]
+    },
+    {
+      "name": "yellow",
+      "variants": [
+        {
+          "name": "lemon"
+        }
+      ]
+    },
+    {
+      "name": "orange",
+      "variants": [
+        {
+          "name": "carrot"
+        },
+        {
+          "name": "sun"
+        }
+      ]
+    }
+  ]
+}
