@@ -61,8 +61,12 @@ body {
   padding: 0;
 }
 .status-box .label {
-  margin-right: 5px;
+  margin-right: 10px;
   text-decoration: underline;
+}
+.status-box .label:after {
+  content: ":";
+  position: absolute;
 }
 .status-box .value {
   font-weight: 700;
