@@ -6,23 +6,6 @@ import Stats from './Property/Stats';
 import Trait from './Property/Trait';
 import Utilities from '../Utilities';
 
-// All names taken from https://github.com/aruljohn/popular-baby-names/tree/master/1985,
-// which is an awesome library I should consider using for more year-accurate
-// names.
-const playerNames = {
-  "first": {
-    "male": require("../../lib/player/firstnames_male.json").names,
-    "female": require("../../lib/player/firstnames_female.json").names,
-    "any": require("../../lib/player/firstnames_any.json").names,
-  },
-  "last": require("../../lib/player/lastnames.json").names,
-  "nick": {
-    "male": require("../../lib/player/nicknames_male.json").names,
-    "female": require("../../lib/player/nicknames_female.json").names,
-    "any": require("../../lib/player/nicknames_any.json").names,
-  },
-}
-
 const playerGenders = require("../../lib/player/genders.json");
 
 class Player {
@@ -65,9 +48,6 @@ class Player {
       this.name.nick = props.name.nick ?? '';
       this.name.last = props.name.last ?? '';
     }
-    else {
-      this.setName(...this.pickName());
-    }
     if (props.age) {
       this.properties.age = props.age;
     }
@@ -94,32 +74,12 @@ class Player {
     return this.name.first + ' ' + (this.name.nick ? '"' + this.name.nick + '" ' : '') + this.name.last;
   }
 
-  getNick() {
-    return this.name.nick ?? this.name.first;
+  getName() {
+    return this.name.first !== '' ? this.name : null;
   }
 
-  pickName(names = playerNames) {
-    const gender = this.getGender();
-    if (!gender) {
-      throw new Error("Attempting to name player without having set a gender first.");
-    }
-    let genderKey = gender.machine_name
-    if (genderKey === "nb") {
-      genderKey = "any";
-    }
-    let firstNames = names.first[genderKey];
-    if (genderKey !== "any") {
-      firstNames = firstNames.concat(names.first["any"]);
-    }
-
-    console.log(`Naming player ${this.getID()} with gender ${this.getGenderString()}`);
-    const name = [
-      firstNames[Utilities.pickFromRange(firstNames.length)],
-      names.last[Utilities.pickFromRange(names.last.length)],
-      null,
-    ];
-    console.log(`Player ${this.getID()} has been named ${name.join(' ')}`)
-    return name;
+  getNick() {
+    return this.name.nick ?? this.name.first;
   }
 
   getGender() {

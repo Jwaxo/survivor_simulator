@@ -1,5 +1,26 @@
 import Player from './../Player/Player';
 import Tribe from '../Tribe/Tribe';
+import Utilities from '../Utilities';
+
+const tribeColors = require('../../lib/tribe/colors.json');
+const tribeNames = require('../../lib/tribe/names.json');
+
+// All player names taken from https://github.com/aruljohn/popular-baby-names/tree/master/1985,
+// which is an awesome library I should consider using for more year-accurate
+// names.
+const playerNames = {
+  "first": {
+    "male": require("../../lib/player/firstnames_male.json").names,
+    "female": require("../../lib/player/firstnames_female.json").names,
+    "any": require("../../lib/player/firstnames_any.json").names,
+  },
+  "last": require("../../lib/player/lastnames.json").names,
+  "nick": {
+    "male": require("../../lib/player/nicknames_male.json").names,
+    "female": require("../../lib/player/nicknames_female.json").names,
+    "any": require("../../lib/player/nicknames_any.json").names,
+  },
+}
 
 class Season {
   properties = {
@@ -35,7 +56,10 @@ class Season {
   }
 
   createTribe(players = []) {
-    const tribe = new Tribe();
+    const tribe = new Tribe({
+      color: this.pickTribeColor(),
+      name: this.pickTribeName(),
+    });
     if (players.length > 0) {
       tribe.addPlayers(players);
     }
@@ -59,6 +83,18 @@ class Season {
     return this.tribes;
   }
 
+  pickTribeColor(colors = tribeColors.colors, depth = 0) {
+    let pickedColor = colors.splice(Utilities.pickFromRange(colors.length), 1)[0];
+    if (pickedColor.hasOwnProperty("variants")) {
+      pickedColor = this.pickTribeColor(pickedColor.variants, depth + 1);
+    }
+    return pickedColor;
+  }
+
+  pickTribeName(names = tribeNames.names) {
+    return names.splice(Utilities.pickFromRange(names.length), 1)[0];
+  }
+
   generateTribes() {
     const tribe_size = this.properties.starting_player_count / this.properties.tribe_count;
     if (this.properties.starting_player_count % this.properties.tribe_count > 0) {
@@ -73,6 +109,24 @@ class Season {
       console.log(`Creating new tribe with ${players.length} players`);
       this.createTribe(players);
     }
+  }
+
+  pickPlayerName(gender) {
+    if (!gender) {
+      throw new Error("Attempting to name player without having set a gender first.");
+    }
+    let genderKey = gender.machine_name
+    if (genderKey === "nb") {
+      genderKey = "any";
+    }
+
+    // When picking names (or anything random) we generally remove the picked
+    // item so that it won't appear again.
+    return [
+      playerNames.first[genderKey].splice(Utilities.pickFromRange(playerNames.first[genderKey]), 1)[0],
+      playerNames.last.splice([Utilities.pickFromRange(playerNames.last.length)], 1)[0],
+      null,
+    ];
   }
 
   createPlayer(props = null) {
@@ -90,6 +144,10 @@ class Season {
       props.id = id;
       console.log(`Generating new player from props ${props}`);
       new_player = new Player(props);
+    }
+
+    if (!new_player.getName()) {
+      new_player.setName(...this.pickPlayerName(new_player.getGender()));
     }
 
     this.addPlayer(new_player);

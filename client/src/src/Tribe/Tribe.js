@@ -1,11 +1,9 @@
 import Utilities from '../Utilities';
-const tribeColors = require('../../lib/tribe/colors.json');
-const tribeNames = require('../../lib/tribe/names.json');
 
 class Tribe {
   properties = {
     name: '',
-    color: '',
+    color: null,
     losses: 0,
     wins: 0,
     assets: [],
@@ -30,11 +28,11 @@ class Tribe {
         }
       };
     }
-    if (!this.getName()) {
-      this.setName(this.pickName());
+    if (this.getName() === '') {
+      throw new Error("Attempting to create a tribe without a name! Please ensure you are setting a color and name for the tribe.");
     }
-    if (!this.getColor()) {
-      this.setColor(this.pickColor());
+    if (this.getColor() === null) {
+      throw new Error("Attempting to create a tribe without a color! Please ensure you are setting a color and name for the tribe.");
     }
   }
 
@@ -55,11 +53,6 @@ class Tribe {
     this.properties.name = name;
   }
 
-  pickName(names = tribeNames.names) {
-    const pickedName = names[Utilities.pickFromRange(names.length)];
-    return pickedName;
-  }
-
   getColor() {
     return this.properties.color;
   }
@@ -74,14 +67,6 @@ class Tribe {
 
   setColor(color) {
     this.properties.color = color;
-  }
-
-  pickColor(colors = tribeColors.colors) {
-    let pickedColor = colors[Utilities.pickFromRange(colors.length)];
-    if (pickedColor.hasOwnProperty("variants")) {
-      pickedColor = this.pickColor(pickedColor.variants);
-    }
-    return pickedColor;
   }
 }
 
