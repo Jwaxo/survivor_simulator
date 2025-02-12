@@ -1,4 +1,4 @@
-import './App.css';
+import './style/app.css';
 import { useState } from "react";
 import Season from "./Season/Season";
 import Interface from "./Interface/Interface";

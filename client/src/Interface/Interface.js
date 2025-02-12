@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ActionBox from './Actionbox';
 import EnviroBox from './Envirobox';
 import InfoBox from './Infobox';
 import PlayerBox from './Playerbox';
@@ -63,10 +64,19 @@ class Interface extends Component {
   render() {
     return (
       <div className="interface">
-        <StatusBox day={0} time={ this.timestring } weather="Sunny" tribe="Default" phase="Morning" debug={ this.debug } />
-        <EnviroBox/>
-        <InfoBox log={ this.status.log }/>
-        <PlayerBox players={ this.season.getPlayers() } />
+        <div className="interface-panel interface-top">
+          <StatusBox day={0} time={ this.timestring } weather="Sunny" tribe="Default" phase="Morning" debug={ this.debug } />
+        </div>
+        <div className="interface-panel interface-main">
+          <EnviroBox />
+          <InfoBox log={ this.status.log }/>
+        </div>
+        <div className="interface-panel interface-side">
+          <PlayerBox players={ this.season.getPlayers() } />
+        </div>
+        <div className="interface-panel interface-bottom">
+          <ActionBox />
+        </div>
       </div>
     )
   }

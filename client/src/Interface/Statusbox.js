@@ -35,28 +35,30 @@ class StatusBox extends Component {
 
   render() {
     return (
-      <ul className="status-box">
-        <li className="status-box-day">
-          <span className="label">Day</span>
-          <span className="value">{ this.state.day }</span>
-        </li>
-        <li className="status-box-time">
-          <span className="label">Time</span>
-          <span className="value">{ this.state.time }</span>
-        </li>
-        <li className="status-box-weather">
-          <span className="label">Weather</span>
-          <span className="value">{ this.state.weather }</span>
-        </li>
-        <li className="status-box-tribe">
-          <span className="label">Tribe</span>
-          <span className="value">{ this.state.tribe }</span>
-        </li>
-        <li className="status-box-phase">
-          <span className="label">Phase</span>
-          <span className="value">{ this.state.phase }</span>
-        </li>
-      </ul>
+      <div class="status-box">
+        <ul className="status-box-stats">
+          <li className="status-box-stat status-box-day">
+            <span className="label">Day</span>
+            <span className="value">{ this.state.day }</span>
+          </li>
+          <li className="status-box-stat status-box-time">
+            <span className="label">Time</span>
+            <span className="value">{ this.state.time }</span>
+          </li>
+          <li className="status-box-stat status-box-weather">
+            <span className="label">Weather</span>
+            <span className="value">{ this.state.weather }</span>
+          </li>
+          <li className="status-box-stat status-box-tribe">
+            <span className="label">Tribe</span>
+            <span className="value">{ this.state.tribe }</span>
+          </li>
+          <li className="status-box-stat status-box-phase">
+            <span className="label">Phase</span>
+            <span className="value">{ this.state.phase }</span>
+          </li>
+        </ul>
+      </div>
     )
   }
 

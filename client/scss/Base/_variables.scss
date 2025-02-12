@@ -1,0 +1,23 @@
+/**
+ * Base Variables
+ */
+
+// PALETTE
+
+$black: #000000;
+$darkGrey: #888888;
+$white: #FFFFFF;
+$green: #00FF00;
+$linen: #FDF9F2;
+$sidecar: #F6E6CB;
+$pizza: #BC8510;
+
+// GENERAL COLORS
+// Define any colors specific to your component within the component's CSS.
+
+$background: $linen;
+$interface: $sidecar;
+$typeColor: $pizza;
+$borderColor: $black;
+
+$fontBody: sans-serif;

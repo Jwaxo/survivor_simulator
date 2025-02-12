@@ -1,0 +1,43 @@
+/**
+ * Styles pertaining to the Interface container.
+ */
+
+@use './../Base' as *;
+
+body {
+  background-color: $background;
+}
+
+.interface {
+  background-color: $interface;
+  border: 1px solid $borderColor;
+  color: $typeColor;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin: 250px auto;
+  max-width: 1200px;
+}
+
+.interface-panel {
+  box-sizing: border-box;
+  padding: 30px;
+}
+
+.interface-top,
+.interface-bottom {
+  flex: 1 1 100%;
+}
+
+.interface-main {
+  border: 1px solid $borderColor;
+  border-left: 0;
+  flex: 0 1 80%;
+}
+
+.interface-side {
+  border: 1px solid $borderColor;
+  border-left: 0;
+  border-right: 0;
+  flex: 1 1 20%;
+}

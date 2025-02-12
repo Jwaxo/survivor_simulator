@@ -1,0 +1,78 @@
+/**
+ * Styles for the main Interface components.
+ */
+/**
+ * Styles pertaining to the Interface container.
+ */
+/**
+ * Base Variables
+ */
+body {
+  background-color: #FDF9F2;
+}
+
+.interface {
+  background-color: #F6E6CB;
+  border: 1px solid #000000;
+  color: #BC8510;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin: 250px auto;
+  max-width: 1200px;
+}
+
+.interface-panel {
+  box-sizing: border-box;
+  padding: 30px;
+}
+
+.interface-top,
+.interface-bottom {
+  flex: 1 1 100%;
+}
+
+.interface-main {
+  border: 1px solid #000000;
+  border-left: 0;
+  flex: 0 1 80%;
+}
+
+.interface-side {
+  border: 1px solid #000000;
+  border-left: 0;
+  border-right: 0;
+  flex: 1 1 20%;
+}
+
+/**
+ * Interface Status Box
+ */
+.status-box .status-box-stats {
+  list-style: none;
+  margin: 0;
+  max-width: 50%;
+  padding: 0;
+}
+.status-box .status-box-stats .status-box-stat {
+  list-style: none;
+  display: inline-block;
+  margin: 5px 20px 5px 0;
+  padding: 0;
+}
+.status-box .label {
+  margin-right: 5px;
+  text-decoration: underline;
+}
+.status-box .value {
+  font-weight: 700;
+}
+
+.player-card {
+  border: 1px;
+}
+.player-card ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}

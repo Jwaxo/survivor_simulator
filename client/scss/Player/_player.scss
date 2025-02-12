@@ -1,0 +1,12 @@
+
+@use './../Base' as *;
+
+.player-card {
+  border: 1px;
+
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+}

@@ -1,0 +1,26 @@
+/**
+ * Interface Status Box
+ */
+
+.status-box {
+  .status-box-stats {
+    list-style: none;
+    margin: 0;
+    max-width: 50%;
+    padding: 0;
+    .status-box-stat {
+      list-style: none;
+      display: inline-block;
+      margin: 5px 20px 5px 0;
+      padding: 0;
+    }
+  }
+
+  .label {
+    margin-right: 5px;
+    text-decoration: underline;
+  }
+  .value {
+    font-weight: 700;
+  }
+}
