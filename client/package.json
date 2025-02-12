@@ -11,6 +11,7 @@
     "gulp-load-plugins": "^2.0.8",
     "gulp-postcss": "^10.0.0",
     "gulp-sass": "^6.0.0",
+    "js-yaml-loader": "^1.2.2",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-scripts": "5.0.1",

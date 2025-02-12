@@ -3,14 +3,27 @@
  */
 
 // PALETTE
-
 $black: #000000;
 $darkGrey: #888888;
 $white: #FFFFFF;
-$green: #00FF00;
 $linen: #FDF9F2;
 $sidecar: #F6E6CB;
 $pizza: #BC8510;
+$neongreen: #00FF00;
+
+// TRIBE COLORS
+// These MUST MATCH the names in /client/lib/tribe/colors.
+$cardinal: #D1232C;
+$amethyst: #AF36BA;
+$orchid: #E26AC1;
+$persian: #201FD1;
+$mariner: #1F67D1;
+$java: #19B3AF;
+$jade: #00A86B;
+$meadow: #19B371;
+$green: #17D10A;
+$lemon: #F9F015;
+$sun: #F9B915;
 
 // GENERAL COLORS
 // Define any colors specific to your component within the component's CSS.

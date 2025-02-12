@@ -1,9 +1,10 @@
 import './style/app.css';
 import { useState } from "react";
-import Season from "./Season/Season";
-import Interface from "./Interface/Interface";
+import Season from "./src/Season/Season";
+import Interface from "./src/Interface/Interface";
 import seedrandom from 'seedrandom';
-import Utilities from './Utilities';
+import Utilities from './src/Utilities';
+
 
 let debug = true;
 

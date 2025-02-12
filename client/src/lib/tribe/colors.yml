@@ -1,0 +1,14 @@
+version: 1.0
+colors:
+  - name: cardinal
+    description: "red"
+  - name: amethyst
+  - name: orchid
+  - name: persian
+  - name: mariner
+  - name: java
+  - name: jade
+  - name: meadow
+  - name: green
+  - name: lemon
+  - name: sun

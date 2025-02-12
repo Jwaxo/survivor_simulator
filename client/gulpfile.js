@@ -22,10 +22,10 @@ function taskImages(cb) {
   return returned;
 }
 
-exports.default = series(taskSass);
 exports.build = series(taskSass);
 exports.dev = (cb) => {
   taskSass(cb);
   // watch('scss/images/*', taskImages);
   watch('scss/**/*.scss', series(taskSass));
 };
+exports.default = exports.dev;
