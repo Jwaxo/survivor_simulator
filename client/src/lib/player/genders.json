@@ -1,0 +1,38 @@
+{
+  "version": 1.0,
+  "genders": [
+    {
+      "id": 0,
+      "machine_name": "nb",
+      "descriptive": "non-binary person",
+      "pronouns": {
+        "identity": "they",
+        "secondary": "them",
+        "descriptive": "their",
+        "possessive": "theirs"
+      }
+    },
+    {
+      "id": 1,
+      "machine_name": "female",
+      "descriptive": "woman",
+      "pronouns": {
+        "identity": "she",
+        "secondary": "her",
+        "descriptive": "her",
+        "possessive": "hers"
+      }
+    },
+    {
+      "id": 2,
+      "machine_name": "male",
+      "descriptive": "man",
+      "pronouns": {
+        "identity": "he",
+        "secondary": "him",
+        "descriptive": "his",
+        "possessive": "his"
+      }
+    }
+  ]
+}

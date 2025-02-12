@@ -4,6 +4,26 @@ import Race from './Property/Race';
 import Relationship from './Property/Relationship';
 import Stats from './Property/Stats';
 import Trait from './Property/Trait';
+import Utilities from '../Utilities';
+
+// All names taken from https://github.com/aruljohn/popular-baby-names/tree/master/1985,
+// which is an awesome library I should consider using for more year-accurate
+// names.
+const playerNames = {
+  "first": {
+    "male": require("../../lib/player/firstnames_male.json").names,
+    "female": require("../../lib/player/firstnames_female.json").names,
+    "any": require("../../lib/player/firstnames_any.json").names,
+  },
+  "last": require("../../lib/player/lastnames.json").names,
+  "nick": {
+    "male": require("../../lib/player/nicknames_male.json").names,
+    "female": require("../../lib/player/nicknames_female.json").names,
+    "any": require("../../lib/player/nicknames_any.json").names,
+  },
+}
+
+const playerGenders = require("../../lib/player/genders.json");
 
 class Player {
   id = 0;
@@ -14,6 +34,7 @@ class Player {
   };
   properties = {
     age: 0,
+    gender: null,
     origin: null,
     occupation: null,
     race: null,
@@ -32,10 +53,20 @@ class Player {
     if (!props || !props.id) {
       throw new Error("Trying to create Player without ID");
     }
+    this.id = props.id;
+    if (props.gender) {
+      this.properties.gender = props.gender;
+    }
+    else {
+      this.setGender(this.pickGender());
+    }
     if (props.name) {
       this.name.first = props.name.first ?? '';
       this.name.nick = props.name.nick ?? '';
       this.name.last = props.name.last ?? '';
+    }
+    else {
+      this.setName(...this.pickName());
     }
     if (props.age) {
       this.properties.age = props.age;
@@ -49,12 +80,63 @@ class Player {
     this.debug = debug;
   }
 
+  setName(first, last, nick = null) {
+    this.name = {
+      "first": first,
+      "last": last,
+    };
+    if (nick) {
+      this.name.nick = nick;
+    }
+  }
+
   nameToString() {
     return this.name.first + ' ' + (this.name.nick ? '"' + this.name.nick + '" ' : '') + this.name.last;
   }
 
   getNick() {
     return this.name.nick ?? this.name.first;
+  }
+
+  pickName(names = playerNames) {
+    const gender = this.getGender();
+    if (!gender) {
+      throw new Error("Attempting to name player without having set a gender first.");
+    }
+    let genderKey = gender.machine_name
+    if (genderKey === "nb") {
+      genderKey = "any";
+    }
+    let firstNames = names.first[genderKey];
+    if (genderKey !== "any") {
+      firstNames.merge(names.first["any"]);
+    }
+
+    console.log(`Naming player ${this.getID()} with gender ${this.getGenderString()}`);
+    const name = [
+      firstNames[Utilities.pickFromRange(firstNames.length)],
+      names.last[Utilities.pickFromRange(names.last.length)],
+      null,
+    ];
+    console.log(`Player ${this.getID()} has been named ${name.join(' ')}`)
+    return name;
+  }
+
+  getGender() {
+    return this.properties.gender;
+  }
+
+  getGenderString() {
+    return this.getGender().descriptive;
+  }
+
+  setGender(gender) {
+    this.properties.gender = gender;
+  }
+
+  pickGender(genders = playerGenders.genders) {
+    const pickedGender = genders[Utilities.pickFromRange(genders.length)];
+    return pickedGender;
   }
 
   getTribe() {
@@ -97,7 +179,7 @@ class Player {
   }
 
   getID() {
-    return this.properties.id;
+    return this.id;
   }
 
   getTraits() {
@@ -109,12 +191,9 @@ class Player {
   }
 
   randomlyGenerate() {
-    if (this.name.first) {
+    if (this.properties.age) {
       throw new Error('Trying to generate a player that has already been defined!');
     }
-    this.name.first = "Adam";
-    this.name.nick = "A-Dog";
-    this.name.last = "Aaronson";
     this.properties.age = 24;
     this.properties.origin = new Origin({ city: "Portland", state: "Oregon", state_initial: "OR"})
     this.properties.occupation = new Occupation({ name: 'Student' });

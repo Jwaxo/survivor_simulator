@@ -1,5 +1,6 @@
 import Utilities from '../Utilities';
 const tribeColors = require('../../lib/tribe/colors.json');
+const tribeNames = require('../../lib/tribe/names.json');
 
 class Tribe {
   properties = {
@@ -29,6 +30,9 @@ class Tribe {
         }
       };
     }
+    if (!this.getName()) {
+      this.setName(this.pickName());
+    }
     if (!this.getColor()) {
       this.setColor(this.pickColor());
     }
@@ -39,15 +43,21 @@ class Tribe {
     player.setTribe(this);
   }
 
-  addPlayers(players) {
-    this.players = this.players.merge(players);
-    players.forEach(player => {
-      player.setTribe(this);
-    })
+  addPlayers(players = []) {
+    players.forEach(player => this.addPlayer(player));
   }
 
   getName() {
     return this.properties.name;
+  }
+
+  setName(name) {
+    this.properties.name = name;
+  }
+
+  pickName(names = tribeNames.names) {
+    const pickedName = names[Utilities.pickFromRange(names.length)];
+    return pickedName;
   }
 
   getColor() {
@@ -67,7 +77,7 @@ class Tribe {
   }
 
   pickColor(colors = tribeColors.colors) {
-    let pickedColor = colors[Utilities.pickFromRange(tribeColors.colors.length)];
+    let pickedColor = colors[Utilities.pickFromRange(colors.length)];
     if (pickedColor.hasOwnProperty("variants")) {
       pickedColor = this.pickColor(pickedColor.variants);
     }

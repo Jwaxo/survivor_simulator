@@ -34,11 +34,8 @@ class Season {
     }
   }
 
-  createTribe(name, players = []) {
-    if (this.getTribeByName(name)) {
-      throw new Error(`Trying to add a tribe that already exists: ${name}`)
-    }
-    const tribe = new Tribe({ name: name });
+  createTribe(players = []) {
+    const tribe = new Tribe();
     if (players.length > 0) {
       tribe.addPlayers(players);
     }

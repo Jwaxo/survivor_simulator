@@ -1,27 +1,32 @@
 {
   "version": 1.0,
-  "first": {
-    "male": [
-
-    ],
-    "female": [
-
-    ],
-    "any": [
-
-    ]
-  },
-  "last": [
-  ],
-  "nick": {
-    "male": [
-
-    ],
-    "female": [
-
-    ],
-    "any": [
-      "[initials]"
-    ]
-  }
+  "names": [
+    "Tagi",
+    "Pagong",
+    "Ogakor",
+    "Kucha",
+    "Boran",
+    "Samburu",
+    "Maraamu",
+    "Rotu",
+    "Chuay Gahn",
+    "Sook Jai",
+    "Jaburu",
+    "Tambaqui",
+    "Morgan",
+    "Drake",
+    "Saboga",
+    "Mogo Mogo",
+    "Chapera",
+    "Yasur",
+    "Lopevi",
+    "Ulong",
+    "Koror",
+    "Nakúm",
+    "Yaxhá",
+    "La Mina",
+    "Viveros",
+    "Bayoneta",
+    "Casaya"
+  ]
 }

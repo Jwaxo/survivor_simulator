@@ -47,7 +47,8 @@ const Utilities = {
     return Math.floor(Math.random() * 20) + mod;
   },
 
-  pickFromRange: (max = 100, min = 0) => {
+  pickFromRange: (length = 100, min = 0) => {
+    const max = length - 1;
     return Math.floor(Math.random() * (max - min)) + min;
   }
 
