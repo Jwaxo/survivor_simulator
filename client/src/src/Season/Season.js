@@ -59,6 +59,22 @@ class Season {
     return this.tribes;
   }
 
+  generateTribes() {
+    const tribe_size = this.properties.starting_player_count / this.properties.tribe_count;
+    if (this.properties.starting_player_count % this.properties.tribe_count > 0) {
+      throw new Error(`Players per tribe is ${tribe_size}, an impossible player count.`);
+    }
+    console.log(`Generating ${this.properties.tribe_count} tribes out of ${this.properties.starting_player_count} players, with ${tribe_size} players per tribe.`)
+    for (let i = 0;i < this.properties.tribe_count;i++) {
+      const players = [];
+      for (let j = 0;j < tribe_size;j++) {
+        players.push(this.createPlayer());
+      }
+      console.log(`Creating new tribe with ${players.length} players`);
+      this.createTribe(players);
+    }
+  }
+
   createPlayer(props = null) {
     let new_player = null;
     const id = this.getPlayerCount() + 1; // Should always go up by one, as long

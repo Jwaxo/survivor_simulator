@@ -109,7 +109,7 @@ class Player {
     }
     let firstNames = names.first[genderKey];
     if (genderKey !== "any") {
-      firstNames.merge(names.first["any"]);
+      firstNames = firstNames.concat(names.first["any"]);
     }
 
     console.log(`Naming player ${this.getID()} with gender ${this.getGenderString()}`);

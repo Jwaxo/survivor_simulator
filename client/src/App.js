@@ -12,8 +12,7 @@ const random_seed = "Random Seed";
 
 seedrandom(random_seed, { global: true});
 
-const test_player = current_season.createPlayer();
-current_season.createTribe([test_player]);
+current_season.generateTribes();
 
 function App() {
 
