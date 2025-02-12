@@ -1,6 +1,4 @@
-const { watch, parallel, series, dest, src } = require('gulp');
-const $ = require('gulp-load-plugins')();
-const autoprefixer = require('autoprefixer');
+const { watch, parallel, series, dest, src, start } = require('gulp');
 const sass = require('gulp-sass')(require('sass'));
 
 function taskSass(cb) {
@@ -13,7 +11,7 @@ function taskSass(cb) {
     // ]))
     .pipe(dest('src/style'));
   console.log('Render complete!');
-  return returned;
+  cb();
 }
 
 function taskImages(cb) {
@@ -24,12 +22,10 @@ function taskImages(cb) {
   return returned;
 }
 
-function taskWatch(cb) {
-  watch('scss/*.scss', taskSass);
-  // watch('scss/images/*', taskImages);
-  cb();
-}
-
 exports.default = series(taskSass);
 exports.build = series(taskSass);
-exports.dev = parallel(taskWatch, series(taskSass));
+exports.dev = (cb) => {
+  taskSass(cb);
+  // watch('scss/images/*', taskImages);
+  watch('scss/**/*.scss', series(taskSass));
+};

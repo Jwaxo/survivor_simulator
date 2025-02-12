@@ -20,11 +20,12 @@ body {
   flex-wrap: wrap;
   margin: 250px auto;
   max-width: 1200px;
+  text-shadow: #BC8510 0px 0 3px;
 }
 
 .interface-panel {
   box-sizing: border-box;
-  padding: 30px;
+  padding: 35px;
 }
 
 .interface-top,

@@ -35,7 +35,7 @@ class StatusBox extends Component {
 
   render() {
     return (
-      <div class="status-box">
+      <div className="status-box">
         <ul className="status-box-stats">
           <li className="status-box-stat status-box-day">
             <span className="label">Day</span>
