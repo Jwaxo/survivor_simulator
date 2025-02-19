@@ -55,6 +55,27 @@ body {
 }
 
 /**
+ * Styles for the main Interface's Action Box.
+ */
+.action-box {
+  align-items: center;
+  display: flex;
+}
+.action-box ul {
+  align-items: center;
+  display: flex;
+  gap: 15px;
+  justify-content: end;
+  list-style: none;
+  margin: 0;
+  width: 100%;
+}
+.action-box ul li {
+  margin: 0;
+  padding: 0;
+}
+
+/**
  * Styles for the main Interface's Player Box.
  */
 /**
@@ -82,6 +103,17 @@ body {
 }
 .status-box .value {
   font-weight: 700;
+}
+
+/**
+ * Styles for Action components.
+ */
+.action button {
+  background: white;
+  border: 1px solid black;
+  font-size: 14px;
+  font-weight: bold;
+  padding: 10px 15px;
 }
 
 /**

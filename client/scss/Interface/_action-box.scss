@@ -1,0 +1,21 @@
+/**
+ * Styles for the main Interface's Action Box.
+ */
+
+.action-box {
+  align-items: center;
+  display: flex;
+  ul {
+    align-items: center;
+    display: flex;
+    gap: 15px;
+    justify-content: end;
+    list-style: none;
+    margin: 0;
+    width: 100%;
+    li {
+      margin: 0;
+      padding: 0;
+    }
+  }
+}
