@@ -26,6 +26,7 @@ export default function Interface({season, timePerTic, debug}) {
   const [actions, setActions] = useState([]);
   const [log, setLog] = useState([]);
   const [players, setPlayers] = useState(() => season.getPlayers());
+  const [prompt, setPrompt] = useState("");
 
   // Basically any States that callbacks might need to reference need to be
   // stored in stateRef so that the callbacks see their ACTUAL values instead of
@@ -34,6 +35,7 @@ export default function Interface({season, timePerTic, debug}) {
   stateRef.log = log;
   stateRef.actions = actions;
   stateRef.time = time;
+  stateRef.prompt = prompt;
 
   function advanceTime() {
     season.advanceTime();
@@ -87,6 +89,7 @@ export default function Interface({season, timePerTic, debug}) {
           }
         }
       ]);
+      setPrompt("Choose a test action:");
     }
   }, []);
 
@@ -94,7 +97,7 @@ export default function Interface({season, timePerTic, debug}) {
     <div className="interface">
       <div className="interface-inner">
         <div className="interface-panel interface-top">
-          <StatusBox day={ stateRef.time.day } time={ stateRef.time.timestring } weather="Sunny" tribe="Default" phase="Morning" debug={ debug } />
+          <StatusBox day={ time.day } time={ time.timestring } weather="Sunny" tribe="Default" phase="Morning" debug={ debug } />
         </div>
         <div className="interface-panel interface-main">
           <EnviroBox />
@@ -104,7 +107,7 @@ export default function Interface({season, timePerTic, debug}) {
           <PlayerBox players={ players } />
         </div>
         <div className="interface-panel interface-bottom">
-          <ActionBox actions={ actions } addAction={ addActions } />
+          <ActionBox actions={ actions } addAction={ addActions } prompt={ prompt } />
         </div>
       </div>
     </div>
