@@ -55,7 +55,7 @@ export default function Interface({season, timePerTic, debug}) {
   function addActions(newActions = []) {
     setActions([...stateRef.actions,
       ...newActions.map(action => (
-        <Action label={ action.label } type={ action.type } callback={ action.callback }/>
+        <Action label={ action.label } type={ action.type ?? 'button' } callback={ action.callback }/>
       ))
     ]);
   }
@@ -75,19 +75,18 @@ export default function Interface({season, timePerTic, debug}) {
         {
           label: 'Advance Time',
           callback: () => {
+            addToLog("Time passes...");
             advanceTime();
           },
           type: 'button'
         },
         {
-          label: 'Add Action',
-          type: 'button',
+          label: 'Add Message',
           callback: () => {
-            addAction('Add Message', () => {
-              addToLog("Adding a new log entry");
-            })
+            addToLog("This is a test message!");
           }
         }
+
       ]);
       setPrompt("Choose a test action:");
     }
@@ -100,7 +99,7 @@ export default function Interface({season, timePerTic, debug}) {
           <StatusBox day={ time.day } time={ time.timestring } weather="Sunny" tribe="Default" phase="Morning" debug={ debug } />
         </div>
         <div className="interface-panel interface-main">
-          <EnviroBox />
+          <EnviroBox description="It's a sunny day on Challenge Beach. Jeff Probst is here in a resplendent navy blue shirt." />
           <InfoBox log={ log }/>
         </div>
         <div className="interface-panel interface-side">

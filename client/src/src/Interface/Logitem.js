@@ -3,8 +3,8 @@ import React from 'react';
 function LogItem({active, message}) {
 
   const classes = [
-    "infobox-log",
-    active ? "infobox-log--active" : '',
+    "info-box-log",
+    active ? "info-box-log--active" : '',
   ].join(' ').trim();
 
   return (

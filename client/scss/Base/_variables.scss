@@ -6,9 +6,10 @@
 $black: #000000;
 $darkGrey: #888888;
 $white: #FFFFFF;
-$linen: #FDF9F2;
+$linen: #FDF9F2; //16644594
 $sidecar: #F6E6CB;
-$pizza: #BC8510;
+$harvest: #DDBF81;
+$pizza: #BC8510; //12354832
 $neongreen: #00FF00;
 
 // TRIBE COLORS
@@ -36,6 +37,7 @@ $tribeColors: (
 $background: $linen;
 $interface: $sidecar;
 $typeColor: $pizza;
+$typeColorDisabled: $harvest;
 $borderColor: $black;
 
 $fontBody: sans-serif;

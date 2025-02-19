@@ -84,6 +84,25 @@ body {
 }
 
 /**
+ * Styles for the Interface EnviroBox component.
+ */
+.enviro-box {
+  border-bottom: 1px solid #000000;
+  margin-bottom: 20px;
+  padding: 0px 20px 20px;
+}
+
+/**
+ * Styles for the Interface InfoBox component.
+ */
+.info-box .info-box-log {
+  color: #DDBF81;
+}
+.info-box .info-box-log.info-box-log--active {
+  color: #BC8510;
+}
+
+/**
  * Styles for the main Interface's Player Box.
  */
 /**

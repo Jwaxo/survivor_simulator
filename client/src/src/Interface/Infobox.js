@@ -4,10 +4,10 @@ import LogItem from './Logitem';
 function InfoBox({ log }) {
 
   return (
-    <div className="infobox">
+    <div className="info-box">
       {log.map((message, index) => {
         return (
-          <LogItem key={ index } active={ index === 0 } message={ message } />
+          <LogItem key={ index } active={ index === (log.length - 1) } message={ message } />
         )
       })}
     </div>

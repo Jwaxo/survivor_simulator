@@ -1,0 +1,15 @@
+/**
+ * Styles for the Interface InfoBox component.
+ */
+
+@use './../Base' as *;
+
+.info-box {
+  .info-box-log {
+    color: $typeColorDisabled;
+
+    &.info-box-log--active {
+      color: $typeColor;
+    }
+  }
+}

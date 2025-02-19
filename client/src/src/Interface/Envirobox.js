@@ -1,8 +1,10 @@
-import React, { Component } from 'react';
+function EnviroBox({ description })  {
 
-function EnviroBox()  {
-
-  return "EnviroBox";
+  return (
+    <div className="enviro-box">
+      { description }
+    </div>
+  );
 
 }
 

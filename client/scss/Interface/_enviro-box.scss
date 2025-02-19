@@ -1,0 +1,11 @@
+/**
+ * Styles for the Interface EnviroBox component.
+ */
+
+@use './../Base' as *;
+
+.enviro-box {
+  border-bottom: 1px solid $borderColor;
+  margin-bottom: 20px;
+  padding: 0px 20px 20px;
+}
