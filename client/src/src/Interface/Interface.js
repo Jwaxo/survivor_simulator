@@ -1,86 +1,64 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import ActionBox from './Actionbox';
 import EnviroBox from './Envirobox';
 import InfoBox from './Infobox';
 import PlayerBox from './Playerbox';
 import StatusBox from './Statusbox';
 
-class Interface extends Component {
-  status = {
-    log: [],
-  };
-  logger = null;
-  season = null;
-  // How many minutes each tic is worth.
-  timePerTic = 10;
-  timestamp = 0;
-  timestring = '';
-  children = null;
-  debug = false;
+import Action from '../Action/Action';
 
-  constructor(props) {
-    super(props);
-    if (props.logger) {
-      this.logger = props.logger;
-    }
-    if (props.season) {
-      this.season = props.season;
-    }
-    if (props.timePerTic) {
-      this.timePerTic = props.timePerTic;
-    }
-    this.updateTimestring();
+/**
+ * The main Interface class holds all UX components within it, and passes any
+ * and all user interaction down to the individual components or functions.
+ * A typical interaction might look like this:
+ * 1. User clicks "advance time one tic".
+ * 2. Interface tells the Season to advance time.
+ * 3. Interface gets the new time back.
+ * 4. Interface updates its own time state.
+ * 5. StatusBox naturally updates with the new time.
+ */
 
-    if (props.debug === true) {
-      // Set time to 7AM.
-      this.debug = true;
-      this.advanceTime((60 / this.timePerTic) * 7);
-    }
-    if (props.children) {
-      this.children = props.children;
-    }
-    if (props.log) {
-      this.status.log = props.log;
-    }
+function Interface({season, timePerTic, debug}) {
+  const [time, setTime] = useState('12:00 AM');
+  const [actions, setActions] = useState([]);
+
+  if (actions?.length < 1) {
+    addAction('Advance Time', () => {
+      advanceTime();
+    });
   }
 
-  advanceTime(tics = 1) {
-    this.timestamp += tics * this.timePerTic;
-    this.updateTimestring();
+  function advanceTime() {
+    season.advanceTime();
+    setTime(season.getTimestring());
   }
 
-  updateTimestring() {
-    const decimalHours = this.timestamp / 60;
-    const hours = Math.floor(decimalHours);
-    const twelveHour = (hours % 12 === 0 ? '12' : hours % 12).toString();
-    let minutes = ((decimalHours - hours) * 60).toString();
-    if (minutes.length < 2) {
-      minutes += "0";
-    }
-    const amPm = hours % 24 < 12 ? "AM" : "PM";
-    this.timestring = `${twelveHour}:${minutes} ${amPm}`;
+  function addAction(label = 'Action', callback = () => {
+    console.log("No callback set for this action.")
+  }, type = 'button') {
+    setActions([...actions, <Action label={ label } type={ type } callback={ callback }/>
+    ]);
   }
 
-  render() {
-    return (
-      <div className="interface">
+  return (
+    <div className="interface">
+      <div className="interface-inner">
         <div className="interface-panel interface-top">
-          <StatusBox day={0} time={ this.timestring } weather="Sunny" tribe="Default" phase="Morning" debug={ this.debug } />
+          <StatusBox day={0} time={ time } weather="Sunny" tribe="Default" phase="Morning" debug={ debug } />
         </div>
         <div className="interface-panel interface-main">
           <EnviroBox />
-          <InfoBox log={ this.status.log }/>
+          <InfoBox log={ season.state.log }/>
         </div>
         <div className="interface-panel interface-side">
-          <PlayerBox players={ this.season.getPlayers() } />
+          <PlayerBox players={ season.getPlayers() } />
         </div>
         <div className="interface-panel interface-bottom">
-          <ActionBox />
+          <ActionBox actions={ actions } addAction={ addAction } />
         </div>
       </div>
-    )
-  }
-
+    </div>
+  )
 }
 
 export default Interface;

@@ -1,10 +1,20 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-class ActionBox extends Component {
+function ActionBox({actions, addAction}) {
 
-  render() {
-    return "ActionBox";
-  }
+  return (
+    <div className="action-box">
+      { actions.length > 0 ? (
+        <ul className="actions-list">
+          { actions.map((action, index) => (
+            <li className="actions-item" key={index}>
+              { action }
+            </li>
+          )) }
+        </ul>
+      ) : ''}
+    </div>
+  );
 
 }
 

@@ -5,6 +5,7 @@ class Relationship extends Component {
   properties = {
     target: null, // Player.
     like: 5, // All properties from 0 - 10.
+    bond: 5,
     trust: 5,
     rival: 5,
   }
@@ -37,7 +38,7 @@ class Relationship extends Component {
   render() {
     return (
       <>
-        { this.properties.target.getNick() }: Like { this.properties.like }, Trust { this.properties.trust }, Rival { this.properties.rival }
+        { this.properties.target.getNick() }: Like { this.properties.like }, Bond { this.properties.bond}, Trust { this.properties.trust }, Rival { this.properties.rival }
       </>
     )
   }

@@ -1,28 +1,16 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PlayerCard from './../Player/Components/Playercard';
 
-class PlayerBox extends Component {
+function PlayerBox({ players, debug }) {
 
-  debug = false;
-
-  constructor(props) {
-    super(props);
-
-    if (props.players) {
-      this.players = props.players;
-    }
-  }
-
-  render() {
-    return (
-      <div className="player-box">
-        Players ({ this.players.length })
-        {this.players.map((player, index) =>
-          <PlayerCard player={ player } key={ index } debug={ this.debug } />
-        )}
-      </div>
-    )
-  }
+  return (
+    <div className="player-box">
+      Players ({ players.length })
+      {players.map((player, index) =>
+        <PlayerCard player={ player } key={ index } debug={ debug } />
+      )}
+    </div>
+  )
 
 }
 

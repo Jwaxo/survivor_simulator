@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 
-class EnviroBox extends Component {
+function EnviroBox()  {
 
-  render() {
-    return "EnviroBox";
-  }
+  return "EnviroBox";
 
 }
 

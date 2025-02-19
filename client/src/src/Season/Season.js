@@ -37,6 +37,11 @@ class Season {
     log: [],
   }
 
+  // How many minutes each tic is worth.
+  timePerTic = 10;
+  timestamp = 0;
+  timestring = '';
+
   current_day = null;
   players = [];
   tribes = [];
@@ -53,6 +58,35 @@ class Season {
     if (props.debug) {
       this.debug = props.debug;
     }
+    // this.advanceTime((60 / this.timePerTic) * 7);
+    this.updateTimestring();
+  }
+
+  advanceTime(tics = 1) {
+    console.log(`Advancing time by ${tics} ${ tics > 1 ? "tics" : "tic"}`)
+    this.timestamp += tics * this.timePerTic;
+    this.updateTimestring();
+    console.log(`Time is now ${this.getTimestring()}`);
+  }
+
+  updateTimestring() {
+    const decimalHours = this.timestamp / 60;
+    const hours = Math.floor(decimalHours);
+    const twelveHour = (hours % 12 === 0 ? '12' : hours % 12).toString();
+    let minutes = ((decimalHours - hours) * 60).toString();
+    if (minutes.length < 2) {
+      minutes += "0";
+    }
+    const amPm = hours % 24 < 12 ? "AM" : "PM";
+    this.timestring = `${twelveHour}:${minutes} ${amPm}`;
+  }
+
+  getTimestring() {
+    return this.timestring;
+  }
+
+  addToLog(message = '') {
+    this.state.log.push(message);
   }
 
   createTribe(players = []) {

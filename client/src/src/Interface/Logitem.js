@@ -1,30 +1,17 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-class LogItem extends Component {
-  active = true;
-  message = "";
+function LogItem({active, message}) {
 
-  constructor(props) {
-    super(props);
-    if (props.active !== null) {
-      this.active = props.active;
-    }
-    if (props.message) {
-      this.message = props.message;
-    }
-  }
+  const classes = [
+    "infobox-log",
+    active ? "infobox-log--active" : '',
+  ].join(' ').trim();
 
-  render() {
-    const classes = [
-      "infobox-log",
-      this.active ? "infobox-log--active" : '',
-    ].join(' ').trim();
-    return (
-      <div className={ classes }>
-        {this.message}
-      </div>
-    )
-  }
+  return (
+    <div className={ classes }>
+      {message}
+    </div>
+  )
 
 }
 

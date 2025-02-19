@@ -9,13 +9,20 @@ body {
 }
 
 .interface {
+  align-items: center;
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  width: 100vw;
+}
+
+.interface-inner {
   background-color: $interface;
   border: 1px solid $borderColor;
   color: $typeColor;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  margin: 250px auto;
   max-width: 1200px;
   // text-shadow: $typeColor 0px 0 3px;
 }
@@ -41,4 +48,6 @@ body {
   border-left: 0;
   border-right: 0;
   flex: 1 1 20%;
+  max-height: 400px;
+  overflow-y: scroll;
 }
