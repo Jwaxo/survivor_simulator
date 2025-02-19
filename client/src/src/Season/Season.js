@@ -42,7 +42,7 @@ class Season {
   timestamp = 0;
   timestring = '';
 
-  current_day = null;
+  current_day = 0;
   players = [];
   tribes = [];
   debug = false;
@@ -85,8 +85,17 @@ class Season {
     return this.timestring;
   }
 
+  getDay() {
+    return this.current_day;
+  }
+
   addToLog(message = '') {
     this.state.log.push(message);
+    return this.state.log;
+  }
+
+  getLog() {
+    return this.state.log;
   }
 
   createTribe(players = []) {

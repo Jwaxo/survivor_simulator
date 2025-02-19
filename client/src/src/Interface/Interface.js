@@ -19,17 +19,28 @@ import Action from '../Action/Action';
  */
 
 export default function Interface({season, timePerTic, debug}) {
-  const [time, setTime] = useState('12:00 AM');
+  const [time, setTime] = useState({
+    timestring: '12:00 AM',
+    day: 0,
+  });
   const [actions, setActions] = useState([]);
   const [log, setLog] = useState([]);
   const [players, setPlayers] = useState(() => season.getPlayers());
+
+  // Basically any States that callbacks might need to reference need to be
+  // stored in stateRef so that the callbacks see their ACTUAL values instead of
+  // the values at the time of the callback's creation.
   const stateRef = useRef();
   stateRef.log = log;
   stateRef.actions = actions;
+  stateRef.time = time;
 
   function advanceTime() {
     season.advanceTime();
-    setTime(season.getTimestring());
+    setTime({
+      day: season.getDay(),
+      timestring: season.getTimestring(),
+    });
   }
 
   function addAction(label = 'Action', callback = () => {
@@ -49,8 +60,9 @@ export default function Interface({season, timePerTic, debug}) {
 
   function addToLog(message = "") {
     if (message !== "") {
+      message = `Day ${stateRef.time.day}, ${stateRef.time.timestring}: ${message}`;
       season.addToLog(message);
-      setLog([...stateRef.log, message]);
+      setLog([...season.getLog()]);
     }
   }
 
@@ -82,7 +94,7 @@ export default function Interface({season, timePerTic, debug}) {
     <div className="interface">
       <div className="interface-inner">
         <div className="interface-panel interface-top">
-          <StatusBox day={0} time={ time } weather="Sunny" tribe="Default" phase="Morning" debug={ debug } />
+          <StatusBox day={ stateRef.time.day } time={ stateRef.time.timestring } weather="Sunny" tribe="Default" phase="Morning" debug={ debug } />
         </div>
         <div className="interface-panel interface-main">
           <EnviroBox />
