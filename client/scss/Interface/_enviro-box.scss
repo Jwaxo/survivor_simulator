@@ -5,7 +5,7 @@
 @use './../Base' as *;
 
 .enviro-box {
-  border-bottom: 1px solid $borderColor;
-  margin-bottom: 20px;
-  padding: 0px 20px 20px;
+  border-top: 1px solid $borderColor;
+  margin-top: 20px;
+  padding: 20px 20px 0;
 }

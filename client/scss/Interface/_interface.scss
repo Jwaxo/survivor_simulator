@@ -41,6 +41,8 @@ body {
   border: 1px solid $borderColor;
   border-left: 0;
   flex: 0 1 80%;
+  max-height: 400px;
+  overflow-y: auto;
 }
 
 .interface-side {

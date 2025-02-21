@@ -97,16 +97,16 @@ export default function Interface({season, timePerTic, debug}) {
       <div className="interface-inner">
         <div className="interface-panel interface-top">
           <StatusBox day={ time.day } time={ time.timestring } weather="Sunny" tribe="Default" phase="Morning" debug={ debug } />
+          <EnviroBox description="It's a sunny day on Challenge Beach. Jeff Probst is here in a resplendent navy blue shirt." debug={ debug } />
         </div>
         <div className="interface-panel interface-main">
-          <EnviroBox description="It's a sunny day on Challenge Beach. Jeff Probst is here in a resplendent navy blue shirt." />
-          <InfoBox log={ log }/>
+          <InfoBox log={ log } debug={ debug } />
         </div>
         <div className="interface-panel interface-side">
-          <PlayerBox players={ players } />
+          <PlayerBox players={ players } debug={ debug } />
         </div>
         <div className="interface-panel interface-bottom">
-          <ActionBox actions={ actions } addAction={ addActions } prompt={ prompt } />
+          <ActionBox actions={ actions } addAction={ addActions } prompt={ prompt } debug={ debug } />
         </div>
       </div>
     </div>

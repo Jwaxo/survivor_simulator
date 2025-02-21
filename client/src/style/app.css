@@ -43,6 +43,8 @@ body {
   border: 1px solid #000000;
   border-left: 0;
   flex: 0 1 80%;
+  max-height: 400px;
+  overflow-y: auto;
 }
 
 .interface-side {
@@ -87,9 +89,9 @@ body {
  * Styles for the Interface EnviroBox component.
  */
 .enviro-box {
-  border-bottom: 1px solid #000000;
-  margin-bottom: 20px;
-  padding: 0px 20px 20px;
+  border-top: 1px solid #000000;
+  margin-top: 20px;
+  padding: 20px 20px 0;
 }
 
 /**

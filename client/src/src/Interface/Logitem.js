@@ -9,7 +9,7 @@ function LogItem({active, message}) {
 
   return (
     <div className={ classes }>
-      {message}
+      { message }
     </div>
   )
 

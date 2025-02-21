@@ -1,7 +1,12 @@
-import React from 'react';
+import { useEffect } from 'react';
 import LogItem from './Logitem';
 
-function InfoBox({ log }) {
+export default function InfoBox({ log }) {
+  let logEnd = null;
+
+  useEffect(() => {
+    logEnd.scrollIntoView();
+  }, [log])
 
   return (
     <div className="info-box">
@@ -10,9 +15,8 @@ function InfoBox({ log }) {
           <LogItem key={ index } active={ index === (log.length - 1) } message={ message } />
         )
       })}
+      <div ref={el => { logEnd = el}}></div>
     </div>
   )
 
 }
-
-export default InfoBox;
