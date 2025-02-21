@@ -7,7 +7,7 @@
       "chance": 50,
       "bonuses": {
         "base": {
-          "intelligence": 1
+          "int": 1
         },
         "skills": {
           "persuasion": 2
@@ -21,7 +21,7 @@
           "name": "Business Consultant",
           "bonuses": {
             "base": {
-              "charisma": 1
+              "cha": 1
             },
             "skills": {
               "persuasion": 1,
@@ -34,7 +34,7 @@
           "chance": 10,
           "bonuses": {
             "base": {
-              "endurance": 1
+              "end": 1
             },
             "skills": {
               "athletics": 1,
@@ -49,7 +49,7 @@
       "collar": "white",
       "bonuses": {
         "base": {
-          "charisma": 1
+          "cha": 1
         },
         "skills": {
           "persuasion": 1,
@@ -73,7 +73,7 @@
       "collar": "blue",
       "bonuses": {
         "base": {
-          "endurance": 1
+          "end": 1
         },
         "skills": {
           "orienteering": 1,
@@ -94,7 +94,7 @@
       "collar": "blue",
       "bonuses": {
         "base": {
-          "strength": 1
+          "str": 1
         },
         "skills": {
           "intimidation": 2
@@ -111,8 +111,8 @@
       "collar": "no",
       "bonuses": {
         "base": {
-          "intelligence": 1,
-          "charisma": 1
+          "int": 1,
+          "cha": 1
         }
       },
       "variants": [
@@ -129,7 +129,7 @@
       "collar": "no",
       "bonuses": {
         "base": {
-          "charisma": 1
+          "cha": 1
         },
         "skills": {
           "persuasion": 1,

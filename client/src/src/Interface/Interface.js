@@ -5,6 +5,8 @@ import InfoBox from './Infobox';
 import PlayerBox from './Playerbox';
 import StatusBox from './Statusbox';
 
+import Utilities from '../Utilities';
+
 import Action from '../Action/Action';
 
 /**
@@ -27,6 +29,7 @@ export default function Interface({season, timePerTic, debug}) {
   const [log, setLog] = useState([]);
   const [players, setPlayers] = useState(() => season.getPlayers());
   const [prompt, setPrompt] = useState("");
+  const [frozen, setFrozen] = useState(false);
 
   // Basically any States that callbacks might need to reference need to be
   // stored in stateRef so that the callbacks see their ACTUAL values instead of
@@ -68,6 +71,36 @@ export default function Interface({season, timePerTic, debug}) {
     }
   }
 
+  function addMultipleToLog(messages = [], delay = 1000) {
+    if (messages.length > 0) {
+      if (messages.length === 1) {
+        addToLog(messages[0]);
+      }
+      else {
+        setFrozen(true);
+        addToLog(messages[0]);
+        messages.shift();
+        logLoop(messages, delay, () => {
+          setFrozen(false);
+        });
+      }
+    }
+  }
+
+  function logLoop(messages, delay, finalCallback) {
+    const timerId = setTimeout(() => {
+      addToLog(messages[0]);
+      if (messages[1]) {
+        messages.shift();
+        logLoop(messages, delay);
+      }
+      else {
+        finalCallback();
+      }
+    }, delay);
+    return () => clearTimeout(timerId);
+  }
+
   // Functions to run on first render.
   useEffect(() => {
     if (stateRef.actions?.length < 1) {
@@ -81,9 +114,34 @@ export default function Interface({season, timePerTic, debug}) {
           type: 'button'
         },
         {
-          label: 'Add Message',
+          label: 'Test Fight',
           callback: () => {
-            addToLog("This is a test message!");
+            const testPlayers = [...players];
+            let player1 = testPlayers.splice(Utilities.pickFromRange(players.length), 1);
+            player1 = player1[0];
+            const player2 = testPlayers[Utilities.pickFromRange(players.length)];
+            const player1result = player1.stats.checkSkill('fight', 0);
+            const player2result = player2.stats.checkSkill('fight', 0);
+            let winner = null;
+            let loser = null;
+            let winningscore = null;
+            let losingscore = null;
+            if (player1result > player2result) {
+              winner = player1;
+              loser = player2;
+              winningscore = player1result;
+              losingscore = player2result;
+            }
+            else {
+              winner = player2;
+              loser = player1;
+              winningscore = player2result;
+              losingscore = player1result;
+            }
+            addMultipleToLog([
+              `${player1.nameToString()} is going to fight ${player2.nameToString()}!`,
+              `${winner.nameToString()} wins, with a score of ${winningscore}. ${loser.nameToString()} loses with a score of ${losingscore}`,
+            ]);
           }
         }
 
@@ -106,7 +164,7 @@ export default function Interface({season, timePerTic, debug}) {
           <PlayerBox players={ players } debug={ debug } />
         </div>
         <div className="interface-panel interface-bottom">
-          <ActionBox actions={ actions } addAction={ addActions } prompt={ prompt } debug={ debug } />
+          <ActionBox disabled={ frozen } actions={ actions } addAction={ addActions } prompt={ prompt } debug={ debug } />
         </div>
       </div>
     </div>

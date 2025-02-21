@@ -25,7 +25,7 @@ function PlayerCard({ player, debug }) {
           ) : '' }
           { debug === true ? (
             <>
-              <li key="stats">{ player.properties.stats.render() }</li>
+              <li key="stats">{ player.stats.render() }</li>
               <li key="traits">{ Utilities.arrayToString(player.properties.traits) }</li>
               <li key="alliances">{ Utilities.arrayToList(player.properties.alliances) }</li>
               <li key="relationships">{ Utilities.arrayToList(player.properties.relationships) }</li>

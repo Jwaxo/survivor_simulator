@@ -1,40 +1,49 @@
 import Utilities from './../../Utilities';
+import SkillBase from './../Skills/SkillBase';
 
 class Stats {
-  properties = {
-    base: {
-      strength: 0,
-      dexterity: 0,
-      endurance: 0,
-      intelligence: 0,
-      wisdom: 0,
-      charisma: 0,
-    },
-    skills: {
-      athletics: 0,
-      swimming: 0,
-      climbing: 0,
-      cooking: 0,
-      orienteering: 0,
-      fishing: 0,
-      gathering: 0,
-      persuasion: 0, // Doubles as public speaking.
-      intimidation: 0,
-      focus: 0,
-      medicine: 0,
-      construction: 0,
-      seduction: 0,
-      stealth: 0, // Mostly social stealth to be honest.
-      improvisation: 0,
-    },
-    status: {
-      hunger: 0,
-      happy: 100,
-      tired: 0,
-      clean: 100,
-      health: 100,
-    }
-  }
+  base = {
+    str: 0,
+    dex: 0,
+    end: 0,
+    int: 0,
+    wis: 0,
+    cha: 0,
+  };
+  skills = {
+    athletics: new SkillBase({name: 'athletics', label: 'Athletics', attribute: 'str'}),
+    swimming: new SkillBase({name: 'swimming', label: 'Swimming', attribute: 'end'}),
+    climbing: new SkillBase({name: 'climbing', label: 'Climbing', attribute: 'dex'}),
+    cooking: new SkillBase({name: 'cooking', label: 'Cooking', attribute: 'wis'}),
+    orienteering: new SkillBase({name: 'orienteering', label: 'Orienteering', attribute: 'wis'}),
+    fishing: new SkillBase({name: 'fishing', label: 'Fishing', attribute: 'wis'}),
+    gathering: new SkillBase({name: 'gathering', label: 'Gathering', attribute: 'int'}),
+    persuasion: new SkillBase({name: 'persuasion', label: 'Persuasion', attribute: 'cha'}), // Doubles as public speaking.
+    intimidation: new SkillBase({name: 'intimidation', label: 'Intimidation', attribute: 'str'}),
+    focus: new SkillBase({name: 'focus', label: 'Focus', attribute: 'end'}),
+    medicine: new SkillBase({name: 'medicine', label: 'Medicine', attribute: 'int'}),
+    construction: new SkillBase({name: 'construction', label: 'Construction', attribute: 'str'}),
+    seduction: new SkillBase({name: 'seduction', label: 'Seduction', attribute: 'cha'}),
+    stealth: new SkillBase({name: 'stealth', label: 'Stealth', attribute: 'dex'}), // Mostly social stealth to be honest.
+    improvisation: new SkillBase({name: 'improvisation', label: 'Improvisation', attribute: 'wis'}),
+    fight: new SkillBase({name: 'fight', label: 'Fight', attribute: 'str'}),
+  };
+  mods = {
+    gullability: 0,
+    attractiveness: 0,
+    body: 0,
+    bravery: 0,
+    ego: 0,
+    orientation: [0, 1, 2], // which genders this person is attracted to.
+    aggression: 0,
+  };
+  status = {
+    hunger: 0,
+    happy: 100,
+    tired: 0,
+    clean: 100,
+    health: 100,
+  };
 
   constructor(props) {
     if (props.random) {
@@ -47,20 +56,24 @@ class Stats {
   }
 
   getBase(name) {
-    return this.properties.base[name];
+    return this.base[name];
   }
 
   randomlyGenerate() {
-    for (const property in this.properties.base) {
-      this.properties.base[property] = Utilities.rollD20();
+    for (const property in this.base) {
+      this.base[property] = Utilities.rollD20();
     }
   }
 
   renderBaseStats() {
-    return Utilities.objectToList(this.properties.base);
+    return Utilities.objectToList(this.base);
   }
   renderStatus() {
-    return Utilities.objectToList(this.properties.status);
+    return Utilities.objectToList(this.status);
+  }
+
+  checkSkill(skillName, inherentMod = 0) {
+    return this.skills[skillName].check(this.base) + inherentMod;
   }
 
   render() {

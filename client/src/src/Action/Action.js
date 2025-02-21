@@ -17,9 +17,15 @@ function Action({label, type, callback, debug}) {
     }
   }
 
+  function setActive(isActive = true) {
+    if (isActive) {
+
+    }
+  }
+
   return (
     <div className="action">
-      { component }
+      { component  }
     </div>
   );
 

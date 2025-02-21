@@ -22,7 +22,6 @@ class Player {
     occupation: null,
     race: null,
     tribe: null,
-    stats: null,
     description: [],
     traits: [],
     relationships: [],
@@ -30,6 +29,8 @@ class Player {
     injuries: [],
     effects: [],
   };
+
+  stats = null;
   debug = false;
 
   constructor(props) {
@@ -158,7 +159,7 @@ class Player {
     this.properties.origin = new Origin()
     this.properties.occupation = new Occupation();
     this.properties.race = new Race({ name: "White"});
-    this.properties.stats = new Stats({ random: true });
+    this.stats = new Stats({ random: true });
     this.properties.traits = [
       new Trait({ name: 'Athletic' }),
       new Trait({ name: 'Paranoid' }),
