@@ -1,7 +1,6 @@
-import React, { Component } from 'react';
 import Utilities from './../../Utilities';
 
-class Stats extends Component {
+class Stats {
   properties = {
     base: {
       strength: 0,
@@ -10,6 +9,23 @@ class Stats extends Component {
       intelligence: 0,
       wisdom: 0,
       charisma: 0,
+    },
+    skills: {
+      athletics: 0,
+      swimming: 0,
+      climbing: 0,
+      cooking: 0,
+      orienteering: 0,
+      fishing: 0,
+      gathering: 0,
+      persuasion: 0, // Doubles as public speaking.
+      intimidation: 0,
+      focus: 0,
+      medicine: 0,
+      construction: 0,
+      seduction: 0,
+      stealth: 0, // Mostly social stealth to be honest.
+      improvisation: 0,
     },
     status: {
       hunger: 0,
@@ -21,7 +37,6 @@ class Stats extends Component {
   }
 
   constructor(props) {
-    super(props);
     if (props.random) {
       this.randomlyGenerate();
     }

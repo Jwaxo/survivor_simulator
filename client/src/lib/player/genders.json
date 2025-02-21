@@ -5,6 +5,7 @@
       "id": 0,
       "machine_name": "nb",
       "descriptive": "non-binary person",
+      "chance": 5,
       "pronouns": {
         "identity": "they",
         "secondary": "them",

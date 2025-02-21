@@ -159,6 +159,7 @@ body {
 }
 .player.player-card ul {
   list-style: none;
+  font-size: 12px;
   margin: 15px 0 0;
   padding: 0;
 }
@@ -226,4 +227,9 @@ body {
   margin-top: 10px;
   padding: 5px;
   text-align: center;
+}
+
+.App {
+  background: url("./images/texture.png") repeat scroll left top tan;
+  background-size: 600%;
 }

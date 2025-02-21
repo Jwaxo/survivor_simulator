@@ -155,8 +155,8 @@ class Player {
       throw new Error('Trying to generate a player that has already been defined!');
     }
     this.properties.age = 24;
-    this.properties.origin = new Origin({ city: "Portland", state: "Oregon", state_initial: "OR"})
-    this.properties.occupation = new Occupation({ name: 'Student' });
+    this.properties.origin = new Origin()
+    this.properties.occupation = new Occupation();
     this.properties.race = new Race({ name: "White"});
     this.properties.stats = new Stats({ random: true });
     this.properties.traits = [

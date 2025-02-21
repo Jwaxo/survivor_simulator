@@ -3,3 +3,8 @@
 @use './Interface/interface_index';
 @use './Player/player_index';
 @use './Tribe/tribe_index';
+
+.App {
+  background: url('./images/texture.png') repeat scroll left top tan;
+  background-size: 600%;
+}

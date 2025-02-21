@@ -17,7 +17,7 @@ function PlayerCard({ player, debug }) {
       <h3>{ player.nameToString() }</h3>
       <div className="player-info">
         <ul>
-          <li key="occupation">{ player.properties.occupation.render() }</li>
+          <li key="occupation">{ player.properties.occupation.getName() }</li>
           <li key="origin">{ player.properties.origin.render() }</li>
           <li key="tribe"><TribeFlag tribe={ player.getTribe() } /></li>
           { player.properties.injuries.length > 0 ? (

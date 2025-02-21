@@ -1,0 +1,141 @@
+{
+  "version": "1.0",
+  "occupations": [
+    {
+      "name": "Consultant",
+      "collar": "white",
+      "chance": 50,
+      "bonuses": {
+        "base": {
+          "intelligence": 1
+        },
+        "skills": {
+          "persuasion": 2
+        }
+      },
+      "variants": [
+        {
+          "name": "Tech Consultant"
+        },
+        {
+          "name": "Business Consultant",
+          "bonuses": {
+            "base": {
+              "charisma": 1
+            },
+            "skills": {
+              "persuasion": 1,
+              "intimidation": 1
+            }
+          }
+        },
+        {
+          "name": "Sports Consultant",
+          "chance": 10,
+          "bonuses": {
+            "base": {
+              "endurance": 1
+            },
+            "skills": {
+              "athletics": 1,
+              "persuasion": 1
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Assistant",
+      "collar": "white",
+      "bonuses": {
+        "base": {
+          "charisma": 1
+        },
+        "skills": {
+          "persuasion": 1,
+          "improvisation": 1
+        }
+      },
+      "variants": [
+        {
+          "name": "Personal Assistant"
+        },
+        {
+          "name": "Executive Assistant"
+        },
+        {
+          "name": "Office Assistant"
+        }
+      ]
+    },
+    {
+      "name": "Ranger",
+      "collar": "blue",
+      "bonuses": {
+        "base": {
+          "endurance": 1
+        },
+        "skills": {
+          "orienteering": 1,
+          "gathering": 1
+        }
+      },
+      "variants": [
+        {
+          "name": "Wilderness Guide"
+        },
+        {
+          "name": "Park Ranger"
+        }
+      ]
+    },
+    {
+      "name": "Police Officer",
+      "collar": "blue",
+      "bonuses": {
+        "base": {
+          "strength": 1
+        },
+        "skills": {
+          "intimidation": 2
+        }
+      },
+      "variants": [
+        {
+          "name": "State Trooper"
+        }
+      ]
+    },
+    {
+      "name": "Student",
+      "collar": "no",
+      "bonuses": {
+        "base": {
+          "intelligence": 1,
+          "charisma": 1
+        }
+      },
+      "variants": [
+        {
+          "name": "Harvard Student"
+        },
+        {
+          "name": "Yale Student"
+        }
+      ]
+    },
+    {
+      "name": "Model",
+      "collar": "no",
+      "bonuses": {
+        "base": {
+          "charisma": 1
+        },
+        "skills": {
+          "persuasion": 1,
+          "seduction": 1
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,473 @@
+{
+  "version": "1.0",
+  "states": [
+    {
+      "name": "Alabama",
+      "abbreviation": "AL",
+      "cities": [
+        "Montgomery",
+        "Huntsville",
+        "Jefferson"
+      ]
+    },
+    {
+      "name": "Alaska",
+      "abbreviation": "AK",
+      "cities": [
+        "Juneau",
+        "Anchorage",
+        "Nome"
+      ]
+    },
+    {
+      "name": "Arizona",
+      "abbreviation": "AZ",
+      "cities": [
+        "Phoenix",
+        "Flagstaff",
+        "Tucson"
+      ]
+    },
+    {
+      "name": "Arkansas",
+      "abbreviation": "AR",
+      "cities": [
+        "Little Rock",
+        "Bentonville",
+        "Pine Bluff"
+      ]
+    },
+    {
+      "name": "California",
+      "abbreviation": "CA",
+      "cities": [
+        "Las Angeles",
+        "San Francisco",
+        "San Diego",
+        "Compton",
+        "Oakland"
+      ]
+    },
+    {
+      "name": "Colorado",
+      "abbreviation": "CO",
+      "cities": [
+        "Colorado Springs",
+        "Boulder",
+        "Denver"
+      ]
+    },
+    {
+      "name": "Connecticut",
+      "abbreviation": "CT",
+      "cities": [
+        "Hartford",
+        "Bridgeport",
+        "New Haven"
+      ]
+    },
+    {
+      "name": "Delaware",
+      "abbreviation": "DE",
+      "cities": [
+        "Dover",
+        "Wilmington",
+        "New Castle"
+      ]
+    },
+    {
+      "name": "Florida",
+      "abbreviation": "FL",
+      "cities": [
+        "Tallahassee",
+        "Jacksonville",
+        "Miami",
+        "Tampa",
+        "Punta Gorda"
+      ]
+    },
+    {
+      "name": "Georgia",
+      "abbreviation": "GA",
+      "cities": [
+        "Atlanta",
+        "Savannah",
+        "Columbus",
+        "Macon"
+      ]
+    },
+    {
+      "name": "Hawaii",
+      "abbreviation": "HI",
+      "cities": [
+        "Honolulu",
+        "East Honolulu",
+        "Pearl City"
+      ]
+    },
+    {
+      "name": "Idaho",
+      "abbreviation": "ID",
+      "cities": [
+        "Boise",
+        "Meridian",
+        "Nampa",
+        "Moscow"
+      ]
+    },
+    {
+      "name": "Illinois",
+      "abbreviation": "IL",
+      "cities": [
+        "Chicago",
+        "Aurora",
+        "Joliet"
+      ]
+    },
+    {
+      "name": "Indiana",
+      "abbreviation": "IN",
+      "cities": [
+        "Indianapolis",
+        "Fort Wayne",
+        "Evansville"
+      ]
+    },
+    {
+      "name": "Iowa",
+      "abbreviation": "IA",
+      "cities": [
+        "Des Moines",
+        "Cedar Rapids",
+        "Davenport"
+      ]
+    },
+    {
+      "name": "Kansas",
+      "abbreviation": "KS",
+      "cities": [
+        "Wichita",
+        "Overland Park",
+        "Kansas City"
+      ]
+    },
+    {
+      "name": "Kentucky",
+      "abbreviation": "KY",
+      "cities": [
+        "Louisville",
+        "Lexington",
+        "Bowling Green"
+      ]
+    },
+    {
+      "name": "Louisiana",
+      "abbreviation": "LA",
+      "cities": [
+        "New Orleans",
+        "Baton Rouge",
+        "Shreveport"
+      ]
+    },
+    {
+      "name": "Maine",
+      "abbreviation": "ME",
+      "cities": [
+        "Portland",
+        "Lewiston",
+        "Bangor"
+      ]
+    },
+    {
+      "name": "Maryland",
+      "abbreviation": "MD",
+      "cities": [
+        "Baltimore",
+        "Frederick",
+        "Gaithersburg"
+      ]
+    },
+    {
+      "name": "Massachusetts",
+      "abbreviation": "MA",
+      "cities": [
+        "Boston",
+        "Worcester",
+        "Springfield"
+      ]
+    },
+    {
+      "name": "Michigan",
+      "abbreviation": "MI",
+      "cities": [
+        "Detroit",
+        "Grand Rapids",
+        "Warren"
+      ]
+    },
+    {
+      "name": "Minnesota",
+      "abbreviation": "MN",
+      "cities": [
+        "Minneapolis",
+        "Saint Paul",
+        "Rochester"
+      ]
+    },
+    {
+      "name": "Mississippi",
+      "abbreviation": "MS",
+      "cities": [
+        "Jackson",
+        "Gulfport",
+        "Southaven"
+      ]
+    },
+    {
+      "name": "Missouri",
+      "abbreviation": "MO",
+      "cities": [
+        "Kansas City",
+        "Saint Louis",
+        "Springfield"
+      ]
+    },
+    {
+      "name": "Montana",
+      "abbreviation": "MT",
+      "cities": [
+        "Billings",
+        "Missoula",
+        "Great Falls",
+        "Bozeman"
+      ]
+    },
+    {
+      "name": "Nebraska",
+      "abbreviation": "NE",
+      "cities": [
+        "Omaha",
+        "Lincoln",
+        "Bellevue"
+      ]
+    },
+    {
+      "name": "Nevada",
+      "abbreviation": "NV",
+      "cities": [
+        "Las Vegas",
+        "Henderson",
+        "Reno"
+      ]
+    },
+    {
+      "name": "New Hampshire",
+      "abbreviation": "NH",
+      "cities": [
+        "Manchester",
+        "Nashua",
+        "Concord"
+      ]
+    },
+    {
+      "name": "New Jersey",
+      "abbreviation": "NJ",
+      "cities": [
+        "Newark",
+        "Jersey City",
+        "Paterson"
+      ]
+    },
+    {
+      "name": "New Mexico",
+      "abbreviation": "NM",
+      "cities": [
+        "Albuquerque",
+        "Las Cruces",
+        "Rio Rancho",
+        "Santa Fe",
+        "Roswell"
+      ]
+    },
+    {
+      "name": "New York",
+      "abbreviation": "NY",
+      "cities": [
+        "New York",
+        "Albany",
+        "Buffalo"
+      ]
+    },
+    {
+      "name": "North Carolina",
+      "abbreviation": "NC",
+      "cities": [
+        "Charlotte",
+        "Raleigh",
+        "Greensboro"
+      ]
+    },
+    {
+      "name": "North Dakota",
+      "abbreviation": "ND",
+      "cities": [
+        "Fargo",
+        "Bismark",
+        "Minot",
+        "Dickinson"
+      ]
+    },
+    {
+      "name": "Ohio",
+      "abbreviation": "OH",
+      "cities": [
+        "Columbus",
+        "Cleveland",
+        "Cincinnati"
+      ]
+    },
+    {
+      "name": "Oklahoma",
+      "abbreviation": "OK",
+      "cities": [
+        "Oklahoma City",
+        "Tulsa",
+        "Norman"
+      ]
+    },
+    {
+      "name": "Oregon",
+      "abbreviation": "OR",
+      "cities": [
+        "Portland",
+        "Eugene",
+        "Salem",
+        "Gresham",
+        "Astoria"
+      ]
+    },
+    {
+      "name": "Pennsylvania",
+      "abbreviation": "PA",
+      "cities": [
+        "Philadelphia",
+        "Pittsburgh",
+        "Allentown"
+      ]
+    },
+    {
+      "name": "Rhode Island",
+      "abbreviation": "RI",
+      "cities": [
+        "Providence",
+        "Warwick",
+        "Cranston"
+      ]
+    },
+    {
+      "name": "South Carolina",
+      "abbreviation": "SC",
+      "cities": [
+        "Charleston",
+        "Columbia",
+        "Mount Pleasant"
+      ]
+    },
+    {
+      "name": "South Dakota",
+      "abbreviation": "SD",
+      "cities": [
+        "Sioux Falls",
+        "Rapid City",
+        "Aberdeen"
+      ]
+    },
+    {
+      "name": "Tennessee",
+      "abbreviation": "TN",
+      "cities": [
+        "Nashville",
+        "Memphis",
+        "Knoxville"
+      ]
+    },
+    {
+      "name": "Texas",
+      "abbreviation": "TX",
+      "cities": [
+        "Houston",
+        "San Antonio",
+        "Dallas",
+        "Austin",
+        "Fort Worth"
+      ]
+    },
+    {
+      "name": "Utah",
+      "abbreviation": "UT",
+      "cities": [
+        "Salt Lake City",
+        "West Jordan",
+        "Provo"
+      ]
+    },
+    {
+      "name": "Vermont",
+      "abbreviation": "VT",
+      "cities": [
+        "Burlington",
+        "South Burlington",
+        "Rutland"
+      ]
+    },
+    {
+      "name": "Virginia",
+      "abbreviation": "VA",
+      "cities": [
+        "Virginia Beach",
+        "Chesapeake",
+        "Norfolk",
+        "Richmond"
+      ]
+    },
+    {
+      "name": "Washington",
+      "abbreviation": "WA",
+      "cities": [
+        "Seattle",
+        "Spokane",
+        "Tacoma",
+        "Vancouver",
+        "Bellevue",
+        "Richmond"
+      ]
+    },
+    {
+      "name": "West Virginia",
+      "abbreviation": "WV",
+      "cities": [
+        "Charleston",
+        "Huntington",
+        "Morgantown"
+      ]
+    },
+    {
+      "name": "Wisconsin",
+      "abbreviation": "WI",
+      "cities": [
+        "Milwaukee",
+        "Madison",
+        "Green Bay"
+      ]
+    },
+    {
+      "name": "Wyoming",
+      "abbreviation": "WY",
+      "cities": [
+        "Cheyenne",
+        "Casper",
+        "Jackson Hole"
+      ]
+    }
+  ]
+}

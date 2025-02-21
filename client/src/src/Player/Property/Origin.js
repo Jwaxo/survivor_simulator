@@ -1,25 +1,33 @@
-import { Component } from 'react';
 
-class Origin extends Component {
-  properties = {
-    city: '',
-    state: '',
-    state_initial: '',
+import Utilities from './../../Utilities';
+
+const playerOrigins = require("../../../lib/player/origins.json").states;
+
+class Origin {
+  city = '';
+  state = {
+    name: '',
+    abbreviation: '',
   };
 
   constructor(props) {
-    super(props);
     if (props) {
-      for (const property in props)  {
-        if (this.properties.hasOwnProperty(property)) {
-          this.properties[property] = props[property];
-        }
-      };
+      if (props.city) {
+        this.city = props.city;
+      }
+      if (props.state) {
+        this.state = props.state;
+      }
+    }
+    else {
+      // Randomly generate origin!
+      this.state = playerOrigins[Utilities.pickFromRange(playerOrigins.length)];
+      this.city = this.state.cities[Utilities.pickFromRange(this.state.cities.length)];
     }
   }
 
   render() {
-    return this.properties.city + ", " + this.properties.state_initial;
+    return this.city + ", " + this.state.abbreviation;
   }
 
 }
