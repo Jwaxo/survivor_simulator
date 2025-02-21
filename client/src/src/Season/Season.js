@@ -73,7 +73,7 @@ class Season {
     const decimalHours = this.timestamp / 60;
     const hours = Math.floor(decimalHours);
     const twelveHour = (hours % 12 === 0 ? '12' : hours % 12).toString();
-    let minutes = ((decimalHours - hours) * 60).toString();
+    let minutes = (this.timestamp % 60).toString();
     if (minutes.length < 2) {
       minutes += "0";
     }
