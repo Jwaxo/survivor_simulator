@@ -5,9 +5,9 @@ function PlayerBox({ players, debug }) {
 
   return (
     <div className="player-box">
-      Players ({ players.length })
+      Players here: ({ players.length })
       {players.map((player, index) =>
-        <PlayerCard player={ player } key={ index } debug={ debug } />
+        <div className="player-box--player">{ player.toLinktext() }</div>
       )}
     </div>
   )

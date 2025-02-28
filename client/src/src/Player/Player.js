@@ -6,6 +6,8 @@ import Stats from './Property/Stats';
 import Trait from './Property/Trait';
 import Utilities from '../Utilities';
 
+import Linktext from '../Interface/Linktext';
+import PlayerCard from './Components/Playercard';
 const playerGenders = require("../../lib/player/genders.json");
 
 class Player {
@@ -71,7 +73,7 @@ class Player {
     }
   }
 
-  nameToString() {
+  getNameString() {
     return this.name.first + ' ' + (this.name.nick ? '"' + this.name.nick + '" ' : '') + this.name.last;
   }
 
@@ -149,6 +151,18 @@ class Player {
 
   addTrait(trait) {
     this.properties.traits.push(trait);
+  }
+
+  toPlayerCard(debug = false) {
+    return (
+      <PlayerCard player={ this } debug={ debug } />
+    )
+  }
+
+  toLinktext(short = false) {
+    return (
+      <Linktext popup={this.toPlayerCard()} color={this.getTribe().getColorName()} outline={this.getTribe().getTextColor() === 'black'}>{short ? this.getNick() : this.getNameString()}</Linktext>
+    )
   }
 
   randomlyGenerate() {

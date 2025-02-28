@@ -146,6 +146,73 @@ body {
 }
 
 /**
+ * Styles for LinkText components.
+ */
+.linktext {
+  position: relative;
+}
+.linktext .linktext--text {
+  font-weight: 700;
+}
+.linktext .linktext--text.black {
+  color: #000000;
+}
+.linktext .linktext--text.cardinal {
+  color: #D1232C;
+}
+.linktext .linktext--text.amethyst {
+  color: #AF36BA;
+}
+.linktext .linktext--text.orchid {
+  color: #E26AC1;
+}
+.linktext .linktext--text.persian {
+  color: #201FD1;
+}
+.linktext .linktext--text.mariner {
+  color: #1F67D1;
+}
+.linktext .linktext--text.java {
+  color: #19B3AF;
+}
+.linktext .linktext--text.jade {
+  color: #00A86B;
+}
+.linktext .linktext--text.meadow {
+  color: #19B371;
+}
+.linktext .linktext--text.green {
+  color: #17D10A;
+}
+.linktext .linktext--text.sulu {
+  color: #A7EC55;
+}
+.linktext .linktext--text.lemon {
+  color: #F9F015;
+}
+.linktext .linktext--text.sun {
+  color: #F9B915;
+}
+.linktext .linktext--text.carrot {
+  color: #F19D22;
+}
+.linktext .linktext--text.outline {
+  text-shadow: 0 0 2px #000000;
+}
+.linktext .linktext--popup {
+  background-color: #FFFFFF;
+  color: #BC8510;
+  display: none;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 999;
+}
+.linktext:hover .linktext--popup {
+  display: block;
+}
+
+/**
  * Styles for Player components.
  */
 /**

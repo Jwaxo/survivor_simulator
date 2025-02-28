@@ -8,6 +8,8 @@ import StatusBox from './Statusbox';
 import Utilities from '../Utilities';
 
 import Action from '../Action/Action';
+import LinkText from './Linktext';
+import LogItem from './Logitem';
 
 /**
  * The main Interface class holds all UX components within it, and passes any
@@ -64,9 +66,11 @@ export default function Interface({season, timePerTic, debug}) {
   }
 
   function addToLog(message = "") {
+    if (typeof message === Array) {
+      message = message.join();
+    }
     if (message !== "") {
-      message = `Day ${stateRef.time.day}, ${stateRef.time.timestring}: ${message}`;
-      season.addToLog(message);
+      season.addToLog(message, stateRef.time.day, stateRef.time.timestring);
       setLog([...season.getLog()]);
     }
   }
@@ -139,8 +143,16 @@ export default function Interface({season, timePerTic, debug}) {
               losingscore = player1result;
             }
             addMultipleToLog([
-              `${player1.nameToString()} is going to fight ${player2.nameToString()}!`,
-              `${winner.nameToString()} wins, with a score of ${winningscore}. ${loser.nameToString()} loses with a score of ${losingscore}`,
+              (
+                <>
+                  { player1.toLinktext()} is going to fight { player2.toLinktext() }!
+                </>
+              ),
+              (
+                <>
+                  { winner.toLinktext() } wins, with a score of { winningscore }. { loser.toLinktext() } loses with a score of { losingscore },
+                </>
+              )
             ]);
           }
         }

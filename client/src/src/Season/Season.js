@@ -89,8 +89,12 @@ class Season {
     return this.current_day;
   }
 
-  addToLog(message = '') {
-    this.state.log.push(message);
+  addToLog(message = '', day, time) {
+    this.state.log.push({
+      day,
+      time,
+      message
+    });
     return this.state.log;
   }
 

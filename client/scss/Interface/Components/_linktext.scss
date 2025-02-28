@@ -1,0 +1,35 @@
+/**
+ * Styles for LinkText components.
+ */
+
+@use './../../Base' as *;
+
+.linktext {
+  position: relative;
+  .linktext--text {
+    font-weight: $weightBold;
+    @each $name, $color in $tribeColors {
+      &.#{$name} {
+        color: $color;
+      }
+    }
+    &.outline {
+      text-shadow: 0 0 2px $black;
+    }
+  }
+
+  .linktext--popup {
+    background-color: $linktextPopupBack;
+    color: $typeColor;
+    display: none;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    z-index: 999;
+  }
+  &:hover {
+    .linktext--popup {
+      display: block;
+    }
+  }
+}

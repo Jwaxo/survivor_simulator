@@ -14,7 +14,7 @@ function PlayerCard({ player, debug }) {
   if (!player) return "";
   return (
     <div className={ classes }>
-      <h3>{ player.nameToString() }</h3>
+      <h3>{ player.getNameString() }</h3>
       <div className="player-info">
         <ul>
           <li key="occupation">{ player.properties.occupation.getName() }</li>

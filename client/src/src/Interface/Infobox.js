@@ -10,9 +10,9 @@ export default function InfoBox({ log }) {
 
   return (
     <div className="info-box">
-      {log.map((message, index) => {
+      {log.map((messageinfo, index) => {
         return (
-          <LogItem key={ index } active={ index === (log.length - 1) } message={ message } />
+          <LogItem key={ index } active={ index === (log.length - 1) } day={ messageinfo.day} time={ messageinfo.time }>{ messageinfo.message }</LogItem>
         )
       })}
       <div ref={el => { logEnd = el}}></div>

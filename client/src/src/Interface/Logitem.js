@@ -1,6 +1,6 @@
 import React from 'react';
 
-function LogItem({active, message}) {
+function LogItem({active, day, time, children}) {
 
   const classes = [
     "info-box-log",
@@ -9,7 +9,7 @@ function LogItem({active, message}) {
 
   return (
     <div className={ classes }>
-      { message }
+      Day { day }, { time }: { children }
     </div>
   )
 
