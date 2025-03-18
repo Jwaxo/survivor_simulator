@@ -12,6 +12,7 @@
   h3 {
     font-size: 16px;
     margin: 0;
+    white-space: nowrap;
   }
 
   ul {
@@ -19,5 +20,8 @@
     font-size: 12px;
     margin: 15px 0 0;
     padding: 0;
+    li {
+      white-space: nowrap;
+    }
   }
 }

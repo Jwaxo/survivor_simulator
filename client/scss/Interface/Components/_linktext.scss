@@ -6,6 +6,9 @@
 
 .linktext {
   position: relative;
+  .hidden & {
+    visibility: hidden;
+  }
   .linktext--text {
     font-weight: $weightBold;
     @each $name, $color in $tribeColors {

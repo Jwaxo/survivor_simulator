@@ -81,9 +81,8 @@ export default function Interface({season, timePerTic, debug}) {
         addToLog(messages[0]);
       }
       else {
+        // Prevent input until logs are all displayed.
         setFrozen(true);
-        addToLog(messages[0]);
-        messages.shift();
         logLoop(messages, delay, () => {
           setFrozen(false);
         });
@@ -92,17 +91,20 @@ export default function Interface({season, timePerTic, debug}) {
   }
 
   function logLoop(messages, delay, finalCallback) {
-    const timerId = setTimeout(() => {
-      addToLog(messages[0]);
-      if (messages[1]) {
+    // Need to have some way of LogItem reporting back when it's done rendering
+    // so that Interface knows to add the next item. Until then, maybe best to
+    // not add multiple messages at once.
+    addToLog(messages[0]);
+    if (messages[1]) {
+      setTimeout(() => {
         messages.shift();
-        logLoop(messages, delay);
-      }
-      else {
-        finalCallback();
-      }
-    }, delay);
-    return () => clearTimeout(timerId);
+        logLoop(messages, delay, finalCallback);
+      }, delay);
+    }
+    else {
+      finalCallback();
+    }
+    return;
   }
 
   // Functions to run on first render.

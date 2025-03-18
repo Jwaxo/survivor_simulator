@@ -103,6 +103,9 @@ body {
 .info-box .info-box-log.info-box-log--active {
   color: #BC8510;
 }
+.info-box .info-box-log .hidden {
+  color: transparent;
+}
 
 /**
  * Styles for the main Interface's Player Box.
@@ -150,6 +153,9 @@ body {
  */
 .linktext {
   position: relative;
+}
+.hidden .linktext {
+  visibility: hidden;
 }
 .linktext .linktext--text {
   font-weight: 700;
@@ -225,12 +231,16 @@ body {
 .player.player-card h3 {
   font-size: 16px;
   margin: 0;
+  white-space: nowrap;
 }
 .player.player-card ul {
   list-style: none;
   font-size: 12px;
   margin: 15px 0 0;
   padding: 0;
+}
+.player.player-card ul li {
+  white-space: nowrap;
 }
 
 /**

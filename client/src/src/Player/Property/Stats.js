@@ -16,16 +16,19 @@ class Stats {
     climbing: new SkillBase({name: 'climbing', label: 'Climbing', attribute: 'dex'}),
     cooking: new SkillBase({name: 'cooking', label: 'Cooking', attribute: 'wis'}),
     orienteering: new SkillBase({name: 'orienteering', label: 'Orienteering', attribute: 'wis'}),
-    fishing: new SkillBase({name: 'fishing', label: 'Fishing', attribute: 'wis'}),
+    fishing: new SkillBase({name: 'fishing', label: 'Fishing', attribute: 'wis'}), // Maybe not WIS.
     gathering: new SkillBase({name: 'gathering', label: 'Gathering', attribute: 'int'}),
     persuasion: new SkillBase({name: 'persuasion', label: 'Persuasion', attribute: 'cha'}), // Doubles as public speaking.
     intimidation: new SkillBase({name: 'intimidation', label: 'Intimidation', attribute: 'str'}),
     focus: new SkillBase({name: 'focus', label: 'Focus', attribute: 'end'}),
     medicine: new SkillBase({name: 'medicine', label: 'Medicine', attribute: 'int'}),
+    memory: new SkillBase({name: 'memory', label: 'Memory', attribute: 'int'}),
     construction: new SkillBase({name: 'construction', label: 'Construction', attribute: 'str'}),
     seduction: new SkillBase({name: 'seduction', label: 'Seduction', attribute: 'cha'}),
-    stealth: new SkillBase({name: 'stealth', label: 'Stealth', attribute: 'dex'}), // Mostly social stealth to be honest.
-    improvisation: new SkillBase({name: 'improvisation', label: 'Improvisation', attribute: 'wis'}),
+    stealth: new SkillBase({name: 'stealth', label: 'Stealth', attribute: 'dex'}),
+    social_stealth: new SkillBase({name: 'social_stealth', label: 'Social Stealth', attribute: 'cha'}),
+    finesse: new SkillBase({name: 'finesse', label: 'Finesse', attribute: 'dex'}),
+    improvisation: new SkillBase({name: 'improvisation', label: 'Improvisation', attribute: 'wis'}), // Also used for puzzle-solving?
     fight: new SkillBase({name: 'fight', label: 'Fight', attribute: 'str'}),
   };
   mods = {
@@ -35,7 +38,7 @@ class Stats {
     bravery: 0,
     ego: 0,
     orientation: [0, 1, 2], // which genders this person is attracted to.
-    aggression: 0,
+    aggression: 0, // Maybe doubles as "competitiveness"?
   };
   status = {
     hunger: 0,

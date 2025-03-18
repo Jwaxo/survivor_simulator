@@ -11,5 +11,8 @@
     &.info-box-log--active {
       color: $typeColor;
     }
+    .hidden {
+      color: transparent;
+    }
   }
 }
