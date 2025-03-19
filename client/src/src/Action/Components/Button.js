@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Button({label, callback, debug}) {
+function Button({label, callback}) {
 
   if (!label) {
     throw new Error("Trying to create a Button Action with no label.");

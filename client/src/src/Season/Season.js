@@ -45,7 +45,6 @@ class Season {
   current_day = 0;
   players = [];
   tribes = [];
-  debug = false;
 
   constructor(props) {
     if (props) {
@@ -54,9 +53,6 @@ class Season {
           this.properties[property] = props[property];
         }
       };
-    }
-    if (props.debug) {
-      this.debug = props.debug;
     }
     // this.advanceTime((60 / this.timePerTic) * 7);
     this.updateTimestring();
@@ -106,6 +102,7 @@ class Season {
     const tribe = new Tribe({
       color: this.pickTribeColor(),
       name: this.pickTribeName(),
+      config: this.config,
     });
     if (players.length > 0) {
       tribe.addPlayers(players);
@@ -184,7 +181,7 @@ class Season {
     // If there are no desired props, we randomly generate them.
     if (props === null) {
       console.log(`Randomly generating new player with ID ${id}`);
-      new_player = new Player({ id: id });
+      new_player = new Player({ id: id, config: this.config });
       new_player.randomlyGenerate();
     }
     else {
@@ -202,9 +199,6 @@ class Season {
   }
 
   addPlayer(player) {
-    if (this.debug) {
-      player.setDebug(this.debug);
-    }
     this.players.push(player);
   }
 

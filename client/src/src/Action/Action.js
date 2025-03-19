@@ -2,17 +2,17 @@ import React from 'react';
 import Button from './Components/Button';
 import Dropdown from './Components/Dropdown';
 
-function Action({label, type, callback, debug}) {
+function Action({label, type, callback}) {
   let component = '';
 
   if (type) {
     switch (type) {
       case 'button':
-        component = <Button label={ label } callback={ callback } debug={ debug }/>;
+        component = <Button label={ label } callback={ callback } />;
         break;
 
       case 'dropdown':
-        component = <Dropdown label={ label } callback={ callback } debug={ debug }/>;
+        component = <Dropdown label={ label } callback={ callback } />;
         break;
     }
   }

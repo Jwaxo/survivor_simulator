@@ -5,8 +5,6 @@ class TribeFlag extends Component {
 
   tribe = null;
 
-  debug = false;
-
   constructor(props) {
     super(props);
 

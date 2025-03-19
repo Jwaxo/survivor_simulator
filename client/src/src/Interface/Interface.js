@@ -6,10 +6,9 @@ import PlayerBox from './Playerbox';
 import StatusBox from './Statusbox';
 
 import Utilities from '../Utilities';
+import Config from '../../Config';
 
 import Action from '../Action/Action';
-import LinkText from './Linktext';
-import LogItem from './Logitem';
 
 /**
  * The main Interface class holds all UX components within it, and passes any
@@ -22,7 +21,7 @@ import LogItem from './Logitem';
  * 5. StatusBox naturally updates with the new time.
  */
 
-export default function Interface({season, timePerTic, debug}) {
+export default function Interface({season}) {
   const [time, setTime] = useState({
     timestring: '12:00 AM',
     day: 0,
@@ -75,7 +74,7 @@ export default function Interface({season, timePerTic, debug}) {
     }
   }
 
-  function addMultipleToLog(messages = [], delay = 1000) {
+  function addMultipleToLog(messages = []) {
     if (messages.length > 0) {
       if (messages.length === 1) {
         addToLog(messages[0]);
@@ -83,22 +82,22 @@ export default function Interface({season, timePerTic, debug}) {
       else {
         // Prevent input until logs are all displayed.
         setFrozen(true);
-        logLoop(messages, delay, () => {
+        logAddLoop(messages, () => {
           setFrozen(false);
         });
       }
     }
   }
 
-  function logLoop(messages, delay, finalCallback) {
-    // Need to have some way of LogItem reporting back when it's done rendering
-    // so that Interface knows to add the next item. Until then, maybe best to
-    // not add multiple messages at once.
+  function logAddLoop(messages, finalCallback) {
     addToLog(messages[0]);
     if (messages[1]) {
+      let delay = Config.infobox.multipleLogDelay;
+
+      delay += (Utilities.characterCountLoop(messages[0]) * Config.infobox.letterFrameLength)
       setTimeout(() => {
         messages.shift();
-        logLoop(messages, delay, finalCallback);
+        logAddLoop(messages, finalCallback);
       }, delay);
     }
     else {
@@ -118,6 +117,14 @@ export default function Interface({season, timePerTic, debug}) {
             advanceTime();
           },
           type: 'button'
+        },
+        {
+          label: 'Advance Time (x2)',
+          callback: () => {
+            addMultipleToLog(['Time passes a lot...', 'For real...']);
+            advanceTime();
+            advanceTime();
+          }
         },
         {
           label: 'Test Fight',
@@ -152,7 +159,7 @@ export default function Interface({season, timePerTic, debug}) {
               ),
               (
                 <>
-                  { winner.toLinktext() } wins, with a score of { winningscore }. { loser.toLinktext() } loses with a score of { losingscore },
+                  { winner.toLinktext() } wins, with a score of { winningscore }. { loser.toLinktext() } loses with a score of { losingscore }.
                 </>
               )
             ]);
@@ -168,17 +175,17 @@ export default function Interface({season, timePerTic, debug}) {
     <div className="interface">
       <div className="interface-inner">
         <div className="interface-panel interface-top">
-          <StatusBox day={ time.day } time={ time.timestring } weather="Sunny" tribe="Default" phase="Morning" debug={ debug } />
-          <EnviroBox description="It's a sunny day on Challenge Beach. Jeff Probst is here in a resplendent navy blue shirt." debug={ debug } />
+          <StatusBox day={ time.day } time={ time.timestring } weather="Sunny" tribe="Default" phase="Morning" />
+          <EnviroBox description="It's a sunny day on Challenge Beach. Jeff Probst is here in a resplendent navy blue shirt." />
         </div>
         <div className="interface-panel interface-main">
-          <InfoBox log={ log } debug={ debug } />
+          <InfoBox log={ log } />
         </div>
         <div className="interface-panel interface-side">
-          <PlayerBox players={ players } debug={ debug } />
+          <PlayerBox players={ players } />
         </div>
         <div className="interface-panel interface-bottom">
-          <ActionBox disabled={ frozen } actions={ actions } addAction={ addActions } prompt={ prompt } debug={ debug } />
+          <ActionBox disabled={ frozen } actions={ actions } addAction={ addActions } prompt={ prompt } />
         </div>
       </div>
     </div>

@@ -154,9 +154,6 @@ body {
 .linktext {
   position: relative;
 }
-.hidden .linktext {
-  visibility: hidden;
-}
 .linktext .linktext--text {
   font-weight: 700;
 }
@@ -201,6 +198,9 @@ body {
 }
 .linktext .linktext--text.carrot {
   color: #F19D22;
+}
+.linktext .linktext--text .hidden, .hidden .linktext .linktext--text {
+  visibility: hidden;
 }
 .linktext .linktext--text.outline {
   text-shadow: 0 0 2px #000000;

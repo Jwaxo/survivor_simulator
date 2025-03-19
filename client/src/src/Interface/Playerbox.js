@@ -1,7 +1,7 @@
 import React from 'react';
 import PlayerCard from './../Player/Components/Playercard';
 
-function PlayerBox({ players, debug }) {
+function PlayerBox({ players }) {
 
   return (
     <div className="player-box">

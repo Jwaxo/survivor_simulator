@@ -1,8 +1,9 @@
 import React from 'react';
 import Utilities from './../../Utilities';
 import TribeFlag from '../../Tribe/Components/Tribeflag';
+import Config from '../../../Config';
 
-function PlayerCard({ player, debug }) {
+function PlayerCard({ player }) {
 
   const classes = [
     "player",
@@ -23,7 +24,7 @@ function PlayerCard({ player, debug }) {
           { player.properties.injuries.length > 0 ? (
             <li key="injuries">{ Utilities.arrayToList(player.properties.injuries) } </li>
           ) : '' }
-          { debug === true ? (
+          { Config.debug === true ? (
             <>
               <li key="stats">{ player.stats.render() }</li>
               <li key="traits">{ Utilities.arrayToString(player.properties.traits) }</li>

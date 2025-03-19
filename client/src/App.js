@@ -7,7 +7,14 @@ import Utilities from './src/Utilities';
 
 let debug = true;
 
-const season = new Season({debug});
+const config = {
+  infobox: {
+    multipleLogDelay: 1000,
+    letterFrameLength: 20,
+  }
+};
+
+const season = new Season({ debug, config });
 const random_seed = "Random Seed";
 
 seedrandom(random_seed, { global: true});
@@ -18,7 +25,7 @@ function App() {
 
   return (
     <div className="App">
-      <Interface season={ season } timePerTic={10} debug={ debug }>
+      <Interface season={ season } timePerTic={10} config={ config } debug={ debug }>
       </Interface>
     </div>
   );

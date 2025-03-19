@@ -1,6 +1,6 @@
 import React from 'react';
 
-function StatusBox({day, time, weather, tribe, phase, debug}) {
+function StatusBox({day, time, weather, tribe, phase}) {
   return (
     <div className="status-box">
       <ul className="status-box-stats">

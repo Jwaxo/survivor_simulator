@@ -33,7 +33,6 @@ class Player {
   };
 
   stats = null;
-  debug = false;
 
   constructor(props) {
     if (!props || !props.id) {
@@ -54,13 +53,6 @@ class Player {
     if (props.age) {
       this.properties.age = props.age;
     }
-    if (props.debug) {
-      this.debug = true;
-    }
-  }
-
-  setDebug(debug) {
-    this.debug = debug;
   }
 
   setName(first, last, nick = null) {
@@ -153,15 +145,15 @@ class Player {
     this.properties.traits.push(trait);
   }
 
-  toPlayerCard(debug = false) {
+  toPlayerCard() {
     return (
-      <PlayerCard player={ this } debug={ debug } />
+      <PlayerCard player={ this } />
     )
   }
 
   toLinktext(short = false) {
     return (
-      <Linktext popup={this.toPlayerCard()} color={this.getTribe().getColorName()} outline={this.getTribe().getTextColor() === 'black'}>{short ? this.getNick() : this.getNameString()}</Linktext>
+      <Linktext popup={this.toPlayerCard()} color={this.getTribe().getColorName()} outline={this.getTribe().getTextColor() === 'black'} >{short ? this.getNick() : this.getNameString()}</Linktext>
     )
   }
 
