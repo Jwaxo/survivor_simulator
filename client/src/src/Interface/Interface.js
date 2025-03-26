@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+import { useCookies } from 'react-cookie';
 import ActionBox from './Actionbox';
 import EnviroBox from './Envirobox';
 import InfoBox from './Infobox';
@@ -32,6 +33,12 @@ export default function Interface({season}) {
   const [prompt, setPrompt] = useState("");
   const [frozen, setFrozen] = useState(false);
 
+  // @todo: Add ability to save and load more than one season, and allow
+  // special characters in names (spaces currently break it).
+  const season_name = "Test";
+
+  const [cookies, setCookie] = useCookies([season_name]);
+
   // Basically any States that callbacks might need to reference need to be
   // stored in stateRef so that the callbacks see their ACTUAL values instead of
   // the values at the time of the callback's creation.
@@ -40,6 +47,21 @@ export default function Interface({season}) {
   stateRef.actions = actions;
   stateRef.time = time;
   stateRef.prompt = prompt;
+
+  function save() {
+    console.log("Saving...");
+    const saved_season = season.save();
+    setCookie(season_name, saved_season);
+
+    console.log(cookies);
+  }
+
+  function load() {
+    console.log("Loading...");
+    console.log(cookies);
+    const loaded_season = cookies[season_name];
+    season.load(loaded_season);
+  }
 
   function advanceTime() {
     season.advanceTime();
@@ -175,7 +197,7 @@ export default function Interface({season}) {
     <div className="interface">
       <div className="interface-inner">
         <div className="interface-panel interface-top">
-          <StatusBox day={ time.day } time={ time.timestring } weather="Sunny" tribe="Default" phase="Morning" />
+          <StatusBox day={ time.day } time={ time.timestring } weather="Sunny" tribe="Default" phase="Morning" save={ save } load={ load }/>
           <EnviroBox description="It's a sunny day on Challenge Beach. Jeff Probst is here in a resplendent navy blue shirt." />
         </div>
         <div className="interface-panel interface-main">

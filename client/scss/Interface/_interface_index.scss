@@ -2,6 +2,8 @@
  * Styles for the main Interface components.
  */
 
+@forward 'general/general_index';
+
 @forward 'interface';
 @forward 'action-box';
 @forward 'enviro-box';
@@ -9,4 +11,4 @@
 @forward 'player-box';
 @forward 'status-box';
 
-@forward './Components/components_index';
+@forward 'Components/components_index';

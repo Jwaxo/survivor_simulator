@@ -2,6 +2,17 @@
  * Styles for the main Interface components.
  */
 /**
+ * Styles for HTML buttons.
+ */
+button {
+  background: white;
+  border: 1px solid black;
+  font-size: 14px;
+  font-weight: bold;
+  padding: 10px 15px;
+}
+
+/**
  * Styles pertaining to the Interface container.
  */
 /**
@@ -86,6 +97,9 @@ body {
 }
 
 /**
+ * Styles pertaining to the Interface container.
+ */
+/**
  * Styles for the Interface EnviroBox component.
  */
 .enviro-box {
@@ -94,6 +108,9 @@ body {
   padding: 20px 20px 0;
 }
 
+/**
+ * Styles pertaining to the Interface container.
+ */
 /**
  * Styles for the Interface InfoBox component.
  */
@@ -113,6 +130,9 @@ body {
 /**
  * Interface Status Box
  */
+.status-box {
+  display: flex;
+}
 .status-box .status-box-stats {
   list-style: none;
   margin: 0;
@@ -125,29 +145,32 @@ body {
   margin: 5px 20px 5px 0;
   padding: 0;
 }
-.status-box .label {
+.status-box .status-box-stats .label {
   margin-right: 10px;
   text-decoration: underline;
 }
-.status-box .label:after {
+.status-box .status-box-stats .label:after {
   content: ":";
   position: absolute;
 }
-.status-box .value {
+.status-box .status-box-stats .value {
   font-weight: 700;
+}
+.status-box .status-box-gamestate {
+  align-items: center;
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+  gap: 15px;
+  justify-content: end;
 }
 
 /**
  * Styles for Action components.
  */
-.action button {
-  background: white;
-  border: 1px solid black;
-  font-size: 14px;
-  font-weight: bold;
-  padding: 10px 15px;
-}
-
+/**
+ * Styles pertaining to the Interface container.
+ */
 /**
  * Styles for LinkText components.
  */

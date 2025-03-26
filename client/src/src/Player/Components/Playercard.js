@@ -18,18 +18,18 @@ function PlayerCard({ player }) {
       <h3>{ player.getNameString() }</h3>
       <div className="player-info">
         <ul>
-          <li key="occupation">{ player.properties.occupation.getName() }</li>
-          <li key="origin">{ player.properties.origin.render() }</li>
+          <li key="occupation">{ player.occupation.getName() }</li>
+          <li key="origin">{ player.origin.render() }</li>
           <li key="tribe"><TribeFlag tribe={ player.getTribe() } /></li>
-          { player.properties.injuries.length > 0 ? (
-            <li key="injuries">{ Utilities.arrayToList(player.properties.injuries) } </li>
+          { player.injuries.length > 0 ? (
+            <li key="injuries">{ Utilities.arrayToList(player.injuries) } </li>
           ) : '' }
           { Config.debug === true ? (
             <>
               <li key="stats">{ player.stats.render() }</li>
-              <li key="traits">{ Utilities.arrayToString(player.properties.traits) }</li>
-              <li key="alliances">{ Utilities.arrayToList(player.properties.alliances) }</li>
-              <li key="relationships">{ Utilities.arrayToList(player.properties.relationships) }</li>
+              <li key="traits">{ Utilities.arrayToString(player.traits) }</li>
+              <li key="alliances">{ Utilities.arrayToList(player.alliances) }</li>
+              <li key="relationships">{ Utilities.arrayToList(player.relationships) }</li>
             </>
           ) : '' }
         </ul>

@@ -6,8 +6,7 @@ class Tribe {
     color: null,
     losses: 0,
     wins: 0,
-    assets: [],
-    camp: {
+    camp: { // Probably ought to be its own variable.
       freshwater: false,
       saltwater: false,
       food: 0, // 1 food is enough for one Player to eat for one Day.
@@ -18,6 +17,7 @@ class Tribe {
       shelter_quality: 0, // Range from 0 - 10.
     }
   }
+  assets = [];
   players = [];
 
   constructor(props) {
@@ -33,6 +33,41 @@ class Tribe {
     }
     if (this.getColor() === null) {
       throw new Error("Attempting to create a tribe without a color! Please ensure you are setting a color and name for the tribe.");
+    }
+  }
+
+  save() {
+    const players = [];
+    const assets = [];
+
+    // For saving Players, we just need to remember their ID. All Player info
+    // is otherwise saved in the players key of the saving object.
+    this.players.forEach(player => {
+      players.push(player.getID());
+    });
+
+    return {
+      properties: this.properties,
+      assets: assets,
+      players,
+    }
+  }
+
+  load(tribe_info, players) {
+    if (tribe_info.hasOwnProperty("properties")) {
+      for (const property in tribe_info.properties) {
+        if (this.properties.hasOwnProperty(property)) {
+          this.properties[property] = tribe_info.properties[property];
+        }
+      }
+    }
+    if (tribe_info.players) {
+      tribe_info.players.forEach(key => {
+        const loaded_player = players.find(player => player.getID() === tribe_info.players[key]);
+        if (loaded_player) {
+          this.addPlayer(loaded_player);
+        }
+      })
     }
   }
 

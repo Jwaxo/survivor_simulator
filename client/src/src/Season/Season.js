@@ -1,6 +1,7 @@
 import Player from './../Player/Player';
 import Tribe from '../Tribe/Tribe';
 import Utilities from '../Utilities';
+import Config from '../../Config';
 
 const tribeColors = require('../../lib/tribe/colors.json');
 const tribeNames = require('../../lib/tribe/names.json');
@@ -29,16 +30,16 @@ class Season {
     final_player_count: 3,
     tribe_count: 2,
     jury_size: 9,
-    location: null,
     current_day_count: 0,
-    nickname: "",
-  }
+    nickname: "Test Season",
+  };
+  location = null;
   state = {
     log: [],
-  }
+  };
 
   // How many minutes each tic is worth.
-  timePerTic = 10;
+  timePerTic = Config.timePerTic;
   timestamp = 0;
   timestring = '';
 
@@ -58,11 +59,69 @@ class Season {
     this.updateTimestring();
   }
 
+  save() {
+    const tribes = [];
+    const players = [];
+    const log = [];
+
+    console.log(`Saving ${this.tribes.length} tribes...`);
+    this.tribes.forEach(tribe => {
+      tribes.push(tribe.save());
+    });
+
+    console.log(`Saving ${this.getPlayerCount()} players...`);
+    this.players.forEach(player => {
+      players.push(player.save());
+    });
+
+    console.log(`Saving ${this.state.log.length} log items...`);
+    this.state.log.forEach(logitem => {
+      log.push(logitem);
+    })
+
+    return {
+      properties: this.properties,
+      location: this.location !== null ? this.location.save() : null,
+      timestamp: this.timestamp,
+      current_day: this.current_day,
+      players,
+      tribes,
+      log,
+    }
+  }
+
+  load(season_info) {
+    if (season_info.hasOwnProperty("properties")) {
+      for (const property in season_info.properties) {
+        if (this.properties.hasOwnProperty(property)) {
+          this.properties[property] = season_info.properties[property];
+        }
+      }
+    }
+    if (season_info.hasOwnProperty("players")) {
+      for (const player in season_info.players) {
+        console.log("Creating new Player from state...");
+        console.log(season_info.players[player]);
+        const new_player = this.createPlayer(season_info.players[player]);
+        new_player.load(season_info.players[player]); // Process existing injuries/relationships/etc.
+      }
+    }
+    if (season_info.hasOwnProperty("tribes")) {
+      for (const tribe in season_info.tribes) {
+        const new_tribe = new Tribe(season_info.tribes[tribe].properties);
+        new_tribe.load(season_info.tribes[tribe], this.getPlayers());
+      }
+    }
+    if (season_info.hasOwnProperty("log")) {
+      for (const logitem in season_info.log) {
+        this.addToLog(season_info.log[logitem].message, season_info.log[logitem].day, season_info.log[logitem].time);
+      }
+    }
+  }
+
   advanceTime(tics = 1) {
-    console.log(`Advancing time by ${tics} ${ tics > 1 ? "tics" : "tic"}`)
     this.timestamp += tics * this.timePerTic;
     this.updateTimestring();
-    console.log(`Time is now ${this.getTimestring()}`);
   }
 
   updateTimestring() {
@@ -98,7 +157,7 @@ class Season {
     return this.state.log;
   }
 
-  createTribe(players = []) {
+  createTribeFromPlayers(players = []) {
     const tribe = new Tribe({
       color: this.pickTribeColor(),
       name: this.pickTribeName(),
@@ -151,7 +210,7 @@ class Season {
         players.push(this.createPlayer());
       }
       console.log(`Creating new tribe with ${players.length} players`);
-      this.createTribe(players);
+      this.tribes.push(this.createTribeFromPlayers(players));
     }
   }
 
@@ -175,18 +234,18 @@ class Season {
 
   createPlayer(props = null) {
     let new_player = null;
-    const id = this.getPlayerCount() + 1; // Should always go up by one, as long
+    const id = (props && props.hasOwnProperty("id")) ? props.id : this.getPlayerCount() + 1; // Should always go up by one, as long
     // as players can't be removed.
 
     // If there are no desired props, we randomly generate them.
     if (props === null) {
       console.log(`Randomly generating new player with ID ${id}`);
-      new_player = new Player({ id: id, config: this.config });
+      new_player = new Player({ id: id});
       new_player.randomlyGenerate();
     }
     else {
-      props.id = id;
-      console.log(`Generating new player from props ${props}`);
+      props.id = id; // Just in case props didn't have it.
+      console.log(`Generating new player with id ${id} from props ${props}`);
       new_player = new Player(props);
     }
 
@@ -208,6 +267,10 @@ class Season {
 
   getPlayerCount() {
     return this.players.length;
+  }
+
+  getNick() {
+    return this.properties.nickname;
   }
 
 }

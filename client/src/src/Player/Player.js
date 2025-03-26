@@ -11,74 +11,119 @@ import PlayerCard from './Components/Playercard';
 const playerGenders = require("../../lib/player/genders.json");
 
 class Player {
-  id = 0;
-  name = {
-    first: '',
-    nick: '',
-    last: '',
-  };
+  // Properties are read-only and cannot have additional functionality.
   properties = {
+    id: 0,
     age: 0,
-    gender: null,
-    origin: null,
-    occupation: null,
-    race: null,
-    tribe: null,
-    description: [],
-    traits: [],
-    relationships: [],
-    alliances: [],
-    injuries: [],
-    effects: [],
+    name: {
+      first: '',
+      nick: '',
+      last: '',
+    },
   };
+  tribe = null;
 
+  gender = null;
+  origin = null;
+  occupation = null;
+  race = null;
   stats = null;
+
+  description = [];
+  traits = [];
+  relationships = [];
+  alliances = [];
+  injuries = [];
+  effects = [];
 
   constructor(props) {
     if (!props || !props.id) {
       throw new Error("Trying to create Player without ID");
     }
-    this.id = props.id;
+    this.properties.id = props.id;
     if (props.gender) {
-      this.properties.gender = props.gender;
+      this.gender = props.gender;
     }
     else {
       this.setGender(this.pickGender());
     }
     if (props.name) {
-      this.name.first = props.name.first ?? '';
-      this.name.nick = props.name.nick ?? '';
-      this.name.last = props.name.last ?? '';
+      this.properties.name.first = props.name.first ?? '';
+      this.properties.name.nick = props.name.nick ?? '';
+      this.properties.name.last = props.name.last ?? '';
     }
     if (props.age) {
       this.properties.age = props.age;
     }
   }
 
+  save() {
+
+    const description = this.description;
+    const traits = this.traits;
+    const relationships = this.relationships;
+    const alliances = this.alliances;
+    const injuries = this.injuries;
+    const effects = this.effects;
+
+    // @todo: need to go through each Property array above and make save/load.
+
+    this.alliances.forEach(alliance => {
+      alliances.push(alliance.save());
+    });
+
+    // @todo: none of the .save() functions below work without error.
+
+    return {
+      properties: this.properties,
+      gender: this.gender.save(),
+      origin: this.origin.save(),
+      occupation: this.occupation.save(),
+      race: this.race.save(),
+      stats: this.stats.save(),
+      description,
+      traits,
+      relationships,
+      alliances,
+      injuries,
+      effects,
+    }
+  }
+
+  load(player_info) {
+    if (player_info.hasOwnProperty("properties")) {
+      for (const property in player_info.properties) {
+        if (this.properties.hasOwnProperty(property)) {
+          this.properties[property] = player_info.properties[property];
+        }
+      }
+    }
+  }
+
   setName(first, last, nick = null) {
-    this.name = {
+    this.properties.name = {
       "first": first,
       "last": last,
     };
     if (nick) {
-      this.name.nick = nick;
+      this.properties.name.nick = nick;
     }
   }
 
   getNameString() {
-    return this.name.first + ' ' + (this.name.nick ? '"' + this.name.nick + '" ' : '') + this.name.last;
+    return this.properties.name.first + ' ' + (this.properties.name.nick ? '"' + this.properties.name.nick + '" ' : '') + this.properties.name.last;
   }
 
   getName() {
-    return this.name.first !== '' ? this.name : null;
+    return this.properties.name.first !== '' ? this.properties.name : null;
   }
 
   getNick() {
-    return this.name.nick ?? this.name.first;
+    return this.properties.name.nick ?? this.properties.properties.name.first;
   }
 
   getGender() {
-    return this.properties.gender;
+    return this.gender;
   }
 
   getGenderString() {
@@ -86,7 +131,7 @@ class Player {
   }
 
   setGender(gender) {
-    this.properties.gender = gender;
+    this.gender = gender;
   }
 
   pickGender(genders = playerGenders.genders) {
@@ -95,29 +140,29 @@ class Player {
   }
 
   getTribe() {
-    return this.properties.tribe;
+    return this.tribe;
   }
 
   setTribe(tribe) {
-    this.properties.tribe = tribe;
+    this.tribe = tribe;
   }
 
   getColor() {
-    return this.properties.tribe.getColorName();
+    return this.tribe.getColorName();
   }
 
   getTextColor() {
-    return this.properties.tribe.getTextColor();
+    return this.tribe.getTextColor();
   }
 
   getOccupation() {
-    return this.properties.occupation;
+    return this.occupation;
   }
 
   getRelationship(playerID) {
-    this.properties.relationships.forEach(key => {
-      if (this.properties.relationships[key].target.getID() === playerID) {
-        return this.properties.relationships[key].target;
+    this.relationships.forEach(key => {
+      if (this.relationships[key].target.getID() === playerID) {
+        return this.relationships[key].target;
       }
     });
 
@@ -138,11 +183,11 @@ class Player {
   }
 
   getTraits() {
-    return this.properties.traits;
+    return this.traits;
   }
 
   addTrait(trait) {
-    this.properties.traits.push(trait);
+    this.traits.push(trait);
   }
 
   toPlayerCard() {
@@ -162,11 +207,11 @@ class Player {
       throw new Error('Trying to generate a player that has already been defined!');
     }
     this.properties.age = 24;
-    this.properties.origin = new Origin()
-    this.properties.occupation = new Occupation();
-    this.properties.race = new Race({ name: "White"});
+    this.origin = new Origin()
+    this.occupation = new Occupation();
+    this.race = new Race({ name: "White"});
     this.stats = new Stats({ random: true });
-    this.properties.traits = [
+    this.traits = [
       new Trait({ name: 'Athletic' }),
       new Trait({ name: 'Paranoid' }),
     ];

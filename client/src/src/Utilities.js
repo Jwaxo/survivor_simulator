@@ -84,6 +84,15 @@ const Utilities = {
     return characters;
   },
 
+  loadPropertiesFromObject: (destination, source) => {
+    if (source.hasOwnProperty("properties")) {
+      for (const property in source.properties) {
+        if (destination.properties.hasOwnProperty(property)) {
+          destination.properties[property] = source.properties[property];
+        }
+      }
+    }
+  },
 
   /**
    * Advance one letter along this LogItem's string, unhiding this character.

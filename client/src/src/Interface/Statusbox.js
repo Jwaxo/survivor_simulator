@@ -1,6 +1,6 @@
 import React from 'react';
 
-function StatusBox({day, time, weather, tribe, phase}) {
+function StatusBox({day, time, weather, tribe, phase, save, load}) {
   return (
     <div className="status-box">
       <ul className="status-box-stats">
@@ -25,6 +25,10 @@ function StatusBox({day, time, weather, tribe, phase}) {
           <span className="value">{ phase }</span>
         </li>
       </ul>
+      <div className="status-box-gamestate">
+        <button className="gamestate-save" onClick={ () => { save(); } }>Save</button>
+        <button className="gamestate-load" onClick={ () => { load(); } }>Load</button>
+      </div>
     </div>
   )
 }
