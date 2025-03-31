@@ -17,6 +17,10 @@ class Race extends Component {
     }
   }
 
+  save() {
+    return this.properties;
+  }
+
   render() {
     return this.properties.name;
   }

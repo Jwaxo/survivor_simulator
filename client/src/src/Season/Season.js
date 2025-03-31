@@ -91,6 +91,9 @@ class Season {
   }
 
   load(season_info) {
+    this.players = [];
+    this.tribes = [];
+    this.state.log = [];
     if (season_info.hasOwnProperty("properties")) {
       for (const property in season_info.properties) {
         if (this.properties.hasOwnProperty(property)) {

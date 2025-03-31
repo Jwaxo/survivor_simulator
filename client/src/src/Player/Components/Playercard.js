@@ -9,7 +9,7 @@ function PlayerCard({ player }) {
     "player",
     "player-card",
     player.getColor() ?? '',
-    `text--${player.getTextColor()}`,
+    `text--${player.getColorDarkness() === "dark" ? "white" : "black"}`,
   ].join(' ').trim();
 
   if (!player) return "";

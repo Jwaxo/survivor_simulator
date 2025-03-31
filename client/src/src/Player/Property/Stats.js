@@ -49,8 +49,41 @@ class Stats {
   };
 
   constructor(props) {
-    if (props.random) {
+    if (props?.random) {
       this.randomlyGenerate();
+    }
+  }
+
+  save() {
+    const skills = {};
+    for (const skill in this.skills) {
+      skills[skill] = this.skills[skill].save();
+    }
+    return {
+      base: this.base,
+      mods: this.mods,
+      status: this.status,
+      skills,
+    }
+  }
+
+  load(stats_info) {
+    if (stats_info.hasOwnProperty("base")) {
+      this.base = stats_info.base;
+    }
+    if (stats_info.hasOwnProperty("mods")) {
+      this.mods = stats_info.mods;
+    }
+    if (stats_info.hasOwnProperty("status")) {
+      this.status = stats_info.status;
+    }
+    if (stats_info.hasOwnProperty("skills")) {
+      for (const skill in stats_info.skills) {
+        const skill_info = stats_info.skills[skill];
+        this.skills[skill] = new SkillBase({name: skill_info.name, label: skill_info.label, attribute: skill_info.attribute});
+        this.skills[skill].setXP(skill_info.experience);
+        this.skills[skill].setLevel(skill_info.level);
+      }
     }
   }
 

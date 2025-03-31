@@ -2,11 +2,13 @@
 import Utilities from '../../Utilities';
 
 export default class SkillBase {
-  name = ''; // Machine name.
-  label = ''; // User-friendly name.
-  experience = 0;
-  level = 0; // Each level adds 1 mod to skill checks. Easy-peasy.
-  attribute = '';
+  properties = {
+    name: '', // Machine name.
+    label: '', // User-friendly name.
+    experience: 0,
+    level: 0, // Each level adds 1 mod to skill checks. Easy-peasy.
+    attribute: '',
+  }
 
   constructor(props) {
     if (props.name) {
@@ -18,6 +20,26 @@ export default class SkillBase {
     if (props.attribute) {
       this.attribute = props.attribute;
     }
+  }
+
+  save() {
+    return this.properties;
+  }
+
+  getXP() {
+    return this.properties.experience;
+  }
+
+  setXP(value) {
+    this.properties.experience = value;
+  }
+
+  getLevel() {
+    return this.properties.level;
+  }
+
+  setLevel(value) {
+    this.properties.level = value
   }
 
   // You must pass an object of base stats to the Skill to check properly.

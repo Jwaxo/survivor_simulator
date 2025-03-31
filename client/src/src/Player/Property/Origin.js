@@ -4,30 +4,38 @@ import Utilities from './../../Utilities';
 const playerOrigins = require("../../../lib/player/origins.json").states;
 
 class Origin {
-  city = '';
-  state = {
-    name: '',
-    abbreviation: '',
-  };
+  properties = {
+    city: '',
+    state: {
+      name: '',
+      abbreviation: '',
+    },
+  }
 
   constructor(props) {
     if (props) {
       if (props.city) {
-        this.city = props.city;
+        this.properties.city = props.city;
       }
       if (props.state) {
-        this.state = props.state;
+        this.properties.state = props.state;
       }
     }
     else {
       // Randomly generate origin!
-      this.state = playerOrigins[Utilities.pickFromRange(playerOrigins.length)];
-      this.city = this.state.cities[Utilities.pickFromRange(this.state.cities.length)];
+      const pickedState = playerOrigins[Utilities.pickFromRange(playerOrigins.length)];
+      this.properties.state.name = pickedState.name;
+      this.properties.state.abbreviation = pickedState.abbreviation;
+      this.properties.city = pickedState.cities[Utilities.pickFromRange(pickedState.cities.length)];
     }
   }
 
+  save() {
+    return this.properties;
+  }
+
   render() {
-    return this.city + ", " + this.state.abbreviation;
+    return this.properties.city + ", " + this.properties.state.abbreviation;
   }
 
 }

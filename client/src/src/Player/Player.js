@@ -59,6 +59,7 @@ class Player {
 
   save() {
 
+    // @todo: as I implement these aspects of the game, I need to save them!
     const description = this.description;
     const traits = this.traits;
     const relationships = this.relationships;
@@ -66,17 +67,13 @@ class Player {
     const injuries = this.injuries;
     const effects = this.effects;
 
-    // @todo: need to go through each Property array above and make save/load.
-
     this.alliances.forEach(alliance => {
       alliances.push(alliance.save());
     });
 
-    // @todo: none of the .save() functions below work without error.
-
     return {
       properties: this.properties,
-      gender: this.gender.save(),
+      gender: this.gender,
       origin: this.origin.save(),
       occupation: this.occupation.save(),
       race: this.race.save(),
@@ -98,6 +95,46 @@ class Player {
         }
       }
     }
+    else {
+      throw new Error("Load Corruption: Trying to load a player without any properties!");
+    }
+
+    if (player_info.hasOwnProperty("gender")) {
+      this.gender = player_info.gender;
+    }
+    else {
+      throw new Error("Load Corruption: Trying to load a player without any gender (even genderless).");
+    }
+
+    if (player_info.hasOwnProperty("origin")) {
+      this.origin = new Origin(player_info.origin);
+    }
+    else {
+      throw new Error("Load Corruption: Trying to load a player with no Origin.");
+    }
+
+    if (player_info.hasOwnProperty("occupation")) {
+      this.occupation = new Occupation(player_info.occupation);
+    }
+    else {
+      throw new Error("Load Corruption: Trying to load a player with no Occupation.");
+    }
+
+    if (player_info.hasOwnProperty("race")) {
+      this.race = new Race(player_info.race);
+    }
+    else {
+      throw new Error("Load Corruption: Trying to load a player with no Race.");
+    }
+
+    if (player_info.hasOwnProperty("stats")) {
+      this.stats = new Stats();
+      this.stats.load(player_info.stats);
+    }
+    else {
+      throw new Error("Load Corruption: Trying to load a player with no Stats.");
+    }
+
   }
 
   setName(first, last, nick = null) {
@@ -119,7 +156,7 @@ class Player {
   }
 
   getNick() {
-    return this.properties.name.nick ?? this.properties.properties.name.first;
+    return this.properties.name.nick ?? this.properties.name.first;
   }
 
   getGender() {
@@ -151,8 +188,8 @@ class Player {
     return this.tribe.getColorName();
   }
 
-  getTextColor() {
-    return this.tribe.getTextColor();
+  getColorDarkness() {
+    return this.tribe.getColorDarkness();
   }
 
   getOccupation() {
@@ -171,7 +208,7 @@ class Player {
   }
 
   modRelationship(player, value, mod) {
-    let targetRelationship = this.getRelationship(player.getID);
+    let targetRelationship = this.getRelationship(player.getID());
     if (!targetRelationship) {
       targetRelationship = new Relationship({ player });
     }
@@ -179,7 +216,7 @@ class Player {
   }
 
   getID() {
-    return this.id;
+    return this.properties.id;
   }
 
   getTraits() {
@@ -198,7 +235,7 @@ class Player {
 
   toLinktext(short = false) {
     return (
-      <Linktext popup={this.toPlayerCard()} color={this.getTribe().getColorName()} outline={this.getTribe().getTextColor() === 'black'} >{short ? this.getNick() : this.getNameString()}</Linktext>
+      <Linktext popup={this.toPlayerCard()} color={this.getColor()} outline={this.getColorDarkness() === 'light'}>{short ? this.getNick() : this.getNameString()}</Linktext>
     )
   }
 
@@ -207,7 +244,7 @@ class Player {
       throw new Error('Trying to generate a player that has already been defined!');
     }
     this.properties.age = 24;
-    this.origin = new Origin()
+    this.origin = new Origin();
     this.occupation = new Occupation();
     this.race = new Race({ name: "White"});
     this.stats = new Stats({ random: true });

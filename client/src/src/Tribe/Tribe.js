@@ -46,6 +46,8 @@ class Tribe {
       players.push(player.getID());
     });
 
+    console.log(`Saving ${this.getName()} with ${this.players.length} players`);
+
     return {
       properties: this.properties,
       assets: assets,
@@ -54,21 +56,16 @@ class Tribe {
   }
 
   load(tribe_info, players) {
-    if (tribe_info.hasOwnProperty("properties")) {
-      for (const property in tribe_info.properties) {
-        if (this.properties.hasOwnProperty(property)) {
-          this.properties[property] = tribe_info.properties[property];
-        }
-      }
-    }
+    Utilities.loadPropertiesFromObject(this, tribe_info);
     if (tribe_info.players) {
-      tribe_info.players.forEach(key => {
-        const loaded_player = players.find(player => player.getID() === tribe_info.players[key]);
+      tribe_info.players.forEach((playerID) => {
+        const loaded_player = players.find((player) => player.getID() === playerID);
         if (loaded_player) {
           this.addPlayer(loaded_player);
         }
       })
     }
+    console.log(`Loaded ${this.getName()} with ${this.players.length} players`);
   }
 
   addPlayer(player) {
@@ -96,8 +93,8 @@ class Tribe {
     return this.properties.color.name;
   }
 
-  getTextColor() {
-    return this.properties.color.hasOwnProperty("dark") && this.properties.color.dark === true ? "white" : "black";
+  getColorDarkness() {
+    return this.properties.color.hasOwnProperty("dark") ? "dark" : "light";
   }
 
   setColor(color) {

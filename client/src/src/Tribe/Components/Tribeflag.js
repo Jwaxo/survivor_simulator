@@ -18,7 +18,7 @@ class TribeFlag extends Component {
       "tribe",
       "tribe-flag",
       this.tribe.getColorName() ?? '',
-      `text--${this.tribe.getTextColor()}`,
+      `text--${this.tribe.getColorDarkness() === "dark" ? "white" : "black"}`,
     ].join(' ').trim();
 
     if (!this.tribe) return "No Tribe";

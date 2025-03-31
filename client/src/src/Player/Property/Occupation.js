@@ -11,8 +11,16 @@ class Occupation {
   }
 
   constructor(props) {
-    if (props?.name) {
-      this.properties.name = props.name;
+    if (props) {
+      if (props.name) {
+        this.properties.name = props.name;
+      }
+      if (props.collar) {
+        this.properties.collar = props.collar;
+      }
+      if (props.bonuses) {
+        this.properties.bonuses = props.bonuses;
+      }
     }
     else {
       // Randomly pick an occupation!
@@ -33,6 +41,10 @@ class Occupation {
       this.properties.collar = pickedOccupation.collar;
       this.properties.bonuses = pickedOccupation.bonuses;
     }
+  }
+
+  save() {
+    return this.properties;
   }
 
   getName() {
