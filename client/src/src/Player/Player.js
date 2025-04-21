@@ -3,6 +3,7 @@ import Origin from './Property/Origin';
 import Race from './Property/Race';
 import Relationship from './Property/Relationship';
 import Stats from './Property/Stats';
+import PlayerInventory from './Property/PlayerInventory';
 import Trait from './Property/Trait';
 import Utilities from '../Utilities';
 
@@ -28,6 +29,7 @@ class Player {
   occupation = null;
   race = null;
   stats = null;
+  inventory = null;
 
   description = [];
   traits = [];
@@ -55,6 +57,7 @@ class Player {
     if (props.age) {
       this.properties.age = props.age;
     }
+    this.inventory = new PlayerInventory;
   }
 
   save() {
@@ -66,6 +69,7 @@ class Player {
     const alliances = this.alliances;
     const injuries = this.injuries;
     const effects = this.effects;
+    const inventory = this.inventory.save();
 
     this.alliances.forEach(alliance => {
       alliances.push(alliance.save());
@@ -84,6 +88,7 @@ class Player {
       alliances,
       injuries,
       effects,
+      inventory,
     }
   }
 
@@ -133,6 +138,14 @@ class Player {
     }
     else {
       throw new Error("Load Corruption: Trying to load a player with no Stats.");
+    }
+
+    if (player_info.hasOwnProperty("inventory")) {
+      this.inventory = new PlayerInventory();
+      this.inventory.load(player_info.inventory.storage, player_info.inventory.slots);
+    }
+    else {
+      throw new Error("Load Corruption: Trying to load a player with no Inventory.");
     }
 
   }

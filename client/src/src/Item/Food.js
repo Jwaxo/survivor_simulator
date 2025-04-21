@@ -1,3 +1,4 @@
+import Item from './Item';
 
 class Food extends Item {
   type_properties = {
@@ -12,3 +13,5 @@ class Food extends Item {
   }
 
 }
+
+export default Food;

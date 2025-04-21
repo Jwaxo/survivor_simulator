@@ -1,3 +1,4 @@
+import Item from './Item';
 
 class Clothing extends Item {
   type_properties = {
@@ -14,3 +15,5 @@ class Clothing extends Item {
     return this.slot;
   }
 }
+
+export default Clothing;

@@ -1,3 +1,4 @@
+import Item from './Item';
 
 class Clue extends Item {
   type_properties = {
@@ -10,3 +11,5 @@ class Clue extends Item {
   }
 
 }
+
+export default Clue;

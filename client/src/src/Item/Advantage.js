@@ -1,3 +1,4 @@
+import Item from './Item';
 
 class Advantage extends Item {
   type_properties = {
@@ -11,3 +12,5 @@ class Advantage extends Item {
   }
 
 }
+
+export default Advantage;

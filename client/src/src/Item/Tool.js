@@ -1,3 +1,4 @@
+import Item from './Item';
 
 class Tool extends Item {
   type_properties = {
@@ -10,3 +11,5 @@ class Tool extends Item {
   }
 
 }
+
+export default Tool;
