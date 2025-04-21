@@ -1,5 +1,5 @@
 
-class Idol extends Item {
+class Advantage extends Item {
   type_properties = {
     hidden: false,
     concealable: false,
@@ -7,7 +7,7 @@ class Idol extends Item {
 
   constructor(props) {
     super(props);
-    this.properties.type = "idol";
+    this.properties.type = "advantage";
   }
 
 }
