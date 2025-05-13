@@ -5,6 +5,18 @@ import Clue from "./Clue";
 import Food from "./Food";
 import Tool from "./Tool";
 
+/**
+ * Defines the Inventory class.
+ *
+ * Used for any general container of items.
+ *
+ * @todo: test and utilize this class.
+ *
+ * Required arguments:
+ *
+ * Optional arguments:
+ */
+
 class Inventory {
 
   storage = [];
@@ -43,6 +55,9 @@ class Inventory {
         case 'tool':
           item = new Tool(saved_item);
 
+          break;
+
+        default:
           break;
       }
 

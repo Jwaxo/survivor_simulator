@@ -3,6 +3,23 @@ import Tribe from '../Tribe/Tribe';
 import Utilities from '../Utilities';
 import Config from '../../Config';
 
+/**
+ * Defines the Season class.
+ *
+ * A "Season" is a single playthrough of the game Survivor Simulator. All info
+ * relevant to that gameplay is contained within the Season. You can think of
+ * a Season as a save file, or as a general manager for the rest of the game.
+ *
+ * Optional arguments:
+ * - days
+ * - starting_player_count
+ * - final_player_count
+ * - tribe_count
+ * - jury_size
+ * - current_day_count
+ * - nickname
+ */
+
 const tribeColors = require('../../lib/tribe/colors.json');
 const tribeNames = require('../../lib/tribe/names.json');
 

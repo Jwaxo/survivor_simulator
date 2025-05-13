@@ -1,12 +1,30 @@
 import Utilities from '../Utilities';
 
+/**
+ * Defines the Tribe class.
+ *
+ * Tracks information for a particular team of Players that live and work
+ * together. Doesn't do a lot other than define name and color, but that carries
+ * a lot of weight. After merging, there should only be one tribe.
+ *
+ * @todo: split "camp" to its own class.
+ * @todo: move random generators from Season to this class.
+ * @todo: rewrite props generator to no just go through all props; that was lazy.
+ *
+ * Required arguments:
+ * - name (string)
+ * - color (array)
+ *
+ * Optional arguments:
+ */
+
 class Tribe {
   properties = {
     name: '',
     color: null,
     losses: 0,
     wins: 0,
-    camp: { // Probably ought to be its own variable.
+    camp: { // Probably ought to be its own class.
       freshwater: false,
       saltwater: false,
       food: 0, // 1 food is enough for one Player to eat for one Day.

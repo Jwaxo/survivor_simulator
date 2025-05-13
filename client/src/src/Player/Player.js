@@ -9,6 +9,26 @@ import Utilities from '../Utilities';
 
 import Linktext from '../Interface/Linktext';
 import PlayerCard from './Components/Playercard';
+
+/**
+ * Defines the Player class.
+ *
+ * A tracker for individual Survivors in the game. NPCs are nothing more than
+ * their Player class, while PCs are both Players and Users.
+ *
+ * @todo: fill out the constructor to actually let custom Players.
+ * @todo: allow RandomlyGenerate to fill in missing info, instead of just
+ * halting when age is defined.
+ *
+ * Required arguments:
+ * - id (int)
+ *
+ * Optional arguments:
+ * - gender (Gender)
+ * - name (object)
+ * - age (int)
+ */
+
 const playerGenders = require("../../lib/player/genders.json");
 
 class Player {
@@ -57,7 +77,7 @@ class Player {
     if (props.age) {
       this.properties.age = props.age;
     }
-    this.inventory = new PlayerInventory;
+    this.inventory = new PlayerInventory();
   }
 
   save() {

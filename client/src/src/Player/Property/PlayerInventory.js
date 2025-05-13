@@ -1,5 +1,18 @@
 import Inventory from "../../Item/Inventory";
 
+/**
+ * Defines the PlayerInventory class.
+ *
+ * Tracks inventory that a Player has on their person and equipped in their
+ * Slots.
+ *
+ * @todo: test and use this class.
+ *
+ * Required arguments:
+ *
+ * Optional arguments:
+ */
+
 class PlayerInventory extends Inventory {
 
   slots = {
