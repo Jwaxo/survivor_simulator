@@ -9,6 +9,7 @@ const random_seed = "Random Seed";
 seedrandom(random_seed, { global: true });
 
 season.generateTribes();
+season.generateTestScenes();
 
 function App() {
 

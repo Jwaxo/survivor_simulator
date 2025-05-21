@@ -2,6 +2,7 @@ import Player from './../Player/Player';
 import Tribe from '../Tribe/Tribe';
 import Utilities from '../Utilities';
 import Config from '../../Config';
+import Scene from '../Scene/Scene';
 
 /**
  * Defines the Season class.
@@ -9,6 +10,8 @@ import Config from '../../Config';
  * A "Season" is a single playthrough of the game Survivor Simulator. All info
  * relevant to that gameplay is contained within the Season. You can think of
  * a Season as a save file, or as a general manager for the rest of the game.
+ *
+ * @todo: move some generation functions to the relevant classes, like Tribe.
  *
  * Optional arguments:
  * - days
@@ -62,7 +65,11 @@ class Season {
 
   current_day = 0;
   players = [];
+  // @todo: something I'm not doing yet is actually having a defined player
+  // character, at the least so I know where the "camera" is and what the
+  // interface can see. I need to set this up.
   tribes = [];
+  scenes = [];
 
   constructor(props) {
     if (props) {
@@ -232,6 +239,40 @@ class Season {
       console.log(`Creating new tribe with ${players.length} players`);
       this.tribes.push(this.createTribeFromPlayers(players));
     }
+  }
+
+  addScene(scene) {
+    this.scenes.push(scene);
+  }
+
+  addScenes(scenes) {
+    this.scenes = this.scenes + scenes;
+  }
+
+  getScenes() {
+    return this.scenes;
+  }
+
+  getScenesCount() {
+    return this.scenes.length;
+  }
+
+  generateTestScenes() {
+    this.getTribes().forEach(tribe => {
+      const tribeBeach = new Scene({
+        id: this.getScenesCount(),
+        name: `${tribe.getName()} Beach`,
+        description: `Gentle waves wash against the shore. Placed firmly in the sand is a ${tribe.getColorName()} flag, bearing the name ${tribe.getName()}`,
+      });
+      const tribeCamp = new Scene({
+        id: this.getScenesCount(),
+        name: `${tribe.getName()} Camp`,
+        description: `A small firepit sits here, neglected. To the side is a bundle of sticks, blankets, and a tarp that one might generously call a shelter.`
+      });
+      tribeBeach.addConnection(tribeCamp);
+      tribeCamp.addConnection(tribeBeach);
+      this.addScenes([tribeBeach, tribeCamp]);
+    });
   }
 
   pickPlayerName(gender) {
