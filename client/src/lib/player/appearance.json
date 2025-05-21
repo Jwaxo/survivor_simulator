@@ -1,0 +1,516 @@
+{
+  "version": "1.0",
+  "races": [
+    {
+      "name": "White",
+      "machine_name": "white",
+      "chance": 60,
+      "is_minority": false,
+      "skintones": [
+        "pale",
+        "pink",
+        "tanned",
+        "freckled",
+        "burned",
+        "flushed",
+        "fair"
+      ],
+      "hair_colors": [
+        "blond",
+        "brown",
+        "black",
+        "red",
+        "grey",
+        "dyed"
+      ]
+    },
+    {
+      "name": "Black",
+      "machine_name": "black",
+      "chance": 20,
+      "is_minority": true,
+      "skintones": [
+        "light-skinned",
+        "dark-skinned"
+      ],
+      "hair_colors": [
+        "brown",
+        "black",
+        "grey",
+        "dyed"
+      ]
+    },
+    {
+      "name": "Hispanic",
+      "machine_name": "hispanic",
+      "chance": 15,
+      "is_minority": true,
+      "skintones": [
+        "light-skinned",
+        "dark-skinned"
+      ],
+      "hair_colors": [
+        "blond",
+        "brown",
+        "black",
+        "red",
+        "grey",
+        "dyed"
+      ]
+    },
+    {
+      "name": "Arabic",
+      "machine_name": "arabic",
+      "chance": 10,
+      "is_minority": true,
+      "skintones": [
+        "light-skinned",
+        "dark-skinned"
+      ],
+      "hair_colors": [
+        "brown",
+        "black",
+        "grey",
+        "dyed"
+      ]
+    },
+    {
+      "name": "Asian",
+      "machine_name": "asian",
+      "chance": 20,
+      "is_minority": true,
+      "skintones": [
+        "light-skinned",
+        "dark-skinned"
+      ],
+      "hair_colors": [
+        "brown",
+        "black",
+        "grey",
+        "dyed"
+      ]
+    },
+    {
+      "name": "Native American",
+      "machine_name": "native",
+      "is_minority": true,
+      "skintones": [
+        "light-skinned",
+        "dark-skinned"
+      ],
+      "hair_colors": [
+        "brown",
+        "black",
+        "red",
+        "grey",
+        "dyed"
+      ]
+    }
+  ],
+  "hair_colors": [
+    {
+      "name": "blond",
+      "chance": 30,
+      "reqs": [
+        {
+          "property": "player.race",
+          "function": "equals",
+          "value": ["white", "hispanic"]
+        }
+      ],
+      "variants": [
+        {
+          "name": "blond",
+          "reqs": [
+            {
+              "property": "player.gender",
+              "function": "equals",
+              "value": ["male", "nonbinary"]
+            }
+          ],
+          "variants": [
+            {"name": "blond"},
+            {"name": "dirty blond"}
+          ]
+        },
+        {
+          "name": "yellow"
+        },
+        {
+          "name": "fair"
+        },
+        {
+          "name": "blonde",
+          "reqs": [
+            {
+              "property": "player.gender",
+              "function": "equals",
+              "value": ["female", "nonbinary"]
+            }
+          ],
+          "variants": [
+            {"name": "blonde"},
+            {"name": "dirty blonde"}
+          ]
+        }
+      ]
+    },
+    {
+      "name": "grey",
+      "reqs": [
+        {
+          "property": "player.age",
+          "function": "greater",
+          "value": 50
+        }
+      ],
+      "variants": [
+        {
+          "name": "grey"
+        },
+        {
+          "name": "white"
+        },
+        {
+          "name": "silver"
+        }
+      ]
+    },
+    {
+      "name": "black",
+      "chance": 10
+    },
+    {
+      "name": "brown",
+      "chance": 60,
+      "variants": [
+        {"name": "brown"},
+        {"name": "brunette"}
+      ]
+    },
+    {
+      "name": "red",
+      "chance": 4,
+      "reqs": [
+        {
+          "property": "player.race",
+          "function": "equals",
+          "value": ["white", "hispanic", "native"]
+        }
+      ],
+      "variants": [
+        {"name": "red"},
+        {"name": "auburn"},
+        {
+          "name": "strawberry blond",
+          "reqs": [
+            {
+              "property": "player.gender",
+              "function": "equals",
+              "value": ["male", "nonbinary"]
+            }
+          ]
+        },
+        {
+          "name": "strawberry blonde",
+          "reqs": [
+            {
+              "property": "player.gender",
+              "function": "equals",
+              "value": ["female", "nonbinary"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "dyed",
+      "chance": 10,
+      "variants": [
+        {"name": "red"},
+        {"name": "blue"},
+        {"name": "green"},
+        {"name": "purple"},
+        {"name": "black"},
+        {"name": "white"},
+        {"name": "silver"},
+        {"name": "pink"},
+        {"name": "magenta"},
+        {"name": "cyan"}
+      ]
+    }
+  ],
+  "hair_lengths": [
+    {
+      "name": "bald",
+      "machine_name": "bald",
+      "chance": 10,
+      "texture": [],
+      "color": [],
+      "reqs": [
+        {
+          "property": "player.gender",
+          "function": "equals",
+          "value": ["male", "nonbinary"]
+        }
+      ]
+    },
+    {
+      "name": "short",
+      "machine_name": "short",
+      "chance": 50,
+      "reqs": [
+        {
+          "property": "player.gender",
+          "function": "equals",
+          "value": ["male", "nonbinary"]
+        }
+      ]
+    },
+    {
+      "name": "short",
+      "machine_name": "short",
+      "chance": 20,
+      "reqs": [
+        {
+          "property": "player.gender",
+          "function": "equals",
+          "value": ["female"]
+        }
+      ]
+    },
+    {
+      "name": "medium-length",
+      "machine_name": "medium",
+      "chance": 25
+    },
+    {
+      "name": "long",
+      "machine_name": "long",
+      "chance": 25
+    }
+  ],
+  "hair_styles": [
+    {
+      "name": "bald",
+      "reqs": [
+        {
+          "property": "player.hair.length",
+          "function": "equals",
+          "value": ["bald"]
+        }
+      ]
+    },
+    {
+      "name": "neat",
+      "reqs": [
+        {
+          "property": "player.hair.length",
+          "function": "equals",
+          "value": ["short"]
+        }
+      ]
+    },
+    {
+      "name": "pixie",
+      "reqs": [
+        {
+          "property": "player.hair.length",
+          "function": "equals",
+          "value": ["short"]
+        }
+      ]
+    },
+    {
+      "name": "styled",
+      "reqs": [
+        {
+          "property": "player.hair.length",
+          "function": "equals",
+          "value": ["short"]
+        }
+      ]
+    },
+    {
+      "name": "messy",
+      "reqs": [
+        {
+          "property": "player.hair.length",
+          "function": "equals",
+          "value": ["short", "medium", "long"]
+        }
+      ]
+    },
+    {
+      "name": "shaggy",
+      "reqs": [
+        {
+          "property": "player.hair.length",
+          "function": "equals",
+          "value": ["medium"]
+        }
+      ]
+    },
+    {
+      "name": "loose",
+      "reqs": [
+        {
+          "property": "player.hair.length",
+          "function": "equals",
+          "value": ["medium", "long"]
+        }
+      ]
+    },
+    {
+      "name": "ponytail",
+      "prefix": "in a",
+      "reqs": [
+        {
+          "property": "player.hair.length",
+          "function": "equals",
+          "value": ["medium", "long"]
+        }
+      ]
+    },
+    {
+      "name": "bun",
+      "variants": [
+        {
+          "name": "bun",
+          "prefix": "in a"
+        },
+        {
+          "name": "buns",
+          "prefix": "in"
+        }
+      ],
+      "reqs": [
+        {
+          "property": "player.hair.length",
+          "function": "equals",
+          "value": ["medium", "long"]
+        }
+      ]
+    },
+    {
+      "name": "pigtails",
+      "prefix": "in",
+      "reqs": [
+        {
+          "property": "player.hair.length",
+          "function": "equals",
+          "value": ["medium", "long"]
+        }
+      ]
+    },
+    {
+      "name": "braid",
+      "variants": [
+        {
+          "name": "braids",
+          "prefix": "in"
+        },
+        {
+          "name": "braid",
+          "prefix": "in a"
+        }
+      ],
+      "reqs": [
+        {
+          "property": "player.hair.length",
+          "function": "equals",
+          "value": ["short", "medium", "long"]
+        }
+      ]
+    },
+    {
+      "name": "dreadlocks",
+      "prefix": "in",
+      "reqs": [
+        {
+          "property": "player.hair.length",
+          "function": "equals",
+          "value": ["medium", "long"]
+        }
+      ]
+    }
+  ],
+  "hair_textures": [
+    {
+      "name": "straight"
+    },
+    {
+      "name": "curly"
+    },
+    {
+      "name": "wavy"
+    },
+    {
+      "name": "tightly-curled"
+    }
+  ],
+  "heights": [
+    {
+      "name": "very short",
+      "machine_name": "very short",
+      "chance": 5
+    },
+    {
+      "name": "short",
+      "machine_name": "short",
+      "chance": 20
+    },
+    {
+      "name": "average height",
+      "machine_name": "average",
+      "chance": 50
+    },
+    {
+      "name": "tall",
+      "machine_name": "tall",
+      "chance": 20
+    },
+    {
+      "name": "very tall",
+      "machine_name": "very tall",
+      "chance": 5
+    }
+  ],
+  "eye_colors": [
+    {
+      "name": "blue",
+      "chance": 20,
+      "variants": [
+        {"name": "blue"},
+        {"name": "ice blue"},
+        {"name": "sky blue"}
+      ]
+    },
+    {
+      "name": "brown",
+      "chance": 50,
+      "variants": [
+        {"name": "brown"},
+        {"name": "light brown"},
+        {"name": "deep brown"}
+      ]
+    },
+    {
+      "name": "green",
+      "chance": 15,
+      "variants": [
+        {"name": "green"},
+        {"name": "bright green"},
+        {"name": "hazel"}
+      ]
+    },
+    {
+      "name": "grey",
+      "chance": 15,
+      "variants": [
+        {"name": "grey"},
+        {"name": "muddled"}
+      ]
+    }
+  ]
+}

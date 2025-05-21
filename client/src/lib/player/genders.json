@@ -3,7 +3,7 @@
   "genders": [
     {
       "id": 0,
-      "machine_name": "nb",
+      "machine_name": "nonbinary",
       "descriptive": "non-binary person",
       "chance": 5,
       "pronouns": {

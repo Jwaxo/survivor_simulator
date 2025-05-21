@@ -1,6 +1,6 @@
 import Occupation from './Property/Occupation';
 import Origin from './Property/Origin';
-import Race from './Property/Race';
+import Appearance from './Property/Appearance';
 import Relationship from './Property/Relationship';
 import Stats from './Property/Stats';
 import PlayerInventory from './Property/PlayerInventory';
@@ -47,7 +47,7 @@ class Player {
   gender = null;
   origin = null;
   occupation = null;
-  race = null;
+  appearance = null;
   stats = null;
   inventory = null;
 
@@ -100,7 +100,7 @@ class Player {
       gender: this.gender,
       origin: this.origin.save(),
       occupation: this.occupation.save(),
-      race: this.race.save(),
+      appearance: this.appearance.save(),
       stats: this.stats.save(),
       description,
       traits,
@@ -145,11 +145,11 @@ class Player {
       throw new Error("Load Corruption: Trying to load a player with no Occupation.");
     }
 
-    if (player_info.hasOwnProperty("race")) {
-      this.race = new Race(player_info.race);
+    if (player_info.hasOwnProperty("appearance")) {
+      this.appearance = new Appearance(player_info.appearance);
     }
     else {
-      throw new Error("Load Corruption: Trying to load a player with no Race.");
+      throw new Error("Load Corruption: Trying to load a player with no Appearance.");
     }
 
     if (player_info.hasOwnProperty("stats")) {
@@ -190,6 +190,10 @@ class Player {
 
   getNick() {
     return this.properties.name.nick ?? this.properties.name.first;
+  }
+
+  getAge() {
+    return this.properties.age;
   }
 
   getGender() {
@@ -279,7 +283,8 @@ class Player {
     this.properties.age = 24;
     this.origin = new Origin();
     this.occupation = new Occupation();
-    this.race = new Race({ name: "White"});
+    this.appearance = new Appearance();
+    this.appearance.randomlyGenerate(this.getGender().machine_name, this.getAge());
     this.stats = new Stats({ random: true });
     this.traits = [
       new Trait({ name: 'Athletic' }),

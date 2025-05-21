@@ -3,6 +3,10 @@ import Config from '../Config';
 
 const Utilities = {
 
+  capitalizeString: string => {
+    return string.charAt(0).toUpperCase() + string.substring(1);
+  },
+
   arrayToString: properties => {
     return (
       <>
@@ -167,6 +171,108 @@ const Utilities = {
   pickFromRange: (length = 100, min = 0) => {
     const max = length - 1;
     return Math.floor(Math.random() * (max - min)) + min;
+  },
+
+  /**
+   * Given an array, randomly pick an item from that array.
+   *
+   * @todo: Reqs only work as an OR search. We need to allow AND, or nested
+   * reqs.
+   *
+   * @param {Array} originArray | An array of objects with optional "chance", "reqs",
+   * and "variants" parameters.
+   * @param {object} reqs | A unique object of values that can be checked against
+   * by potential values to remove specific options.
+   */
+  pickFromArray: (originArray, reqs) => {
+    const pickingArray = [];
+    let chosen = null;
+
+    for (let element of originArray) {
+      // If the reqs are not met by the reqs array, skip this option.
+      let has_reqs = true;
+      if (element.hasOwnProperty("reqs")) {
+        has_reqs = false;
+        for (let requirement of element.reqs) {
+          if (!requirement.hasOwnProperty("property")) {
+            throw new Error("Requirement check: Requirement does not define property to check against.");
+          }
+          else if (!reqs.hasOwnProperty(requirement.property)) {
+            throw new Error("Requirement check: pickFromArray not passed necessary property to check against.");
+          }
+          if (!requirement.hasOwnProperty("value")) {
+            throw new Error("Requirement check: Requirement does not define values to look for.");
+          }
+
+          switch (requirement.function) {
+            case "equals":
+              if (Array.isArray(requirement.value)) {
+                if (requirement.value.includes(reqs[requirement.property])) {
+                  has_reqs = true;
+                }
+              }
+              else if (reqs[requirement.property] !== requirement.value) {
+                has_reqs = true;
+              }
+
+              break;
+
+            case "greater":
+              if (reqs[requirement.property] <= requirement.value) {
+                has_reqs = true;
+              }
+
+              break;
+
+            default:
+              throw new Error("Requirement check: Requirement missing function, or function not accounted for in Utilities.pickFromArray()!");
+          }
+
+          if (has_reqs === true) {
+            break;
+          }
+        };
+      }
+      if (has_reqs === true) {
+        // By default, add a single copy of each element to the picking array.
+        // In general, I try to structure the picking array to have a maximum of
+        // around 100 elements, so an element with a chance of 10 has a 10%
+        // chance of being chosen.
+        let loopTotal = 1;
+        if (element.hasOwnProperty("chance") && element.chance > 0) {
+          loopTotal = element.chance;
+        }
+        for (let i = 0;i < loopTotal;i++) {
+          pickingArray.push(element);
+        }
+      }
+    };
+    if (pickingArray.length < 1) {
+      throw new Error("Generation error: picking from an empty array! Maybe there are too many reqs?");
+    }
+    else if (pickingArray.length === 1) {
+      chosen = pickingArray[0];
+    }
+    else {
+      chosen = pickingArray[Utilities.pickFromRange(pickingArray.length)];
+    }
+    if (chosen.hasOwnProperty("variants")) {
+      // ...here we go again.
+      // Alternately: we have to go deeper!
+      const chosen_variant = Utilities.pickFromArray(chosen.variants, reqs);
+
+      // Any properties a variant does not define, that the parent has, needs to
+      // be copied down to the variant before sending us back up the recursion.
+      for (let prop in chosen) {
+        if (prop !== "variants" && !chosen_variant.hasOwnProperty(prop)) {
+          chosen_variant[prop] = chosen[prop];
+        }
+      }
+      chosen = chosen_variant;
+
+    }
+
+    return chosen;
   }
 
 }

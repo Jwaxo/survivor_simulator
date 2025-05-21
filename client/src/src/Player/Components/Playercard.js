@@ -20,6 +20,9 @@ function PlayerCard({ player }) {
         <ul>
           <li key="occupation">{ player.occupation.getName() }</li>
           <li key="origin">{ player.origin.render() }</li>
+          <li key="race">{ player.appearance.renderRace() }</li>
+          <li key="hair">{ player.appearance.renderHair() }</li>
+          <li key="details">{ player.appearance.renderDetails() }</li>
           <li key="tribe"><TribeFlag tribe={ player.getTribe() } /></li>
           { player.injuries.length > 0 ? (
             <li key="injuries">{ Utilities.arrayToList(player.injuries) } </li>

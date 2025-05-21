@@ -280,7 +280,7 @@ class Season {
       throw new Error("Attempting to name player without having set a gender first.");
     }
     let genderKey = gender.machine_name
-    if (genderKey === "nb") {
+    if (genderKey === "nonbinary") {
       genderKey = "any";
     }
 
