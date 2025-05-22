@@ -293,6 +293,7 @@
   "hair_styles": [
     {
       "name": "bald",
+      "machine_name": "bald",
       "reqs": [
         {
           "property": "player.hair.length",
@@ -302,7 +303,8 @@
       ]
     },
     {
-      "name": "neat",
+      "name": "neat hair",
+      "machine_name": "neat",
       "reqs": [
         {
           "property": "player.hair.length",
@@ -312,7 +314,8 @@
       ]
     },
     {
-      "name": "pixie",
+      "name": "pixie cut",
+      "machine_name": "pixie",
       "reqs": [
         {
           "property": "player.hair.length",
@@ -323,6 +326,7 @@
     },
     {
       "name": "styled",
+      "machine_name": "styled",
       "reqs": [
         {
           "property": "player.hair.length",
@@ -333,6 +337,7 @@
     },
     {
       "name": "messy",
+      "machine_name": "messy",
       "reqs": [
         {
           "property": "player.hair.length",
@@ -343,6 +348,7 @@
     },
     {
       "name": "shaggy",
+      "machine_name": "shaggy",
       "reqs": [
         {
           "property": "player.hair.length",
@@ -353,6 +359,7 @@
     },
     {
       "name": "loose",
+      "machine_name": "loose",
       "reqs": [
         {
           "property": "player.hair.length",
@@ -363,6 +370,7 @@
     },
     {
       "name": "ponytail",
+      "machine_name": "ponytail",
       "prefix": "in a",
       "reqs": [
         {
@@ -374,6 +382,7 @@
     },
     {
       "name": "bun",
+      "machine_name": "bun",
       "variants": [
         {
           "name": "bun",
@@ -394,6 +403,7 @@
     },
     {
       "name": "pigtails",
+      "machine_name": "pigtails",
       "prefix": "in",
       "reqs": [
         {
@@ -405,6 +415,7 @@
     },
     {
       "name": "braid",
+      "machine_name": "braid",
       "variants": [
         {
           "name": "braids",
@@ -425,6 +436,7 @@
     },
     {
       "name": "dreadlocks",
+      "machine_name": "dreadlocks",
       "prefix": "in",
       "reqs": [
         {

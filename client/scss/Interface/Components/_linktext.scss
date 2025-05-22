@@ -28,9 +28,7 @@
     background-color: $linktextPopupBack;
     color: $typeColor;
     display: none;
-    position: absolute;
-    left: 50%;
-    top: 50%;
+    position: fixed;
     z-index: 999;
   }
   &:hover {

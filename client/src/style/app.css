@@ -232,9 +232,7 @@ body {
   background-color: #FFFFFF;
   color: #BC8510;
   display: none;
-  position: absolute;
-  left: 50%;
-  top: 50%;
+  position: fixed;
   z-index: 999;
 }
 .linktext:hover .linktext--popup {

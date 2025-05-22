@@ -18,7 +18,7 @@ function PlayerCard({ player }) {
       <h3>{ player.getNameString() }</h3>
       <div className="player-info">
         <ul>
-          <li key="occupation">{ player.occupation.getName() }</li>
+          <li key="occupation">{ player.occupation.getName() }, { player.getGenderString() }</li>
           <li key="origin">{ player.origin.render() }</li>
           <li key="race">{ player.appearance.renderRace() }</li>
           <li key="hair">{ player.appearance.renderHair() }</li>
