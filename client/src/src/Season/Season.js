@@ -19,7 +19,7 @@ import Scene from '../Scene/Scene';
  * - final_player_count
  * - tribe_count
  * - jury_size
- * - current_day_count
+ * - current_day
  * - nickname
  */
 
@@ -45,13 +45,13 @@ const playerNames = {
 
 class Season {
   properties = {
-    days: 39,
-    starting_player_count: 18,
-    final_player_count: 3,
-    tribe_count: 2,
-    jury_size: 9,
-    current_day_count: 0,
-    nickname: "Test Season",
+    days: Config.default_season.days,
+    starting_player_count: Config.default_season.starting_player_count,
+    final_player_count: Config.default_season.final_player_count,
+    tribe_count: Config.default_season.tribe_count,
+    jury_size: Config.default_season.jury_size,
+    current_day: Config.default_season.current_day,
+    nickname: Config.default_season.nickname,
   };
   location = null;
   state = {
