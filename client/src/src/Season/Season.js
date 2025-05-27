@@ -260,7 +260,7 @@ class Season {
   }
 
   setActiveScene(scene) {
-    if (!typeof scene == "Scene") {
+    if (!typeof scene === "Scene") {
       throw new Error("Scene Management: Trying to setActiveScene with " + (typeof scene));
     }
     this.active_scene = scene;
@@ -270,9 +270,7 @@ class Season {
     if (!this.scenes[sceneIndex]) {
       throw new Error("Scene Management: Trying to setActiveSceneByIndex with invalid index of " + sceneIndex)
     }
-    console.log(this.scenes);
     this.active_scene = this.scenes[sceneIndex];
-    console.log(this.active_scene);
   }
 
   setActiveSceneById(sceneId) {

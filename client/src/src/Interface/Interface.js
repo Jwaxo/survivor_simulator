@@ -9,6 +9,7 @@ import StatusBox from './Statusbox';
 import Utilities from '../Utilities';
 import Config from '../../Config';
 
+import ActionCategory from '../Action/ActionCategory';
 import Action from '../Action/Action';
 
 /**
@@ -27,7 +28,7 @@ export default function Interface({season}) {
     timestring: '12:00 AM',
     day: 0,
   });
-  const [actions, setActions] = useState([]);
+  const [actionCategories, setActionCategories] = useState([]);
   const [log, setLog] = useState([]);
   const [players, setPlayers] = useState(() => season.getPlayers());
   const [prompt, setPrompt] = useState("");
@@ -45,7 +46,7 @@ export default function Interface({season}) {
   // the values at the time of the callback's creation.
   const stateRef = useRef();
   stateRef.log = log;
-  stateRef.actions = actions;
+  stateRef.actionCategories = actionCategories;
   stateRef.time = time;
   stateRef.prompt = prompt;
 
@@ -79,16 +80,24 @@ export default function Interface({season}) {
   function addAction(label = 'Action', callback = () => {
     console.log("No callback set for this action.")
   }, type = 'button') {
-    setActions([...stateRef.actions, <Action label={ label } type={ type } callback={ callback }/>
-    ]);
+    setActionCategories(
+      [
+        ...stateRef.actionCategories,
+        <Action label={ label } type={ type } callback={ callback }/>
+      ]
+    );
   }
 
-  function addActions(newActions = []) {
-    setActions([...stateRef.actions,
-      ...newActions.map(action => (
-        <Action label={ action.label } type={ action.type ?? 'button' } callback={ action.callback }/>
-      ))
-    ]);
+  function addActions(category = 'debug', newActions = []) {
+    const tempActions = [...stateRef.actionCategories];
+    const existingCategory = tempActions.findIndex(x => x.category === category);
+    if (existingCategory >= 0) {
+      tempActions[existingCategory].push(...newActions);
+    }
+    else {
+      tempActions.push(new ActionCategory(category, newActions));
+    }
+    setActionCategories(tempActions);
   }
 
   function addToLog(message = "") {
@@ -135,27 +144,25 @@ export default function Interface({season}) {
 
   // Functions to run on first render.
   useEffect(() => {
-    if (stateRef.actions?.length < 1) {
-      addActions([
-        {
-          label: 'Advance Time',
-          callback: () => {
+    if (Config.debug === true) {
+      addActions('debug', [
+        new Action(
+          'Advance Time', () => {
             addToLog("Time passes...");
             advanceTime();
-          },
-          type: 'button'
-        },
-        {
-          label: 'Advance Time (x2)',
-          callback: () => {
+          }
+        ),
+        new Action(
+          'Advance Time (x2)',
+          () => {
             addMultipleToLog(['Time passes a lot...', 'For real...']);
             advanceTime();
             advanceTime();
           }
-        },
-        {
-          label: 'Test Fight',
-          callback: () => {
+        ),
+        new Action(
+          'Test Fight',
+          () => {
             const testPlayers = [...players];
             let player1 = testPlayers.splice(Utilities.pickFromRange(players.length), 1);
             player1 = player1[0];
@@ -191,13 +198,12 @@ export default function Interface({season}) {
               )
             ]);
           }
-        }
-
+        )
       ]);
-      setActiveScene(season.getActiveScene());
       setPrompt("Choose a test action:");
     }
-  }, []);
+    setActiveScene(season.getActiveScene());
+  }, [players, season]);
 
   return (
     <div className="interface">
@@ -213,7 +219,7 @@ export default function Interface({season}) {
           <PlayerBox players={ players } />
         </div>
         <div className="interface-panel interface-bottom">
-          <ActionBox disabled={ frozen } actions={ actions } addAction={ addActions } prompt={ prompt } />
+          <ActionBox disabled={ frozen } categories={ actionCategories } addAction={ addActions } prompt={ prompt } />
         </div>
       </div>
     </div>

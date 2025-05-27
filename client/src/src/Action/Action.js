@@ -1,33 +1,47 @@
 import React from 'react';
 import Button from './Components/Button';
 import Dropdown from './Components/Dropdown';
+import Link from './Components/Link';
 
-function Action({label, type, callback}) {
-  let component = '';
+class Action {
+  label = "";
+  type = "";
+  callback = () => {};
 
-  if (type) {
-    switch (type) {
-      case 'button':
-        component = <Button label={ label } callback={ callback } />;
-        break;
-
-      case 'dropdown':
-        component = <Dropdown label={ label } callback={ callback } />;
-        break;
-    }
+  constructor(label, callback, type) {
+    this.label = label;
+    this.type = type;
+    this.callback = callback;
   }
 
-  function setActive(isActive = true) {
+  setActive(isActive = true) {
     if (isActive) {
 
     }
   }
 
-  return (
-    <div className="action">
-      { component  }
-    </div>
-  );
+  render() {
+    let component = "";
+    switch (this.type) {
+      case 'button':
+        component = <Button label={ this.label } callback={ this.callback } />;
+        break;
+
+      case 'dropdown':
+        component = <Dropdown label={ this.label } callback={ this.callback } />;
+        break;
+
+      case 'link':
+      default:
+        component = <Link label={ this.label } callback={ this.callback } />;
+    }
+
+    return (
+      <div className="action">
+        { component }
+      </div>
+    );
+  }
 
 }
 

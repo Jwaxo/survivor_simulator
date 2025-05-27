@@ -10,11 +10,9 @@ function Button({label, callback}) {
   }
 
   return (
-    <div className='action action--button'>
-      <button onClick={ () => { callback() } }>
-        { label }
-      </button>
-    </div>
+    <button onClick={ () => { callback() } }>
+      { label }
+    </button>
   )
 
 }

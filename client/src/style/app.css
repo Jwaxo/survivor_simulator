@@ -169,8 +169,20 @@ body {
 }
 
 /**
+ * Styles pertaining to the Interface container.
+ */
+/**
  * Styles for Action components.
  */
+.action a {
+  color: #BC8510;
+  cursor: pointer;
+  font-weight: bold;
+}
+.action a:hover {
+  color: #725009;
+}
+
 /**
  * Styles pertaining to the Interface container.
  */
