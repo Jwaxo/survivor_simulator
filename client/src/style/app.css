@@ -107,6 +107,9 @@ body {
   margin-top: 20px;
   padding: 20px 20px 0;
 }
+.enviro-box p:last-child {
+  margin-bottom: 0;
+}
 
 /**
  * Styles pertaining to the Interface container.

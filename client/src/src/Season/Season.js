@@ -64,12 +64,14 @@ class Season {
   timestring = '';
 
   current_day = 0;
+
   players = [];
   // @todo: something I'm not doing yet is actually having a defined player
   // character, at the least so I know where the "camera" is and what the
   // interface can see. I need to set this up.
   tribes = [];
   scenes = [];
+  active_scene = null;
 
   constructor(props) {
     if (props) {
@@ -257,21 +259,48 @@ class Season {
     return this.scenes.length;
   }
 
+  setActiveScene(scene) {
+    if (!typeof scene == "Scene") {
+      throw new Error("Scene Management: Trying to setActiveScene with " + (typeof scene));
+    }
+    this.active_scene = scene;
+  }
+
+  setActiveSceneByIndex(sceneIndex) {
+    if (!this.scenes[sceneIndex]) {
+      throw new Error("Scene Management: Trying to setActiveSceneByIndex with invalid index of " + sceneIndex)
+    }
+    console.log(this.scenes);
+    this.active_scene = this.scenes[sceneIndex];
+    console.log(this.active_scene);
+  }
+
+  setActiveSceneById(sceneId) {
+
+  }
+
+  getActiveScene() {
+    return this.active_scene;
+  }
+
   generateTestScenes() {
     this.getTribes().forEach(tribe => {
-      const tribeBeach = new Scene({
+      const props = {
         id: this.getScenesCount(),
         name: `${tribe.getName()} Beach`,
-        description: `Gentle waves wash against the shore. Placed firmly in the sand is a ${tribe.getColorName()} flag, bearing the name ${tribe.getName()}`,
-      });
+        description: `Gentle waves wash against the shore. Placed firmly in the sand is a ${tribe.getColorName()} flag, bearing the name ${tribe.getName()}.`,
+      };
+      const tribeBeach = new Scene(props);
+      this.addScene(tribeBeach);
       const tribeCamp = new Scene({
         id: this.getScenesCount(),
         name: `${tribe.getName()} Camp`,
         description: `A small firepit sits here, neglected. To the side is a bundle of sticks, blankets, and a tarp that one might generously call a shelter.`
       });
+      this.addScene(tribeCamp);
       tribeBeach.addConnection(tribeCamp);
       tribeCamp.addConnection(tribeBeach);
-      this.addScenes([tribeBeach, tribeCamp]);
+      this.setActiveSceneByIndex(0);
     });
   }
 

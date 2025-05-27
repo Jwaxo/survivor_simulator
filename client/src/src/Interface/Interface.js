@@ -32,6 +32,7 @@ export default function Interface({season}) {
   const [players, setPlayers] = useState(() => season.getPlayers());
   const [prompt, setPrompt] = useState("");
   const [frozen, setFrozen] = useState(false);
+  const [activeScene, setActiveScene] = useState();
 
   // @todo: Add ability to save and load more than one season, and allow
   // special characters in names (spaces currently break it).
@@ -61,6 +62,10 @@ export default function Interface({season}) {
     console.log(cookies);
     const loaded_season = cookies[season_name];
     season.load(loaded_season);
+  }
+
+  function loadActiveScene(scene) {
+    setActiveScene(scene);
   }
 
   function advanceTime() {
@@ -189,6 +194,7 @@ export default function Interface({season}) {
         }
 
       ]);
+      setActiveScene(season.getActiveScene());
       setPrompt("Choose a test action:");
     }
   }, []);
@@ -198,7 +204,7 @@ export default function Interface({season}) {
       <div className="interface-inner">
         <div className="interface-panel interface-top">
           <StatusBox day={ time.day } time={ time.timestring } weather="Sunny" tribe="Default" phase="Morning" save={ save } load={ load }/>
-          <EnviroBox description="It's a sunny day on Challenge Beach. Jeff Probst is here in a resplendent navy blue shirt." />
+          <EnviroBox scene={ activeScene } />
         </div>
         <div className="interface-panel interface-main">
           <InfoBox log={ log } />

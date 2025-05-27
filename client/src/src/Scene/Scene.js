@@ -24,6 +24,12 @@ class Scene {
   activities = [];
 
   constructor(props) {
+    if (props.id !== null) {
+      this.properties.id = props.id;
+    }
+    else {
+      throw new Error("Generation Error: Trying to create a Scene without an ID.");
+    }
     if (props.name) {
       this.properties.name = props.name;
     }
@@ -37,6 +43,18 @@ class Scene {
       this.properties.description = props.description;
     }
 
+  }
+
+  getId() {
+    return this.properties.id;
+  }
+
+  getName() {
+    return this.properties.name;
+  }
+
+  getDescription() {
+    return this.properties.description;
   }
 
   addConnection(scene, hidden = false) {

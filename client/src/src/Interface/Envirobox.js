@@ -1,8 +1,9 @@
-function EnviroBox({ description })  {
+function EnviroBox({ scene })  {
 
   return (
     <div className="enviro-box">
-      { description }
+      <strong>{ scene ? scene.getName() : '' }</strong>
+      <p>{ scene ? scene.getDescription() : '' }</p>
     </div>
   );
 
