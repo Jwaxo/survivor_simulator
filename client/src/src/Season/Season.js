@@ -111,7 +111,7 @@ class Season {
       location: this.location !== null ? this.location.save() : null,
       timestamp: this.timestamp,
       current_day: this.current_day,
-      controlled_player: this.controlledPlayer.getID(),
+      controlled_player: this.controlledPlayer.getId(),
       players,
       tribes,
       log,
@@ -304,6 +304,10 @@ class Season {
       tribeBeach.addConnection(tribeCamp);
       tribeCamp.addConnection(tribeBeach);
       this.setActiveSceneByIndex(0);
+
+      tribe.getPlayers().forEach(player => {
+        player.setScene(tribeBeach);
+      });
     });
   }
 
@@ -359,7 +363,7 @@ class Season {
   }
 
   getPlayerByID(id) {
-    return this.players.find(player => player.getID() === id);
+    return this.players.find(player => player.getId() === id);
   }
 
   getControlledPlayer() {

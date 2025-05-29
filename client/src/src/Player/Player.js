@@ -52,6 +52,8 @@ class Player {
   stats = null;
   inventory = null;
 
+  scene = null;
+
   description = [];
   traits = [];
   relationships = [];
@@ -240,7 +242,7 @@ class Player {
 
   getRelationship(playerID) {
     this.relationships.forEach(key => {
-      if (this.relationships[key].target.getID() === playerID) {
+      if (this.relationships[key].target.getId() === playerID) {
         return this.relationships[key].target;
       }
     });
@@ -250,14 +252,14 @@ class Player {
   }
 
   modRelationship(player, value, mod) {
-    let targetRelationship = this.getRelationship(player.getID());
+    let targetRelationship = this.getRelationship(player.getId());
     if (!targetRelationship) {
       targetRelationship = new Relationship({ player });
     }
     targetRelationship.modValue(value, mod);
   }
 
-  getID() {
+  getId() {
     return this.properties.id;
   }
 
@@ -267,6 +269,18 @@ class Player {
 
   addTrait(trait) {
     this.traits.push(trait);
+  }
+
+  getScene() {
+    return this.scene;
+  }
+
+  setScene(scene) {
+    if (this.scene !== null) {
+      this.scene.removePlayerById(this.getId());
+    }
+    this.scene = scene;
+    scene.addPlayer(this);
   }
 
   toPlayerCard() {

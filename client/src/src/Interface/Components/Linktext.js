@@ -17,10 +17,6 @@ export default function LinkText({children, popup, color, outline}) {
     }
   }, [children]);
 
-  if (color === null) {
-    color = 'cardinal';
-  }
-
   const classes = [
     "linktext",
     isOpen ? "open" : null,
@@ -28,7 +24,7 @@ export default function LinkText({children, popup, color, outline}) {
 
   const textClasses = [
     "linktext--text",
-    color,
+    color ?? '',
     outline ? 'outline' : '',
   ].join(' ').trim();
 

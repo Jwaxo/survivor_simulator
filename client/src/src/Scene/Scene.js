@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Activity from './Activity';
+import LinkText from '../Interface/Components/Linktext';
 
 /**
  * Defines the Scene and SceneConnection classes.
@@ -67,8 +67,8 @@ class Scene {
   }
 
   getValidConnections(player) {
-    // Check player stats to see which connections they can see.
-
+    // @todo: Check player stats to see which connections they can see.
+    return this.getAllConnections();
   }
 
   addPlayer(player) {
@@ -83,12 +83,36 @@ class Scene {
     return this.players;
   }
 
+  removePlayerById(id) {
+    this.players.splice(this.getPlayers().findIndex(player => player.getId() === id), 1);
+  }
+
   addActivity(activity) {
     this.activities.push(activity);
   }
 
   getActivities() {
     return this.activities;
+  }
+
+  toLinkText() {
+    return (
+      <LinkText popup={this.players.length > 0 ? this.toPlayerList() : "Unoccupied"}>{ this.getName() }</LinkText>
+    )
+  }
+
+  toPlayerList() {
+    return (
+      <ul>
+        { this.getPlayers().map((player, index) => {
+          return (
+            <li key={ index } >
+              { player.toLinkText() }
+            </li>
+          )
+        }) }
+      </ul>
+    )
   }
 
 }

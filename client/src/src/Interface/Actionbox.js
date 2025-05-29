@@ -12,8 +12,6 @@ function ActionBox({categories, prompt, addAction, frozen}) {
     });
   });
 
-  console.log(categories);
-
   return (
     <div className="action-box">
       <div className="actions-prompt">{ prompt }</div>

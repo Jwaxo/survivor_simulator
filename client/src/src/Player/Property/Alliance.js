@@ -13,7 +13,7 @@ class Alliance extends Component {
   save() {
     const players = [];
     this.players.forEach(key => {
-      players.push = this.players[key].getID();
+      players.push = this.players[key].getId();
     });
     return {
       properties: this.properties,
@@ -25,7 +25,7 @@ class Alliance extends Component {
     Utilities.loadPropertiesFromObject(this, alliance_info);
     if (alliance_info.hasOwnProperty("players")) {
       alliance_info.players.forEach(key => {
-        const loaded_player = players.find(player => player.getID() === alliance_info.players[key]);
+        const loaded_player = players.find(player => player.getId() === alliance_info.players[key]);
         if (loaded_player) {
           this.players.push(loaded_player);
         }

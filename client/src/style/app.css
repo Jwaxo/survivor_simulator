@@ -71,7 +71,7 @@ body {
  * Styles for the main Interface's Action Box.
  */
 .action-box {
-  align-items: center;
+  align-items: start;
   display: flex;
   flex-wrap: wrap;
   gap: 15px;
@@ -81,19 +81,8 @@ body {
   width: 100%;
   text-align: center;
 }
-.action-box ul {
-  align-items: center;
-  display: flex;
-  gap: 15px;
-  justify-content: center;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  width: 100%;
-}
-.action-box ul li {
-  margin: 0;
-  padding: 0;
+.action-box .actions-category {
+  min-width: 30%;
 }
 
 /**
@@ -245,10 +234,16 @@ body {
 }
 .linktext .linktext--popup {
   background-color: #FFFFFF;
+  border: 1px solid #000000;
   color: #BC8510;
   display: none;
+  padding: 15px;
   position: fixed;
   z-index: 999;
+}
+.linktext .linktext--popup > .player.player-card {
+  border: 0;
+  padding: 0;
 }
 .linktext:hover > .linktext--popup {
   display: block;

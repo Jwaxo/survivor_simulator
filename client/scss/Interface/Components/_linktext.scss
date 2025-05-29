@@ -26,10 +26,16 @@
 
   .linktext--popup {
     background-color: $linktextPopupBack;
+    border: 1px solid $borderColor;
     color: $typeColor;
     display: none;
+    padding: 15px;
     position: fixed;
     z-index: 999;
+    > .player.player-card {
+      border: 0;
+      padding: 0;
+    }
   }
   // @todo: change this to .open and make linktext work on click instead.
   &:hover {

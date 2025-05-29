@@ -63,7 +63,7 @@ class Tribe {
     // For saving Players, we just need to remember their ID. All Player info
     // is otherwise saved in the players key of the saving object.
     this.players.forEach(player => {
-      players.push(player.getID());
+      players.push(player.getId());
     });
 
     console.log(`Saving ${this.getName()} with ${this.players.length} players`);
@@ -79,7 +79,7 @@ class Tribe {
     Utilities.loadPropertiesFromObject(this, tribe_info);
     if (tribe_info.players) {
       tribe_info.players.forEach((playerID) => {
-        const loaded_player = players.find((player) => player.getID() === playerID);
+        const loaded_player = players.find((player) => player.getId() === playerID);
         if (loaded_player) {
           this.addPlayer(loaded_player);
         }

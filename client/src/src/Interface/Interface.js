@@ -68,6 +68,82 @@ export default function Interface({season}) {
 
   function loadActiveScene(scene) {
     setActiveScene(scene);
+
+    const connections = scene.getValidConnections();
+
+    clearActions();
+
+    addActions('Travel to...', connections.map(connected => {
+      return new Action(
+        connected.scene.toLinkText(),
+        () => {
+          season.setActiveScene(connected.scene);
+          loadActiveScene(connected.scene);
+        }
+      )
+    }));
+
+    if (Config.debug) {
+      loadDebugActions();
+    }
+  }
+
+  function loadDebugActions() {
+    addActions('debug', [
+      new Action(
+        'Advance Time', () => {
+          addToLog("Time passes...");
+          advanceTime();
+        }
+      ),
+      new Action(
+        'Advance Time (x2)',
+        () => {
+          addMultipleToLog(['Time passes a lot...', 'For real...']);
+          advanceTime();
+          advanceTime();
+        }
+      ),
+      new Action(
+        'Test Fight',
+        () => {
+          const testPlayers = [...players];
+          let player1 = testPlayers.splice(Utilities.pickFromRange(players.length), 1);
+          player1 = player1[0];
+          const player2 = testPlayers[Utilities.pickFromRange(players.length)];
+          const player1result = player1.stats.checkSkill('fight', 0);
+          const player2result = player2.stats.checkSkill('fight', 0);
+          let winner = null;
+          let loser = null;
+          let winningscore = null;
+          let losingscore = null;
+          if (player1result > player2result) {
+            winner = player1;
+            loser = player2;
+            winningscore = player1result;
+            losingscore = player2result;
+          }
+          else {
+            winner = player2;
+            loser = player1;
+            winningscore = player2result;
+            losingscore = player1result;
+          }
+          addMultipleToLog([
+            (
+              <>
+                { player1.toLinkText()} is going to fight { player2.toLinkText() }!
+              </>
+            ),
+            (
+              <>
+                { winner.toLinkText() } wins, with a score of { winningscore }. { loser.toLinkText() } loses with a score of { losingscore }.
+              </>
+            )
+          ]);
+        }
+      )
+    ]);
   }
 
   function advanceTime() {
@@ -78,27 +154,56 @@ export default function Interface({season}) {
     });
   }
 
-  function addAction(label = 'Action', callback = () => {
+  /**
+   * Add a single action to the actionCategory defined.
+   *
+   * Creates the Action object for you.
+   *
+   * @param {string} category
+   * @param {string} label
+   * @param {function} callback
+   * @param {string} type
+   */
+  function addAction(category = 'debug', label = 'Action', callback = () => {
     console.log("No callback set for this action.")
-  }, type = 'button') {
-    setActionCategories(
-      [
-        ...stateRef.actionCategories,
-        <Action label={ label } type={ type } callback={ callback }/>
-      ]
-    );
+  }, type = null) {
+    addActions(category, [
+      new Action(label, callback, type),
+    ]);
   }
 
+  /**
+   * Add an array of actions to the actionCategory defined.
+   *
+   * Does not create each Action object for you.
+   *
+   * @param {string} category
+   * @param {Array} newActions
+   */
   function addActions(category = 'debug', newActions = []) {
-    const tempActions = [...stateRef.actionCategories];
-    const existingCategory = tempActions.findIndex(x => x.category === category);
-    if (existingCategory >= 0) {
-      tempActions[existingCategory].push(...newActions);
+    // Pull down the current categories, process them into a fresh array (to
+    // prevent weird React state issues), then set the state AND the stateRef
+    // so they don't conflict.
+    const existingCategories = [...stateRef.actionCategories];
+    const updatedCategories = [];
+    let added = false;
+    existingCategories.forEach(actionCategory => {
+      if (actionCategory.category === category && Array.isArray(actionCategory.actions)) {
+        actionCategory.actions.concat(newActions);
+        added = true;
+      }
+      updatedCategories.push(actionCategory);
+    });
+    if (!added) {
+      updatedCategories.push(new ActionCategory(category, newActions));
     }
-    else {
-      tempActions.push(new ActionCategory(category, newActions));
-    }
-    setActionCategories(tempActions);
+    stateRef.actionCategories = updatedCategories;
+    setActionCategories(updatedCategories);
+  }
+
+  function clearActions() {
+    stateRef.actionCategories = [];
+    setActionCategories([]);
   }
 
   function addToLog(message = "") {
@@ -145,67 +250,8 @@ export default function Interface({season}) {
 
   // Functions to run on first render.
   useEffect(() => {
-    if (Config.debug === true) {
-      addActions('debug', [
-        new Action(
-          'Advance Time', () => {
-            addToLog("Time passes...");
-            advanceTime();
-          }
-        ),
-        new Action(
-          'Advance Time (x2)',
-          () => {
-            addMultipleToLog(['Time passes a lot...', 'For real...']);
-            advanceTime();
-            advanceTime();
-          }
-        ),
-        new Action(
-          'Test Fight',
-          () => {
-            const testPlayers = [...players];
-            let player1 = testPlayers.splice(Utilities.pickFromRange(players.length), 1);
-            player1 = player1[0];
-            const player2 = testPlayers[Utilities.pickFromRange(players.length)];
-            const player1result = player1.stats.checkSkill('fight', 0);
-            const player2result = player2.stats.checkSkill('fight', 0);
-            let winner = null;
-            let loser = null;
-            let winningscore = null;
-            let losingscore = null;
-            if (player1result > player2result) {
-              winner = player1;
-              loser = player2;
-              winningscore = player1result;
-              losingscore = player2result;
-            }
-            else {
-              winner = player2;
-              loser = player1;
-              winningscore = player2result;
-              losingscore = player1result;
-            }
-            addMultipleToLog([
-              (
-                <>
-                  { player1.toLinkText()} is going to fight { player2.toLinkText() }!
-                </>
-              ),
-              (
-                <>
-                  { winner.toLinkText() } wins, with a score of { winningscore }. { loser.toLinkText() } loses with a score of { losingscore }.
-                </>
-              )
-            ]);
-          }
-        )
-      ]);
-      setPrompt("Choose a test action:");
-    }
-    setActiveScene(season.getActiveScene());
+    loadActiveScene(season.getActiveScene());
     setControlledPlayer(season.getControlledPlayer());
-    console.log("set controlled player");
   }, [players, season]);
 
   return (
@@ -219,7 +265,7 @@ export default function Interface({season}) {
           <InfoBox log={ log } />
         </div>
         <div className="interface-panel interface-side">
-          <PlayerBox players={ players } />
+          <PlayerBox players={ activeScene ? activeScene.getPlayers() : [] } />
         </div>
         <div className="interface-panel interface-bottom">
           <ActionBox disabled={ frozen } categories={ actionCategories } addAction={ addActions } prompt={ prompt } />
