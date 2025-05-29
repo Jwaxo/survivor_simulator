@@ -1,5 +1,5 @@
 import Utilities from '../Utilities';
-import LinkText from '../Interface/Linktext';
+import LinkText from '../Interface/Components/Linktext';
 import TribeFlag from './Components/Tribeflag';
 
 /**

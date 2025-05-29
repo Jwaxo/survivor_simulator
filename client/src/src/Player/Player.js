@@ -7,7 +7,7 @@ import PlayerInventory from './Property/PlayerInventory';
 import Trait from './Property/Trait';
 import Utilities from '../Utilities';
 
-import Linktext from '../Interface/Linktext';
+import Linktext from '../Interface/Components/Linktext';
 import PlayerCard from './Components/Playercard';
 
 /**

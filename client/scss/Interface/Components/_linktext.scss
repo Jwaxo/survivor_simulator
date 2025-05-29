@@ -31,6 +31,7 @@
     position: fixed;
     z-index: 999;
   }
+  // @todo: change this to .open and make linktext work on click instead.
   &:hover {
     > .linktext--popup {
       display: block;
