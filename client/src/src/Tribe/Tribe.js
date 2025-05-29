@@ -1,4 +1,6 @@
 import Utilities from '../Utilities';
+import LinkText from '../Interface/Linktext';
+import TribeFlag from './Components/Tribeflag';
 
 /**
  * Defines the Tribe class.
@@ -95,6 +97,10 @@ class Tribe {
     players.forEach(player => this.addPlayer(player));
   }
 
+  getPlayers() {
+    return this.players;
+  }
+
   getName() {
     return this.properties.name;
   }
@@ -117,6 +123,32 @@ class Tribe {
 
   setColor(color) {
     this.properties.color = color;
+  }
+
+  toPlayerList() {
+    return (
+      <ul>
+        { this.getPlayers().map((player, index) => {
+          return (
+            <li key={ index } >
+              { player.toLinkText() }
+            </li>
+          )
+        }) }
+      </ul>
+    )
+  }
+
+  toLinkText() {
+    return (
+      <LinkText popup={this.toPlayerList()} color={this.getColorName()} outline={this.getColorDarkness() === 'light'}>{ this.getName() }</LinkText>
+    )
+  }
+
+  toTribeFlag() {
+    return (
+      <TribeFlag tribe={this} />
+    );
   }
 }
 

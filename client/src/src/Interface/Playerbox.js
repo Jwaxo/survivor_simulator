@@ -7,7 +7,7 @@ function PlayerBox({ players }) {
     <div className="player-box">
       Players here: ({ players.length })
       {players.map((player, index) =>
-        <div className="player-box--player">{ player.toLinktext() }</div>
+        <div className="player-box--player">{ player.toLinkText() }</div>
       )}
     </div>
   )

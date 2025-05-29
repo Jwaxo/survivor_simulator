@@ -34,6 +34,7 @@ export default function Interface({season}) {
   const [prompt, setPrompt] = useState("");
   const [frozen, setFrozen] = useState(false);
   const [activeScene, setActiveScene] = useState();
+  const [controlledPlayer, setControlledPlayer] = useState(null);
 
   // @todo: Add ability to save and load more than one season, and allow
   // special characters in names (spaces currently break it).
@@ -188,12 +189,12 @@ export default function Interface({season}) {
             addMultipleToLog([
               (
                 <>
-                  { player1.toLinktext()} is going to fight { player2.toLinktext() }!
+                  { player1.toLinkText()} is going to fight { player2.toLinkText() }!
                 </>
               ),
               (
                 <>
-                  { winner.toLinktext() } wins, with a score of { winningscore }. { loser.toLinktext() } loses with a score of { losingscore }.
+                  { winner.toLinkText() } wins, with a score of { winningscore }. { loser.toLinkText() } loses with a score of { losingscore }.
                 </>
               )
             ]);
@@ -203,13 +204,15 @@ export default function Interface({season}) {
       setPrompt("Choose a test action:");
     }
     setActiveScene(season.getActiveScene());
+    setControlledPlayer(season.getControlledPlayer());
+    console.log("set controlled player");
   }, [players, season]);
 
   return (
     <div className="interface">
       <div className="interface-inner">
         <div className="interface-panel interface-top">
-          <StatusBox day={ time.day } time={ time.timestring } weather="Sunny" tribe="Default" phase="Morning" save={ save } load={ load }/>
+          <StatusBox day={ time.day } time={ time.timestring } weather="Sunny" tribe="Default" phase="Morning" save={ save } load={ load } player={ controlledPlayer } />
           <EnviroBox scene={ activeScene } />
         </div>
         <div className="interface-panel interface-main">

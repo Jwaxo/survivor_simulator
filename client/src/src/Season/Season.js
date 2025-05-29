@@ -53,6 +53,7 @@ class Season {
     current_day: Config.default_season.current_day ?? 0,
     nickname: Config.default_season.nickname ?? "Default Season",
   };
+  controlledPlayer = null;
   location = null;
   state = {
     log: [],
@@ -110,6 +111,7 @@ class Season {
       location: this.location !== null ? this.location.save() : null,
       timestamp: this.timestamp,
       current_day: this.current_day,
+      controlled_player: this.controlledPlayer.getID(),
       players,
       tribes,
       log,
@@ -120,6 +122,9 @@ class Season {
     this.players = [];
     this.tribes = [];
     this.state.log = [];
+    if (season_info.hasOwnProperty("controlled_player")) {
+      this.controlledPlayer = this.getPlayerByID(season_info.controlled_player);
+    }
     if (season_info.hasOwnProperty("properties")) {
       for (const property in season_info.properties) {
         if (this.properties.hasOwnProperty(property)) {
@@ -351,6 +356,18 @@ class Season {
 
   getPlayers() {
     return this.players;
+  }
+
+  getPlayerByID(id) {
+    return this.players.find(player => player.getID() === id);
+  }
+
+  getControlledPlayer() {
+    return this.controlledPlayer;
+  }
+
+  setControlledPlayer(player) {
+    this.controlledPlayer = player;
   }
 
   getPlayerCount() {

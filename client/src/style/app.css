@@ -250,7 +250,7 @@ body {
   position: fixed;
   z-index: 999;
 }
-.linktext:hover .linktext--popup {
+.linktext:hover > .linktext--popup {
   display: block;
 }
 

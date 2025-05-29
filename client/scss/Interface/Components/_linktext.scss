@@ -32,7 +32,7 @@
     z-index: 999;
   }
   &:hover {
-    .linktext--popup {
+    > .linktext--popup {
       display: block;
     }
   }

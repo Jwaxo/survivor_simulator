@@ -41,6 +41,7 @@ class Player {
       nick: '',
       last: '',
     },
+    isControlled: false,
   };
   tribe = null;
 
@@ -192,6 +193,10 @@ class Player {
     return this.properties.name.nick ?? this.properties.name.first;
   }
 
+  setControlled() {
+    this.properties.isControlled = true;
+  }
+
   getAge() {
     return this.properties.age;
   }
@@ -270,7 +275,7 @@ class Player {
     )
   }
 
-  toLinktext(short = false) {
+  toLinkText(short = false) {
     return (
       <Linktext popup={this.toPlayerCard()} color={this.getColor()} outline={this.getColorDarkness() === 'light'}>{short ? this.getNick() : this.getNameString()}</Linktext>
     )

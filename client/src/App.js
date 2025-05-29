@@ -10,6 +10,7 @@ seedrandom(random_seed, { global: true });
 
 season.generateTribes();
 season.generateTestScenes();
+season.setControlledPlayer(season.getPlayerByID(1));
 
 function App() {
 
