@@ -1,5 +1,5 @@
 
-class Item {
+class ItemBase {
   type_properties = {};
   properties = {
     id: 0,
@@ -47,4 +47,4 @@ class Item {
   }
 }
 
-export default Item;
+export default ItemBase;

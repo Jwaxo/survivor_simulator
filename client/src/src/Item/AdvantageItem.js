@@ -1,6 +1,6 @@
-import Item from './Item';
+import ItemBase from './ItemBase';
 
-class Advantage extends Item {
+class AdvantageItem extends ItemBase {
   type_properties = {
     hidden: false,
     concealable: false,
@@ -13,4 +13,4 @@ class Advantage extends Item {
 
 }
 
-export default Advantage;
+export default AdvantageItem;

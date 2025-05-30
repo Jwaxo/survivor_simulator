@@ -1,6 +1,6 @@
-import Item from './Item';
+import ItemBase from './ItemBase';
 
-class Clue extends Item {
+class ClueItem extends ItemBase{
   type_properties = {
     text: "",
   };
@@ -12,4 +12,4 @@ class Clue extends Item {
 
 }
 
-export default Clue;
+export default ClueItem;

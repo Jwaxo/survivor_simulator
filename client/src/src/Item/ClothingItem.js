@@ -1,6 +1,6 @@
-import Item from './Item';
+import ItemBase from './ItemBase';
 
-class Clothing extends Item {
+class ClothingItem extends ItemBase {
   type_properties = {
     concealing: false,
   }
@@ -16,4 +16,4 @@ class Clothing extends Item {
   }
 }
 
-export default Clothing;
+export default ClothingItem;

@@ -271,6 +271,22 @@ class Player {
     this.traits.push(trait);
   }
 
+  getStats() {
+    return this.stats;
+  }
+
+  getStat(stat) {
+    return this.stats.getBase(stat);
+  }
+
+  getSkill(skill) {
+    return this.stats.getSkill(skill);
+  }
+
+  getNeed(need) {
+    return this.stats.getNeed(need);
+  }
+
   getScene() {
     return this.scene;
   }

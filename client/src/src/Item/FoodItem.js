@@ -1,6 +1,6 @@
-import Item from './Item';
+import ItemBase from './ItemBase';
 
-class Food extends Item {
+class FoodItem extends ItemBase{
   type_properties = {
     concealable: false,
     base_value: 10,
@@ -14,4 +14,4 @@ class Food extends Item {
 
 }
 
-export default Food;
+export default FoodItem;

@@ -48,6 +48,10 @@ const Utilities = {
     )
   },
 
+  ticPerDay: () => {
+    return 24 * 60 / Config.timePerTic;
+  },
+
   /**
    * Determines character count of a nested React component.
    *

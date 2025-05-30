@@ -1,5 +1,6 @@
 import Utilities from './../../Utilities';
 import SkillBase from './../Skills/SkillBase';
+import Need from './Need';
 
 class Stats {
   base = {
@@ -40,13 +41,17 @@ class Stats {
     orientation: [0, 1, 2], // which genders this person is attracted to.
     aggression: 0, // Maybe doubles as "competitiveness"?
   };
-  status = {
-    hunger: 0,
-    happy: 100,
-    tired: 0,
-    clean: 100,
-    health: 100,
-  };
+  // Most needs drain (or fill) automatically, but naturally some needs may have
+  // their values changed by external forces.
+  needs = [
+    new Need("Food", "food", 100, -1 * (100 / Utilities.ticPerDay())), // Empty stomach every 24 hours.
+    new Need("Water", "water", 100, -1 * (8 / Utilities.ticPerDay())), // Empty water every ~2 hours.
+    new Need("Happiness", "happy", 100, -1 * (200 / Utilities.ticPerDay())), // Empty happy every 48 hours.
+    new Need("Energy", "energy", 100, -1 * (50 / Utilities.ticPerDay())), // Empty energy every 12 hours.
+    new Need("Happiness", "happy", 100, -1 * (200 / Utilities.ticPerDay())), // Empty happy every 48 hours.
+    new Need("Health", "health", 100, 0),
+    // new Need("Bladder", "bladder", 0, 8 / Utilities.ticPerDay()), // Full bladder every 2 hours.
+  ];
 
   constructor(props) {
     if (props?.random) {
@@ -62,7 +67,7 @@ class Stats {
     return {
       base: this.base,
       mods: this.mods,
-      status: this.status,
+      needs: this.needs,
       skills,
     }
   }
@@ -74,8 +79,8 @@ class Stats {
     if (stats_info.hasOwnProperty("mods")) {
       this.mods = stats_info.mods;
     }
-    if (stats_info.hasOwnProperty("status")) {
-      this.status = stats_info.status;
+    if (stats_info.hasOwnProperty("needs")) {
+      this.needs = stats_info.needs;
     }
     if (stats_info.hasOwnProperty("skills")) {
       for (const skill in stats_info.skills) {
@@ -87,12 +92,20 @@ class Stats {
     }
   }
 
-  getStat(name) {
-    return this.properties[name];
-  }
-
   getBase(name) {
     return this.base[name];
+  }
+
+  getSkill(skill) {
+    return this.skills[skill];
+  }
+
+  getNeed(need_name) {
+    return this.needs.find(need => need.getMachineName() === need_name);
+  }
+
+  modNeed(need_name, mod) {
+    return this.getNeed(need_name).modValue(mod);
   }
 
   randomlyGenerate() {
@@ -104,8 +117,8 @@ class Stats {
   renderBaseStats() {
     return Utilities.objectToList(this.base);
   }
-  renderStatus() {
-    return Utilities.objectToList(this.status);
+  renderNeeds() {
+    return Utilities.arrayToList(this.needs);
   }
 
   checkSkill(skillName, inherentMod = 0) {
@@ -118,8 +131,8 @@ class Stats {
         <li key="base"><strong>Base Stats:</strong>
           { this.renderBaseStats() }
         </li>
-        <li key="status"><strong>Status:</strong>
-          { this.renderStatus() }
+        <li key="status"><strong>Needs:</strong>
+          { this.renderNeeds() }
         </li>
       </ul>
     );

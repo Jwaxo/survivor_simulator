@@ -1,6 +1,6 @@
-import Item from './Item';
+import ItemBase from './ItemBase';
 
-class Tool extends Item {
+class ToolItem extends ItemBase {
   type_properties = {
     concealable: false,
   };
@@ -12,4 +12,4 @@ class Tool extends Item {
 
 }
 
-export default Tool;
+export default ToolItem;

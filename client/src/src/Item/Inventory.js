@@ -1,9 +1,9 @@
 
-import Clothing from "./Clothing";
-import Advantage from "./Advantage";
-import Clue from "./Clue";
-import Food from "./Food";
-import Tool from "./Tool";
+import ClothingItem from "./ClothingItem";
+import AdvantageItem from "./AdvantageItem";
+import ClueItem from "./ClueItem";
+import FoodItem from "./FoodItem";
+import ToolItem from "./ToolItem";
 
 /**
  * Defines the Inventory class.
@@ -37,23 +37,23 @@ class Inventory {
 
       switch (saved_item.properties.type) {
         case 'advantage':
-          item = new Advantage(saved_item);
+          item = new AdvantageItem(saved_item);
 
           break;
         case 'clothing':
-          item = new Clothing(saved_item);
+          item = new ClothingItem(saved_item);
 
           break;
         case 'clue':
-          item = new Clue(saved_item);
+          item = new ClueItem(saved_item);
 
           break;
         case 'food':
-          item = new Food(saved_item);
+          item = new FoodItem(saved_item);
 
           break;
         case 'tool':
-          item = new Tool(saved_item);
+          item = new ToolItem(saved_item);
 
           break;
 
