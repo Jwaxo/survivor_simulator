@@ -288,21 +288,30 @@ class Season {
 
   generateTestScenes() {
     this.getTribes().forEach(tribe => {
-      const props = {
+      const tribeBeach = new Scene({
         id: this.getScenesCount(),
         name: `${tribe.getName()} Beach`,
         description: `Gentle waves wash against the shore. Placed firmly in the sand is a ${tribe.getColorName()} flag, bearing the name ${tribe.getName()}.`,
-      };
-      const tribeBeach = new Scene(props);
+      });
       this.addScene(tribeBeach);
       const tribeCamp = new Scene({
         id: this.getScenesCount(),
         name: `${tribe.getName()} Camp`,
-        description: `A small firepit sits here, neglected. To the side is a bundle of sticks, blankets, and a tarp that one might generously call a shelter.`
+        description: `You are in a clearing surrounded by light jungle. A small firepit sits here, neglected. To the side is a bundle of sticks, blankets, and a tarp that one might generously call a shelter.`
       });
       this.addScene(tribeCamp);
+      const tribeWater = new Scene({
+        id: this.getScenesCount(),
+        name: `${tribe.getName()} Water Well`,
+        description: `A large stone well sits, surrounded by a palm thicket. This is ${tribe.getColorName()}'s water well.`,
+      });
+      this.addScene(tribeWater);
+
       tribeBeach.addConnection(tribeCamp);
       tribeCamp.addConnection(tribeBeach);
+      tribeCamp.addConnection(tribeWater);
+      tribeWater.addConnection(tribeCamp);
+
       this.setActiveSceneByIndex(0);
 
       tribe.getPlayers().forEach(player => {

@@ -16,18 +16,18 @@ class NeedPlan extends PlanBase {
 
   constructor(need, summary, player) {
     super(`need_${need}`, summary, 0, [
-      new TaskLocate(need, this.storeLocation),
-      new TaskGoto(this.storage.need_scene),
-      new TaskAcquire(this.storage.need_item, this.storage.need_container),
-      new TaskUse(this.storage.need_item),
-      new TaskPlace(this.storage.need_item, this.storage.need_container),
+      new TaskLocate(need, player, this.storeLocation),
+      new TaskGoto(this.storage.need_scene, player),
+      new TaskAcquire(this.storage.need_item, this.storage.need_container, player),
+      new TaskUse(this.storage.need_item, player),
+      new TaskPlace(this.storage.need_item, this.storage.need_container, player),
     ]);
     this.need = need;
     this.player = player;
 
   }
 
-  storeLocation(location, item) {
+  storeLocation({location, item}) {
     this.storage.need_location = location;
     this.storage.need_item = item;
   }

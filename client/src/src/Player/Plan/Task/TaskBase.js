@@ -12,12 +12,16 @@ class TaskBase {
   summary = "";
   reqs = [];
 
-  constructor(name, summary, done, reqs, storage = () => { throw new Error("Plan Corruption: no storage location set for Task results!")}) {
+  constructor(name, summary, player, callback, reqs, storage = () => { throw new Error("Plan Corruption: no storage location set for Task results!")}) {
     this.name = name;
     this.summary = summary;
-    this.done = done;
+    this.callback = callback;
     this.reqs = reqs;
     this.storage = storage;
+  }
+
+  putInStorage(info) {
+    this.storage(info);
   }
 
 }
