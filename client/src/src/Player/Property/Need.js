@@ -1,10 +1,13 @@
-
+/**
+ * Defines the Need class.
+ *
+ */
 class Need {
   name = "Default Need";
   machine_name = "default_need";
   value = 100;
   change_per_tic = -1;
-  weight = 0;
+  weight = 0; // How heavily the matching plan for this need is considered. Generally goes from 0 - 100.
 
   constructor(name, machine_name, base_value = 100, change_per_tic = -1) {
     this.name = name;

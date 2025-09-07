@@ -100,6 +100,10 @@ class Stats {
     return this.skills[skill];
   }
 
+  getNeeds() {
+    return this.needs;
+  }
+
   getNeed(need_name) {
     return this.needs.find(need => need.getMachineName() === need_name);
   }

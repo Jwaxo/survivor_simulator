@@ -12,6 +12,10 @@ class PlanBase {
     this.tasks = tasks;
   }
 
+  getWeight() {
+    return this.weight;
+  }
+
   getTasks() {
     return this.tasks;
   }
@@ -41,7 +45,7 @@ class PlanBase {
   }
 
   reweighPlan() {
-
+    this.weight = this.need.reweighWeight();
   }
 
 }

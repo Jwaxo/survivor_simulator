@@ -3,6 +3,7 @@ import Origin from './Property/Origin';
 import Appearance from './Property/Appearance';
 import Relationship from './Property/Relationship';
 import Stats from './Property/Stats';
+import Library from './Property/Library';
 import PlayerInventory from './Property/PlayerInventory';
 import Trait from './Property/Trait';
 import Utilities from '../Utilities';
@@ -51,6 +52,7 @@ class Player {
   appearance = null;
   stats = null;
   inventory = null;
+  library = null;
 
   scene = null;
 
@@ -81,6 +83,7 @@ class Player {
       this.properties.age = props.age;
     }
     this.inventory = new PlayerInventory();
+    this.library = new Library();
   }
 
   save() {
@@ -93,6 +96,7 @@ class Player {
     const injuries = this.injuries;
     const effects = this.effects;
     const inventory = this.inventory.save();
+    const library = this.library.save();
 
     this.alliances.forEach(alliance => {
       alliances.push(alliance.save());
@@ -285,6 +289,10 @@ class Player {
 
   getNeed(need) {
     return this.stats.getNeed(need);
+  }
+
+  getNeeds() {
+    return this.stats.getNeeds();
   }
 
   getScene() {

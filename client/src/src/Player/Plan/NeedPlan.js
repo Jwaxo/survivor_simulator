@@ -7,7 +7,7 @@ import TaskPlace from './Task/PlaceTask';
 
 class NeedPlan extends PlanBase {
   player = null;
-  need = "water";
+  need = null;
   storage = {
     need_scene: null, // Scene storage.
     need_container: null, // Container storage.
@@ -15,8 +15,8 @@ class NeedPlan extends PlanBase {
   }
 
   constructor(need, summary, player) {
-    super(`need_${need}`, summary, 0, [
-      new TaskLocate(need, player, this.storeLocation),
+    super(`need_${need.getMachineName()}`, summary, 0, [
+      new TaskLocate(need.getMachineName(), player, this.storeLocation),
       new TaskGoto(this.storage.need_scene, player),
       new TaskAcquire(this.storage.need_item, this.storage.need_container, player),
       new TaskUse(this.storage.need_item, player),
@@ -24,7 +24,10 @@ class NeedPlan extends PlanBase {
     ]);
     this.need = need;
     this.player = player;
+  }
 
+  getNeed() {
+    return this.need;
   }
 
   storeLocation({location, item}) {
@@ -40,7 +43,6 @@ class NeedPlan extends PlanBase {
 
   reweighPlan(tics = 1) {
     this.weight = this.weight + (tics * this.player.getNeed(need));
-
   }
 }
 
