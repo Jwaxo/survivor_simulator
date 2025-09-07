@@ -21,6 +21,23 @@ class Inventory {
 
   storage = [];
 
+  addItem(item) {
+    this.storage.push(item);
+  }
+
+  check(machine_name) {
+    return (this.storage.some(i => i.machine_name === machine_name));
+  }
+
+  getItemByName(machine_name) {
+    if (this.check(machine_name)) {
+      return this.storage.findIndex(i => i.machine_name === machine_name);
+    }
+    else {
+      throw new Error("Tried to get an Inventory Item that doesn't exist!");
+    }
+  }
+
   save() {
     const storage = [];
     storage.forEach(item => {

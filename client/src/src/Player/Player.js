@@ -14,12 +14,10 @@ import PlayerCard from './Components/Playercard';
 /**
  * Defines the Player class.
  *
- * A tracker for individual Survivors in the game. NPCs are nothing more than
- * their Player class, while PCs are both Players and Users.
+ * A tracker for individual Survivors in the game. NPCs are ComputerPlayer class
+ * while Users are UserPlayer (and have isControlled set to True).
  *
  * @todo: fill out the constructor to actually let custom Players.
- * @todo: allow RandomlyGenerate to fill in missing info, instead of just
- * halting when age is defined.
  *
  * Required arguments:
  * - id (int)
@@ -63,6 +61,8 @@ class Player {
   injuries = [];
   effects = [];
 
+  plans = [];
+
   constructor(props) {
     if (!props || !props.id) {
       throw new Error("Trying to create Player without ID");
@@ -84,11 +84,13 @@ class Player {
     }
     this.inventory = new PlayerInventory();
     this.library = new Library();
+    this.stats = new Stats();
   }
 
   save() {
 
-    // @todo: as I implement these aspects of the game, I need to save them!
+    // @todo: as I implement these aspects of the game, I need to add save/load
+    // functions for them!
     const description = this.description;
     const traits = this.traits;
     const relationships = this.relationships;
@@ -199,6 +201,10 @@ class Player {
     return this.properties.name.nick ?? this.properties.name.first;
   }
 
+  isControlled() {
+    return this.properties.isControlled;
+  }
+
   setControlled() {
     this.properties.isControlled = true;
   }
@@ -295,6 +301,10 @@ class Player {
     return this.stats.getNeeds();
   }
 
+  modNeed(need_name, mod) {
+    this.stats.modNeed(need_name, mod);
+  }
+
   getScene() {
     return this.scene;
   }
@@ -305,6 +315,38 @@ class Player {
     }
     this.scene = scene;
     scene.addPlayer(this);
+  }
+
+  getInventory() {
+    return this.inventory;
+  }
+
+  addToInventory(item) {
+    this.inventory.addItem(item);
+  }
+
+  checkInventory(machine_name) {
+    return (this.inventory.check(machine_name));
+  }
+
+  getFromInventory(machine_name) {
+    return (this.inventory.getItemByName(machine_name))
+  }
+
+  getLibrary() {
+    return this.library;
+  }
+
+  addKnowledge(knowledge) {
+    this.library.addKnowledge(knowledge);
+  }
+
+  getKnowledge() {
+    return this.library.getKnowledge();
+  }
+
+  processTic(tics = 1) {
+    this.getNeeds().forEach(need => need.processTic(tics));
   }
 
   toPlayerCard() {

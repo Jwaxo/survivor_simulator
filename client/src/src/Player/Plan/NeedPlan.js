@@ -1,9 +1,18 @@
 import PlanBase from './PlanBase';
-import TaskLocate from './Task/LocateTask';
-import TaskGoto from './Task/GotoTask';
-import TaskAcquire from './Task/AcquireTask';
-import TaskUse from './Task/UseTask';
-import TaskPlace from './Task/PlaceTask';
+import LocateTask from './Task/LocateTask';
+import GotoTask from './Task/GotoTask';
+import AcquireTask from './Task/AcquireTask';
+import UseTask from './Task/UseTask';
+import PlaceTask from './Task/PlaceTask';
+
+/**
+ * A Plan that should be straightforward to accomplish and repeat endlessly.
+ *
+ * Properties:
+ * - machine_name (string)
+ * - summary (string)
+ * - player (Player)
+ */
 
 class NeedPlan extends PlanBase {
   player = null;
@@ -14,13 +23,14 @@ class NeedPlan extends PlanBase {
     need_item: null, // ItemBasestorage.
   }
 
-  constructor(need, summary, player) {
-    super(`need_${need.getMachineName()}`, summary, 0, [
-      new TaskLocate(need.getMachineName(), player, this.storeLocation),
-      new TaskGoto(this.storage.need_scene, player),
-      new TaskAcquire(this.storage.need_item, this.storage.need_container, player),
-      new TaskUse(this.storage.need_item, player),
-      new TaskPlace(this.storage.need_item, this.storage.need_container, player),
+  constructor(need, player) {
+    super(`need_${need.getMachineName()}`, need.getSummary(), 0);
+    this.addTasks([
+      new LocateTask(need.getMachineName(), player, this.storeLocation),
+      new GotoTask(this.storage.need_scene, player),
+      new AcquireTask(this.storage.need_item, this.storage.need_container, player),
+      new UseTask(this.storage.need_item, player),
+      new PlaceTask(this.storage.need_item, this.storage.need_container, player),
     ]);
     this.need = need;
     this.player = player;
@@ -42,7 +52,7 @@ class NeedPlan extends PlanBase {
   }
 
   reweighPlan(tics = 1) {
-    this.weight = this.weight + (tics * this.player.getNeed(need));
+    this.weight = this.weight + (tics * this.player.getNeed(this.need));
   }
 }
 

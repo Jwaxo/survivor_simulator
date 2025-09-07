@@ -33,6 +33,9 @@ function PlayerCard({ player }) {
               <li key="traits">{ Utilities.arrayToString(player.traits) }</li>
               <li key="alliances">{ Utilities.arrayToList(player.alliances) }</li>
               <li key="relationships">{ Utilities.arrayToList(player.relationships) }</li>
+              { player.hasActivePlan() ? (
+                <li key="active_plan">{ player.getActivePlan().getSummary() }</li>
+              ) : ''}
             </>
           ) : '' }
         </ul>

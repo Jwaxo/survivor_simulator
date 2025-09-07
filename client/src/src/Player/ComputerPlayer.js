@@ -5,11 +5,8 @@ import Utilities from '../Utilities';
 /**
  * Defines the ComputerPlayer class.
  *
- * A tracker for NPC Survivors in the game.
- *
- * @todo: fill out the constructor to actually let custom Players.
- * @todo: allow RandomlyGenerate to fill in missing info, instead of just
- * halting when age is defined.
+ * A tracker for NPC Survivors in the game. A ComputerPlayer's main action
+ * occurs at the start of each Tic, in the "process tic" function.
  *
  * Required arguments:
  * - id (int)
@@ -23,12 +20,13 @@ import Utilities from '../Utilities';
 class ComputerPlayer extends Player {
 
   need_plans = [];
+  active_plan = null;
 
   constructor(props) {
     super(props);
 
     this.getNeeds().forEach(need => {
-      this.addPlan(new NeedPlan(need.getMachineName(), ))
+      this.addPlan(new NeedPlan(need, this));
     });
   }
 
@@ -48,6 +46,18 @@ class ComputerPlayer extends Player {
     });
   }
 
+  hasActivePlan() {
+    return this.active_plan !== null;
+  }
+
+  getActivePlan() {
+    return this.active_plan;
+  }
+
+  // Decide what to do! This should automatically run when:
+  // - A Player has no current Plans.
+  // - A Player completes their previous Plan.
+  // - A Player's Plan is interrupted or they gain a new Plan.
   pickPlan() {
     this.reweighNeeds();
 
@@ -58,13 +68,22 @@ class ComputerPlayer extends Player {
     const pick_array = [];
 
     pickable_plans.forEach(plan => {
-      for (i = 0;i < plan.getWeight();i++) {
+      for (let i = 0;i < plan.getWeight();i++) {
         pick_array.push(plan);
       }
     })
 
-    return Utilities.pickFromArray(pick_array);
+    this.active_plan = Utilities.pickFromArray(pick_array);
+  }
 
+  processTic(tics = 1) {
+    // Where the magic happens.
+    super.processTic(tics);
+    console.log(`Processing ${tics} tics for ${this.getNick()}`);
+    if (!this.hasActivePlan()) {
+      this.pickPlan();
+    }
+    this.getActivePlan().continueTask();
   }
 
 }

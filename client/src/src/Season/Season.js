@@ -3,6 +3,9 @@ import Tribe from '../Tribe/Tribe';
 import Utilities from '../Utilities';
 import Config from '../../Config';
 import Scene from '../Scene/Scene';
+import KnowledgeBase from '../Player/Knowledge/KnowledgeBase';
+import GetWaterActivity from '../Scene/Activities/GetWaterActivity';
+import ComputerPlayer from '../Player/ComputerPlayer';
 
 /**
  * Defines the Season class.
@@ -156,6 +159,8 @@ class Season {
   advanceTime(tics = 1) {
     this.timestamp += tics * this.timePerTic;
     this.updateTimestring();
+
+    this.tribes.forEach(tribe => tribe.processTic(tics));
   }
 
   updateTimestring() {
@@ -312,10 +317,22 @@ class Season {
       tribeCamp.addConnection(tribeWater);
       tribeWater.addConnection(tribeCamp);
 
+      const getWaterName = `get_water_${tribe.getName()}`;
+
+      tribeWater.addActivity(new GetWaterActivity(getWaterName, "Fill Canteen", "Fills your canteen with water"));
+
       this.setActiveSceneByIndex(0);
 
       tribe.getPlayers().forEach(player => {
-        player.setScene(tribeBeach);
+        if (!player.isControlled()) {
+          player.setScene(tribeBeach);
+          player.addKnowledge(new KnowledgeBase(["water"], {
+            "need_location": tribeWater,
+            "need_activity": getWaterName,
+          }, () => {
+            return `location of water for ${tribe.getName()}`;
+          } ));
+        }
       });
     });
   }
@@ -346,13 +363,13 @@ class Season {
     // If there are no desired props, we randomly generate them.
     if (props === null) {
       console.log(`Randomly generating new player with ID ${id}`);
-      new_player = new Player({ id: id});
+      new_player = new ComputerPlayer({ id: id});
       new_player.randomlyGenerate();
     }
     else {
       props.id = id; // Just in case props didn't have it.
       console.log(`Generating new player with id ${id} from props ${props}`);
-      new_player = new Player(props);
+      new_player = new ComputerPlayer(props);
     }
 
     if (!new_player.getName()) {

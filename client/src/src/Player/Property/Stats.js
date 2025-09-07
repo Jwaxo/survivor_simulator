@@ -44,13 +44,12 @@ class Stats {
   // Most needs drain (or fill) automatically, but naturally some needs may have
   // their values changed by external forces.
   needs = [
-    new Need("Food", "food", 100, -1 * (100 / Utilities.ticPerDay())), // Empty stomach every 24 hours.
-    new Need("Water", "water", 100, -1 * (8 / Utilities.ticPerDay())), // Empty water every ~2 hours.
-    new Need("Happiness", "happy", 100, -1 * (200 / Utilities.ticPerDay())), // Empty happy every 48 hours.
-    new Need("Energy", "energy", 100, -1 * (50 / Utilities.ticPerDay())), // Empty energy every 12 hours.
-    new Need("Happiness", "happy", 100, -1 * (200 / Utilities.ticPerDay())), // Empty happy every 48 hours.
-    new Need("Health", "health", 100, 0),
-    // new Need("Bladder", "bladder", 0, 8 / Utilities.ticPerDay()), // Full bladder every 2 hours.
+    new Need("Food", "food", 100, -1 * (100 / Utilities.ticPerDay()), "eat something"), // Empty stomach every 24 hours.
+    new Need("Water", "water", 100, -1 * (8 / Utilities.ticPerDay()), "drink something"), // Empty water every ~2 hours.
+    new Need("Happiness", "happy", 100, -1 * (200 / Utilities.ticPerDay()), "feel happier"), // Empty happy every 48 hours.
+    new Need("Energy", "energy", 100, -1 * (50 / Utilities.ticPerDay()), "get some sleep"), // Empty energy every 12 hours.
+    new Need("Health", "health", 100, 0, "heal"),
+    // new Need("Bladder", "bladder", 0, 8 / Utilities.ticPerDay(), "empty bladder"), // Full bladder every 2 hours.
   ];
 
   constructor(props) {
@@ -110,6 +109,12 @@ class Stats {
 
   modNeed(need_name, mod) {
     return this.getNeed(need_name).modValue(mod);
+  }
+
+  processTic(tics = 1) {
+    for (let i = 0;i < this.needs.length;i++) {
+      this.needs[i].processTic(tics);
+    }
   }
 
   randomlyGenerate() {

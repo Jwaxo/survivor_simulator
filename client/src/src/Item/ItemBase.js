@@ -2,11 +2,17 @@
 class ItemBase {
   type_properties = {};
   properties = {
-    id: 0,
-    original: '',
+    original: '', // I don't remember why I added this property.
     name: '',
+    machine_name: '',
     type: '',
   };
+
+  constructor(machine_name, name, type) {
+    this.properties.name = name;
+    this.properties.machine_name = machine_name;
+    this.properties.type = type;
+  }
 
   getId() {
     return this.properties.id;
@@ -32,6 +38,10 @@ class ItemBase {
     else {
       throw new Error("Tried to get concealable on an item type that does not have a concealable type property.");
     }
+  }
+
+  use(playerTarget) {
+
   }
 
   save() {

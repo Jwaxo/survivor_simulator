@@ -125,6 +125,10 @@ class Tribe {
     this.properties.color = color;
   }
 
+  processTic(tics = 1) {
+    this.players.forEach(player => player.processTic(tics));
+  }
+
   toPlayerList() {
     return (
       <ul>

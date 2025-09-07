@@ -8,12 +8,14 @@ class Need {
   value = 100;
   change_per_tic = -1;
   weight = 0; // How heavily the matching plan for this need is considered. Generally goes from 0 - 100.
+  summary = "";
 
-  constructor(name, machine_name, base_value = 100, change_per_tic = -1) {
+  constructor(name, machine_name, base_value = 100, change_per_tic = -1, summary = "This Need has not yet implemented a Summary.") {
     this.name = name;
     this.machine_name = machine_name;
     this.value = base_value;
     this.change_per_tic = change_per_tic;
+    this.summary = summary;
   }
 
   getName() {
@@ -22,6 +24,10 @@ class Need {
 
   getMachineName() {
     return this.machine_name;
+  }
+
+  getSummary() {
+    return this.summary;
   }
 
   getValue() {
@@ -38,7 +44,7 @@ class Need {
     return this.value;
   }
 
-  reweighValue(tics = 1) {
+  processTic(tics = 1) {
     this.modValue(tics * this.change_per_tic);
     this.reweighWeight();
 

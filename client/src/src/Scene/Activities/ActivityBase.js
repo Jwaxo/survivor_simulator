@@ -12,18 +12,28 @@ import React, { Component } from 'react';
  * Optional arguments:
  */
 
-class Activity {
+class ActivityBase {
 
   properties = {
-    id: null,
+    machine_name: "activity",
     name: "Take part in Activity",
-    description: "",
+    summary: "",
   }
   requirements = []; // If these reqs are not met, the Activity is greyed out.
   hiddenRequirements = []; // If these reqs are not met, the Activity is hidden.
 
   playerList = [];
 
+  constructor(machine_name, name, summary = "This Activity has not yet implemented a Summary.") {
+    this.machine_name = machine_name;
+    this.name = name;
+    this.summary = summary;
+  }
+
+  useActivity(player) {
+    // Expected to be overridden when this Activity is defined.
+  }
+
 }
 
-export default Activity;
+export default ActivityBase;

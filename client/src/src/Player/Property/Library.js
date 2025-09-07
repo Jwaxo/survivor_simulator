@@ -1,16 +1,16 @@
 import KnowledgeBase from "../Knowledge/KnowledgeBase";
 
 /**
- * Defines the PlayerInventory class.
+ * Defines the Library class.
  *
- * Tracks inventory that a Player has on their person and equipped in their
- * Slots.
+ * Tracks the Knowledge that a Player has accumulated.
  *
- * @todo: test and use this class.
- *
- * Required arguments:
- *
- * Optional arguments:
+ * This class has two properties:
+ * - bank: a database of all pieces of Knowledge this Player has.
+ * - keys: an indexed database of those Knowledge items, sorted based off of
+ *   tags for easy retrieval. For more information see the KnowledgeBase class.
+ *   Each "key" is an array of Knowledge. Each Knowledge should track its index
+ *   in the Bank and in each Keys array in its StorageId properties.
  */
 
 class Library {
@@ -35,6 +35,7 @@ class Library {
   addKnowledge(knowledge) {
     // Add the knowledge to our general bank.
     const storage_id = this.bank.push(knowledge);
+    knowledge.setStorageId(storage_id);
     // Also add it to the banks of each key.
     knowledge.getTags().forEach(tag => {
       const tag_name = tag.getName();
@@ -57,6 +58,23 @@ class Library {
     knowledge.getTags().forEach(tag => {
       this.keys.splice(tag.getStorageId(),1);
     })
+  }
+
+  getKnowledge() {
+    // Mostly used for debugging;
+    return this.bank;
+  }
+
+  getKnowledgeByIndex(index) {
+    // You better know what you're doing because you're not likely to need to
+    // get this.
+    return this.bank[index];
+  }
+
+  getKnowledgeArrayByTag(tag) {
+    // Note: returns an array! Do additional processing to determine which piece
+    // of Knowledge is relevant.
+    return this.keys[tag];
   }
 }
 

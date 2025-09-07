@@ -1,7 +1,21 @@
+/**
+ * Defines the KnowledgeBase class.
+ *
+ * Tracks information a Player may have received or learned on their own.
+ *
+ * Properties:
+ * -
+ *
+ * Required arguments:
+ *
+ * Optional arguments:
+ */
+
 class KnowledgeBase {
-  tags = []; // Array of strings that classify this information.
   storage = {}; // An arbitrary collection of information. "{Greg} {has a/an} {idol}".
+  tags = []; // Array of strings that classify this information. "player", "player.Greg", "advantage", "advantage.idol" for the above information.
   summary = () => {}; // A function to return a string describing the knowledge.
+  storage_id = null;
 
   constructor(tags = [], storage = {}, summary = () => {return "This Knowledge has not implemented a summary function."}) {
     tags.forEach(tag => this.addTag(tag));
@@ -15,6 +29,10 @@ class KnowledgeBase {
 
   addTag(name) {
     this.tags.push(new KnowledgeTag(name));
+  }
+
+  setStorageId(id) {
+    this.storage_id = id;
   }
 
   setTagStorageId(name, id) {
