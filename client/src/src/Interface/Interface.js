@@ -94,6 +94,7 @@ export default function Interface({season}) {
         'Advance Time', () => {
           addToLog("Time passes...");
           advanceTime();
+          console.log(`Now on tic ${season.timestamp / season.timePerTic}`)
         }
       ),
       new Action(
@@ -101,7 +102,9 @@ export default function Interface({season}) {
         () => {
           addMultipleToLog(['Time passes a lot...', 'For real...']);
           advanceTime();
+          console.log(`Now on tic ${season.timestamp / season.timePerTic}`)
           advanceTime();
+          console.log(`Now on tic ${season.timestamp / season.timePerTic}`)
         }
       ),
       new Action(

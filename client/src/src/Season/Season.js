@@ -334,6 +334,15 @@ class Season {
           } ));
         }
       });
+
+      // @todo: Okay! NPCs are picking plans to follow and presumably trying to
+      // complete them, which is happening without errors, so something is going
+      // wrong. All I've defined is how to do the "Locate" task, and only defined
+      // where water is. But the Water NPCs should be locating it! Which is great.
+      // Next step is the "move" task, which should be obvious when it works.
+      // We need to build a map of connections, then loop from one end, checking all connections, and continuing on
+      // until the goal is reached, then analyzing which path is most efficient, and taking that path.
+      // Pretty basic path-finding and shouldn't be too costly since our maps won't be very large.
     });
   }
 
@@ -363,8 +372,7 @@ class Season {
     // If there are no desired props, we randomly generate them.
     if (props === null) {
       console.log(`Randomly generating new player with ID ${id}`);
-      new_player = new ComputerPlayer({ id: id});
-      new_player.randomlyGenerate();
+      new_player = new ComputerPlayer({ id: id}, true, this.pickPlayerName);
     }
     else {
       props.id = id; // Just in case props didn't have it.

@@ -378,6 +378,10 @@ class Player {
 
   }
 
+  debugMessage(message) {
+    console.log(`DEBUG ${this.getNick()}: ` + message);
+  }
+
 }
 
 export default Player;

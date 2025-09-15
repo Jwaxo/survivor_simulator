@@ -1,4 +1,4 @@
-import NeedPlan from './Plan/NeedPlan';
+import CheckNeedPlan from './Plan/CheckNeedPlan';
 import Player from './Player';
 import Utilities from '../Utilities';
 
@@ -22,11 +22,20 @@ class ComputerPlayer extends Player {
   need_plans = [];
   active_plan = null;
 
-  constructor(props) {
+  constructor(props, random, nameFunction) {
     super(props);
 
+    // Creates a CheckNeedPlan for each need that never ends.
+    // Setting a base threshold of "50" for each need just for testing.
+    // @todo: make each need define a threshold which varies Player-to-Player.
+
+    if (random === true) {
+      this.randomlyGenerate();
+      this.setName(...nameFunction(this.getGender()));
+    }
+
     this.getNeeds().forEach(need => {
-      this.addPlan(new NeedPlan(need, this));
+      this.addNeedPlan(new CheckNeedPlan(need, this));
     });
   }
 
@@ -42,7 +51,7 @@ class ComputerPlayer extends Player {
 
   reweighNeeds() {
     this.need_plans.forEach(plan => {
-      plan.reweightWeight();
+      plan.reweighPlan();
     });
   }
 
@@ -52,6 +61,10 @@ class ComputerPlayer extends Player {
 
   getActivePlan() {
     return this.active_plan;
+  }
+
+  setActivePlan(plan) {
+    this.active_plan = plan;
   }
 
   // Decide what to do! This should automatically run when:
@@ -73,17 +86,38 @@ class ComputerPlayer extends Player {
       }
     })
 
-    this.active_plan = Utilities.pickFromArray(pick_array);
+    this.setActivePlan(Utilities.pickFromArray(pick_array));
+    this.debugMessage(`Picked new plan: ${this.getActivePlan().getName()}`);
   }
 
+  // Where the magic happens.
   processTic(tics = 1) {
-    // Where the magic happens.
     super.processTic(tics);
-    console.log(`Processing ${tics} tics for ${this.getNick()}`);
     if (!this.hasActivePlan()) {
+      // this.debugMessage(`does not have an active plan! Getting a new one.`);
       this.pickPlan();
     }
-    this.getActivePlan().continueTask();
+    const {complete = false, follow_ups = []} = this.getActivePlan().continueTask();
+    if (complete === true) {
+      // If the completed plan isn't a Need, remove it from our list of plans.
+      // It's done!
+      if (this.plans.includes(this.getActivePlan())) {
+        this.plans.splice(this.plans.indexOf(this.getActivePlan()), 1);
+      }
+      // If any follow-ups were returned, add them to the Plan list and start
+      // doing the first one next tic.
+      // Needs don't need to set follow_ups, since they technically never expire
+      if (follow_ups.length > 0) {
+        follow_ups.forEach(plan => {
+          this.addPlan(plan);
+        });
+        this.setActivePlan(follow_ups[0]);
+      }
+      // Otherwise we're a free agent and will run pickPlan() next tic.
+      else {
+        this.setActivePlan(null);
+      }
+    }
   }
 
 }

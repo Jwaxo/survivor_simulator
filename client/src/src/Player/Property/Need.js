@@ -8,13 +8,15 @@ class Need {
   value = 100;
   change_per_tic = -1;
   weight = 0; // How heavily the matching plan for this need is considered. Generally goes from 0 - 100.
+  plan_threshold = 50; // When the value is below this threshold NPCs create a Plan to handle it.
   summary = "";
 
-  constructor(name, machine_name, base_value = 100, change_per_tic = -1, summary = "This Need has not yet implemented a Summary.") {
+  constructor(name, machine_name, base_value = 100, change_per_tic = -1, plan_threshold = 50, summary = "This Need has not yet implemented a Summary.") {
     this.name = name;
     this.machine_name = machine_name;
     this.value = base_value;
     this.change_per_tic = change_per_tic;
+    this.plan_threshold = plan_threshold;
     this.summary = summary;
   }
 
@@ -51,6 +53,10 @@ class Need {
     return this.value;
   }
 
+  getThreshold() {
+    return this.plan_threshold;
+  }
+
   getWeight() {
     return this.weight;
   }
@@ -62,7 +68,7 @@ class Need {
   render() {
     return (
       <>
-        <strong>{ this.getName() }</strong>: { this.getValue() }
+        <strong>{ this.getName() }</strong>: { Math.round(this.getValue()) }
       </>
     );
   }

@@ -14,14 +14,21 @@ class PlanBase {
   machine_name = 'Default Plan';
   tasks = [];
   completed_tasks = [];
+  follow_ups = [];
   summary = '';
+  player = null;
   weight = 10;
 
-  constructor(machine_name, summary, initial_weight, tasks = []) {
+  constructor(machine_name, summary, player, initial_weight, tasks = []) {
     this.machine_name = machine_name;
     this.summary = summary;
+    this.player = player;
     this.weight = initial_weight ? initial_weight : this.weight;
     this.tasks = tasks;
+  }
+
+  getName() {
+    return this.machine_name;
   }
 
   getSummary() {
@@ -53,24 +60,36 @@ class PlanBase {
   }
 
   continueTask() {
+    let done = {};
     if (this.tasks[0]) {
-      this.tasks[0].callback();
+      if (this.tasks[0].execute() === true) {
+        done = this.completeTask();
+      }
     }
     else {
-      this.completePlan();
+      done = this.completePlan();
     }
+
+    return done;
   }
 
   completeTask(index = 0) {
+    let done = {};
     if (this.tasks[index]) {
-      this.completed_tasks.push(this.tasks.splice(index, 1));
+      this.completed_tasks.push(this.tasks.splice(index, 1)[0]);
     }
     else {
       throw new Error("Plan Corruption: Attempting to complete nonexistant task!");
     }
     if (this.tasks.length === 0) {
-      this.completePlan();
+      done = this.completePlan();
     }
+    else {
+      console.log('still tasks remaining!');
+      console.log(this.tasks);
+    }
+
+    return done;
   }
 
   startPlan() {
@@ -78,11 +97,17 @@ class PlanBase {
   }
 
   completePlan() {
-
+    let done = {
+      complete: true,
+    };
+    if (this.follow_ups.length > 0) {
+      done.follow_ups = this.follow_ups;
+    }
+    return done;
   }
 
   reweighPlan() {
-    this.weight = this.need.reweighWeight();
+    this.weight = this.weight;
   }
 
 }
