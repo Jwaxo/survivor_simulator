@@ -68,6 +68,17 @@ the final goal.
 ## How to Run
 It should be very simple!
 1. Make sure you have NPM 18 installed.
-1. Navigate to this directory.
-1. Run `npm run`.
+1. Navigate to the `client` directory.
+1. If you have not before, or have recently pulled a new version, run `npm install`
+to ensure you've got all the right Node modules installed.
+1. Run `npm start`.
 1. If a browser window doesn't automatically open, navigate to http://localhost:3000
+
+## How to Build
+If you made changes to any of the SCSS files, you'll need to recompile the CSS.
+This is pretty straightforward.
+1. Navigate to the `client` directory.
+1. If you have not before, or have recently pulled a new version, run `npm install`
+to ensure you've got all the right Node modules installed.
+1. Run `gulp dev` to start the watch process and recompile.
+1. If you're done, use Ctrl+C to exit out of gulp.
