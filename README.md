@@ -38,30 +38,30 @@ This is heavily work-in-progress and (assuming this README is up-to-date) not
 much for an individual user to do yet.
 
 ### Roadmap
-0.01: You are here. Players can be created and sorted into Tribes, and a basic
+* 0.01: You are here. Players can be created and sorted into Tribes, and a basic
 UI exists.
-0.02: Simulated tribe life is complete and NPCs are capable of gathering food,
+* 0.02: Simulated tribe life is complete and NPCs are capable of gathering food,
 making fire, and building a camp, as well as interacting with each other to
 build (or break) bonds.
-0.1: Tribes can compete in Challenges, using Skill Checks to beat other Tribes
+* 0.1: Tribes can compete in Challenges, using Skill Checks to beat other Tribes
 in various set goals and obstacles.
-0.11: Developers can easily create Challenges by using a Challenge Builder UI.
-0.12: Tribes can gain rewards that increases the complexity of Tribal life.
-0.2: Tribes can now participate in Tribal Council, where one Player is voted off.
-0.21: Tribal Council is easier to set up with a Jeff Builder UI.
-0.22: Players can be removed from the game via Medivac when their health OR
+* 0.11: Developers can easily create Challenges by using a Challenge Builder UI.
+* 0.12: Tribes can gain rewards that increases the complexity of Tribal life.
+* 0.2: Tribes can now participate in Tribal Council, where one Player is voted off.
+* 0.21: Tribal Council is easier to set up with a Jeff Builder UI.
+* 0.22: Players can be removed from the game via Medivac when their health OR
 morale gets too low.
-0.3: Tribes can merge, and an extremely simplified Season can be played out
+* 0.3: Tribes can merge, and an extremely simplified Season can be played out
 (with no Jury and Final Tribal Council gimmick).
-0.31: Any weirdness with individual Challenges gets hammered out.
-0.32: Jury gets built after a certain point (configured per-Season) and gains
+* 0.31: Any weirdness with individual Challenges gets hammered out.
+* 0.32: Jury gets built after a certain point (configured per-Season) and gains
 Knowledge during Tribal Council.
-0.4: Final Tribal Council can be ran, with Jury members asking questions that
+* 0.4: Final Tribal Council can be ran, with Jury members asking questions that
 can affect the final vote.
-0.5: A human Player can replace/take over any NPC within the game, making
+* 0.5: A human Player can replace/take over any NPC within the game, making
 choices and clicking the "roll dice" button for skill checks. Ideally this has
 been subtly getting support along every previous step.
-1.0: A human Player can be created at game start and an entire Season of
+* 1.0: A human Player can be created at game start and an entire Season of
 Survivor can be played through, with NPCs acting as allies and obstructions to
 the final goal.
 
