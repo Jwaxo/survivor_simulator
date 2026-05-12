@@ -20,9 +20,9 @@ class CheckNeedPlan extends PlanBase {
   }
 
   constructor(need, player) {
-    super(`checkneed_${need.getMachineName()}`, `check on my ${need}`, player);
+    super(`checkneed_${need.getName()}`, `check on my ${need.getName()}`, player);
     this.addTasks([
-      new StatCheckTask(need.getMachineName(), 'need', player, player, this.storage),
+      new StatCheckTask(need.getName(), 'need', player, player, this.storage),
     ]);
     this.storage.action_threshold = need.getThreshold();
     this.need = need;
@@ -35,7 +35,7 @@ class CheckNeedPlan extends PlanBase {
   continueTask() {
     const done = super.continueTask();
 
-    this.player.debugMessage(`checked ${this.need.getMachineName()} and received ${this.storage.current_value}`);
+    this.player.debugMessage(`checked ${this.need.getName()} and received ${this.storage.current_value}`);
 
     return done;
   }
@@ -54,7 +54,7 @@ class CheckNeedPlan extends PlanBase {
     this.complete_tasks = [];
 
     if (this.storage.current_value < this.storage.action_threshold) {
-      this.player.debugMessage(`needs higher ${this.need.getMachineName()}, creating GetPlan.`);
+      this.player.debugMessage(`needs higher ${this.need.getName()}, creating GetPlan.`);
       this.player.addPlan(new GetPlan(this.need, this.player));
     }
 

@@ -346,7 +346,10 @@ class Player {
   }
 
   processTic(tics = 1) {
-    this.getNeeds().forEach(need => need.processTic(tics));
+    const needs = this.getNeeds();
+    for (let need in needs) {
+      needs[need].processTic(tics);
+    };
   }
 
   toPlayerCard() {

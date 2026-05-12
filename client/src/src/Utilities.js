@@ -25,6 +25,16 @@ const Utilities = {
     )
   },
 
+  arrayRenderToList: properties => {
+    return (
+      <ul>
+        { properties.map((property, index) => (
+          <li key={ index }>{ property.render() }</li>
+        ))}
+      </ul>
+    )
+  },
+
   arrayToLabelledList: properties => {
     return (
       <ul>
@@ -39,6 +49,19 @@ const Utilities = {
     const items = [];
     for (const property in object) {
       items.push(<li key={ property }><strong>{ property }</strong>: { object[property] }</li>);
+    }
+
+    return (
+      <ul>
+        { items }
+      </ul>
+    )
+  },
+
+  objectRenderToList: object => {
+    const items = [];
+    for (const property in object) {
+      items.push(<li key={ property }>{ object[property].render() }</li>);
     }
 
     return (
@@ -170,6 +193,19 @@ const Utilities = {
 
   rollD20: (mod = 0) => {
     return Math.floor(Math.random() * 20) + mod;
+  },
+
+  /**
+   * Simple function to determine an ability score modifier, taken from dnd5e.info
+   * 
+   * Input 1, return -5.
+   * Input 10-11, return 0.
+   * Inpu 15, return 2, etc.
+   * @param {int} value 
+   * @returns {int}
+   */
+  getD20Mod: (value) => {
+    return Math.floor((value - 10) / 2);
   },
 
   pickFromRange: (length = 100, min = 0) => {

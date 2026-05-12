@@ -24,6 +24,7 @@ class ComputerPlayer extends Player {
 
   constructor(props, random, nameFunction) {
     super(props);
+    const needs = this.getNeeds();
 
     // Creates a CheckNeedPlan for each need that never ends.
     // Setting a base threshold of "50" for each need just for testing.
@@ -34,9 +35,9 @@ class ComputerPlayer extends Player {
       this.setName(...nameFunction(this.getGender()));
     }
 
-    this.getNeeds().forEach(need => {
-      this.addNeedPlan(new CheckNeedPlan(need, this));
-    });
+    for (let need in needs) {
+      this.addNeedPlan(new CheckNeedPlan(needs[need], this));
+    };
   }
 
   addNeedPlan(plan) {
