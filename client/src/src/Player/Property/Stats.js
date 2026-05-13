@@ -192,7 +192,7 @@ class Stats {
 
   render() {
     return (
-      <ul>
+      <ul className="stats">
         <li key="base"><strong>Base Stats:</strong>
           { this.renderBaseStats() }
         </li>

@@ -23,5 +23,11 @@
     li {
       white-space: nowrap;
     }
+    ul.stats {
+      ul {
+        margin: 0 0 0 15px;
+      }
+      margin-bottom: 15px;
+    }
   }
 }

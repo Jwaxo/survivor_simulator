@@ -273,6 +273,12 @@ body {
 .player.player-card ul li {
   white-space: nowrap;
 }
+.player.player-card ul ul.stats {
+  margin-bottom: 15px;
+}
+.player.player-card ul ul.stats ul {
+  margin: 0 0 0 15px;
+}
 
 /**
  * Styles for Tribe components.

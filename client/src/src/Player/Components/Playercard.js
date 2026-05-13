@@ -29,12 +29,12 @@ function PlayerCard({ player }) {
           ) : '' }
           { Config.debug === true ? (
             <>
-              <li key="stats">{ player.stats.render() }</li>
-              <li key="traits">{ Utilities.arrayToString(player.traits) }</li>
+              <li key="stats" className="stats">{ player.stats.render() }</li>
+              <li key="traits">{ Utilities.arrayToList(player.traits) }</li>
               <li key="alliances">{ Utilities.arrayToList(player.alliances) }</li>
               <li key="relationships">{ Utilities.arrayToList(player.relationships) }</li>
               { player.hasActivePlan() ? (
-                <li key="active_plan">{ player.getActivePlan().getSummary() }</li>
+                <li key="active_plan">Plan: { player.getActivePlan().getSummary() }</li>
               ) : ''}
             </>
           ) : '' }
