@@ -29,6 +29,7 @@ function PlayerCard({ player }) {
           ) : '' }
           { Config.debug === true ? (
             <>
+              <li key="inventory" className="inventory">{ player.getInventory().render() }</li>
               <li key="stats" className="stats">{ player.stats.render() }</li>
               <li key="traits">{ Utilities.arrayToList(player.traits) }</li>
               <li key="alliances">{ Utilities.arrayToList(player.alliances) }</li>

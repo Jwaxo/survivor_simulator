@@ -61,6 +61,10 @@ class Need {
     return this.value;
   }
 
+  getValueClean() {
+    return Math.floor(this.value);
+  }
+
   baseMod(base) {
     const mod = Utilities.getD20Mod(base[this.attribute]);
     // Thresholds increase/decrease with a flat D20mod based on the governing attribute.

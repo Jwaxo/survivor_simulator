@@ -15,8 +15,8 @@ import React, { Component } from 'react';
 class ActivityBase {
 
   properties = {
-    machine_name: "activity",
-    name: "Take part in Activity",
+    name: "activity",
+    label: "Take part in Activity",
     summary: "",
   }
   requirements = []; // If these reqs are not met, the Activity is greyed out.
@@ -24,10 +24,22 @@ class ActivityBase {
 
   playerList = [];
 
-  constructor(machine_name, name, summary = "This Activity has not yet implemented a Summary.") {
-    this.machine_name = machine_name;
+  constructor(name, label, summary = "This Activity has not yet implemented a Summary.") {
     this.name = name;
+    this.label = label;
     this.summary = summary;
+  }
+
+  getName() {
+    return this.name;
+  }
+
+  getLabel() {
+    return this.label;
+  }
+
+  getSummary() {
+    return this.summary;
   }
 
   useActivity(player) {

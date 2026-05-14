@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-import Utilities from '../Utilities';
+import Utilities from '../../Utilities';
 
 export default function LogItem({active, day, time, children}) {
   const [message, setMessage] = useState('');

@@ -1,5 +1,5 @@
 import React from 'react';
-import Utilities from '../Utilities';
+import Utilities from '../../Utilities';
 
 function ActionBox({categories, prompt, addAction, frozen}) {
 

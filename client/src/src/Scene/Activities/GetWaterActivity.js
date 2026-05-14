@@ -6,7 +6,7 @@ class GetWaterActivity extends ActivityBase {
   useActivity(player) {
     super.useActivity(player);
 
-    player.addItem(new FoodItem("water", "Full Canteen", "water", 100));
+    player.addToInventory(new FoodItem("water", "Full Canteen", "water", 100));
   }
 
 }

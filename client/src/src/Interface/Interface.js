@@ -1,10 +1,10 @@
 import { useState, useEffect, useRef } from 'react';
 import { useCookies } from 'react-cookie';
-import ActionBox from './Actionbox';
-import EnviroBox from './Envirobox';
-import InfoBox from './Infobox';
-import PlayerBox from './Playerbox';
-import StatusBox from './Statusbox';
+import ActionBox from './Components/Actionbox';
+import EnviroBox from './Components/Envirobox';
+import InfoBox from './Components/Infobox';
+import PlayerBox from './Components/Playerbox';
+import StatusBox from './Components/Statusbox';
 
 import Utilities from '../Utilities';
 import Config from '../../Config';
@@ -46,6 +46,7 @@ export default function Interface({season}) {
   // stored in stateRef so that the callbacks see their ACTUAL values instead of
   // the values at the time of the callback's creation.
   const stateRef = useRef();
+  stateRef.controlledPlayer = controlledPlayer;
   stateRef.log = log;
   stateRef.actionCategories = actionCategories;
   stateRef.time = time;
@@ -77,11 +78,23 @@ export default function Interface({season}) {
       return new Action(
         connected.scene.toLinkText(),
         () => {
+          stateRef.controlledPlayer.setScene(connected.scene);
           season.setActiveScene(connected.scene);
           loadActiveScene(connected.scene);
         }
       )
     }));
+
+    if (scene.activities.length > 0 ) {
+      addActions('Activities here:', scene.getActivities().map(activity => {
+        return new Action(
+          activity.getLabel(),
+          () => {
+            activity.useActivity(stateRef.controlledPlayer);
+          }
+        )
+      }));
+    }
 
     if (Config.debug) {
       loadDebugActions();
@@ -255,6 +268,7 @@ export default function Interface({season}) {
   useEffect(() => {
     loadActiveScene(season.getActiveScene());
     setControlledPlayer(season.getControlledPlayer());
+    stateRef.controlledPlayer = controlledPlayer;
   }, [players, season]);
 
   return (

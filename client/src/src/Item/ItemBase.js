@@ -1,16 +1,15 @@
-
 class ItemBase {
   type_properties = {};
   properties = {
     original: '', // I don't remember why I added this property.
+    label: '',
     name: '',
-    machine_name: '',
     type: '',
   };
 
-  constructor(machine_name, name, type) {
+  constructor(name, label, type) {
+    this.properties.label = label;
     this.properties.name = name;
-    this.properties.machine_name = machine_name;
     this.properties.type = type;
   }
 
@@ -22,6 +21,9 @@ class ItemBase {
   }
   getName() {
     return this.properties.name;
+  }
+  getLabel() {
+    return this.properties.label;
   }
 
   getOwner() {

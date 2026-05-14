@@ -309,6 +309,9 @@ class Season {
         id: this.getScenesCount(),
         name: `${tribe.getName()} Water Well`,
         description: `A large stone well sits, surrounded by a palm thicket. This is ${tribe.getColorName()}'s water well.`,
+        activities: [
+          new GetWaterActivity(),
+        ],
       });
       this.addScene(tribeWater);
 

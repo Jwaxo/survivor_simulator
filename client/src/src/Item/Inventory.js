@@ -22,6 +22,7 @@ class Inventory {
   storage = [];
 
   addItem(item) {
+    // @bug: adding an item doesn't force PlayerCard to re-render. Why?
     this.storage.push(item);
   }
 
@@ -36,6 +37,10 @@ class Inventory {
     else {
       throw new Error("Tried to get an Inventory Item that doesn't exist!");
     }
+  }
+
+  getStorage() {
+    return this.storage;
   }
 
   save() {
@@ -85,6 +90,10 @@ class Inventory {
         throw new Error("Inventory Load Corruption: Loading item with invalid Type.");
       }
     });
+  }
+
+  render() {
+    return <ul className="inventory">{ this.storage.map(item => (<li key={ item.getId() }>{ item.getLabel() }</li>)) }</ul>
   }
 }
 

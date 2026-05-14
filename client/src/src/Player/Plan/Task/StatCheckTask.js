@@ -19,8 +19,10 @@ class StatCheckTask extends TaskBase {
   }
 
   execute() {
-    // For now, Players only check their own stats, so we don't need to worry
-    // about if the target is in the same location (for realism).
+    // For now, Players only check their own stats, so we don't need to check
+    // that the target, themselves, are in the same location.
+    // If a Player can ever check another Player's stat (for example, to compare attractiveness
+    // or to see if they are unhappy) we need to double-check they can see the target.
     let value = 0;
     switch (this.type) {
       case "base":

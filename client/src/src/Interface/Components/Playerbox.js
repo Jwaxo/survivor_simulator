@@ -1,5 +1,5 @@
 import React from 'react';
-import PlayerCard from './../Player/Components/Playercard';
+import PlayerCard from '../../Player/Components/Playercard';
 
 function PlayerBox({ players }) {
 

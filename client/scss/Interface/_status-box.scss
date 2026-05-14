@@ -4,29 +4,32 @@
 
 .status-box {
   display: flex;
+  
+  .label {
+    margin-right: 10px;
+    text-decoration: underline;
+    &:after {
+      content: ':';
+      position: absolute;
+    }
+  }
+  .value {
+    font-weight: 700;
+  }
 
-  .status-box-stats {
+  .status-box-stats,
+  .status-box-needs {
     list-style: none;
     margin: 0;
-    max-width: 50%;
+    max-width: 33%;
     padding: 0;
-    .status-box-stat {
-      list-style: none;
-      display: inline-block;
-      margin: 5px 20px 5px 0;
-      padding: 0;
-    }
-    .label {
-      margin-right: 10px;
-      text-decoration: underline;
-      &:after {
-        content: ':';
-        position: absolute;
-      }
-    }
-    .value {
-      font-weight: 700;
-    }
+  }
+  .status-box-stat,
+  .status-box-need {
+    list-style: none;
+    display: inline-block;
+    margin: 5px 20px 5px 0;
+    padding: 0;
   }
 
   .status-box-gamestate {
