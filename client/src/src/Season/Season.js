@@ -70,9 +70,6 @@ class Season {
   current_day = 0;
 
   players = [];
-  // @todo: something I'm not doing yet is actually having a defined player
-  // character, at the least so I know where the "camera" is and what the
-  // interface can see. I need to set this up.
   tribes = [];
   scenes = [];
   active_scene = null;
@@ -293,6 +290,7 @@ class Season {
 
   generateTestScenes() {
     this.getTribes().forEach(tribe => {
+      const getWaterName = `get_water_${tribe.getName()}`;
       const tribeBeach = new Scene({
         id: this.getScenesCount(),
         name: `${tribe.getName()} Beach`,
@@ -310,7 +308,7 @@ class Season {
         name: `${tribe.getName()} Water Well`,
         description: `A large stone well sits, surrounded by a palm thicket. This is ${tribe.getColorName()}'s water well.`,
         activities: [
-          new GetWaterActivity(),
+          new GetWaterActivity(getWaterName, "Fill Canteen", "Fills your canteen with water"),
         ],
       });
       this.addScene(tribeWater);
@@ -319,10 +317,6 @@ class Season {
       tribeCamp.addConnection(tribeBeach);
       tribeCamp.addConnection(tribeWater);
       tribeWater.addConnection(tribeCamp);
-
-      const getWaterName = `get_water_${tribe.getName()}`;
-
-      tribeWater.addActivity(new GetWaterActivity(getWaterName, "Fill Canteen", "Fills your canteen with water"));
 
       this.setActiveSceneByIndex(0);
 

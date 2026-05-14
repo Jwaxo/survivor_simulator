@@ -43,6 +43,10 @@ class Scene {
       this.properties.description = props.description;
     }
 
+    if (props.activities) {
+      this.activities = props.activities;
+    }
+
   }
 
   getId() {

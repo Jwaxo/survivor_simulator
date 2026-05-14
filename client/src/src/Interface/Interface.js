@@ -90,7 +90,8 @@ export default function Interface({season}) {
         return new Action(
           activity.getLabel(),
           () => {
-            activity.useActivity(stateRef.controlledPlayer);
+            activity.useActivity(stateRef.controlledPlayer, players, setPlayers);
+            setPlayers(...players);
           }
         )
       }));
@@ -275,7 +276,7 @@ export default function Interface({season}) {
     <div className="interface">
       <div className="interface-inner">
         <div className="interface-panel interface-top">
-          <StatusBox day={ time.day } time={ time.timestring } weather="Sunny" tribe="Default" phase="Morning" save={ save } load={ load } player={ controlledPlayer } />
+          <StatusBox day={ time.day } time={ time.timestring } weather="Sunny" tribe="Default" phase="Morning" save={ save } load={ load } player={ stateRef.controlledPlayer } />
           <EnviroBox scene={ activeScene } />
         </div>
         <div className="interface-panel interface-main">
